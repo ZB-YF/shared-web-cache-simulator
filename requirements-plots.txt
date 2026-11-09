@@ -1,0 +1,2 @@
+# Optional; the simulator, batch runner, and correctness tests use only the standard library.
+matplotlib>=3.7

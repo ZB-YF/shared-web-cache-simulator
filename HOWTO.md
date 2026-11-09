@@ -1,44 +1,66 @@
 # Usage
 
-## Validate the supplied input
+## Setup and input validation
 
-From the repository root:
+Use Python 3.10+ from the repository root. No dependencies are needed for simulation, testing, or batch execution.
 
 ```bash
 python3 main.py --validate-only
+python3 -m experiments.validate_reference
 python3 -m unittest discover -s tests -v
 ```
 
-Default input paths are resolved relative to `main.py`, so they also work when the script is invoked from another working directory. No package installation is currently required.
+Default input paths are relative to `main.py`, so invoking it from another working directory also works. Resources use full URLs as identifiers. Inputs are UTF-8 CSV; timestamps must include a timezone. Equal timestamps retain source order. See the [data dictionary](docs/DATA_DICTIONARY.md) for the exact schema.
 
-To validate specific inputs and configuration:
-
-```bash
-python3 main.py --validate-only --resources data/resources.csv --requests data/requests_reference.csv --policy LFU --capacity 102400 --hit-latency-ms 5
-```
-
-`--capacity` is measured in bytes: 100 KiB = 102400 bytes. Policy names are case-insensitive and must be FIFO, LRU, LFU, or CUSTOM. The current CLI validates and displays these parameters but does not instantiate a policy. `--output-dir` is reserved for future result export and currently creates no output.
-
-Successful validation exits with status 0. Invalid input or configuration exits with status 2. Requesting simulation without `--validate-only` also exits with status 2 and explicitly reports that simulation is not implemented.
-
-## Planned simulation commands
-
-The following commands describe the intended interface. They **do not run a simulation in the current scaffold**:
+## Run a policy
 
 ```bash
-python3 main.py --policy FIFO --capacity 102400 --output-dir results/reference/FIFO_102400
-python3 main.py --policy LRU --capacity 102400 --output-dir results/reference/LRU_102400
-python3 main.py --policy LFU --capacity 102400 --output-dir results/reference/LFU_102400
+python3 main.py --policy FIFO --capacity 102400 --output-dir results/my_fifo_run
+python3 main.py --policy LRU --capacity 102400 --output-dir results/my_lru_run
+python3 main.py --policy LFU --capacity 102400 --output-dir results/my_lfu_run
+python3 main.py --policy CUSTOM --capacity 102400 --output-dir results/my_custom_run
 ```
 
-Each completed run is intended to produce `requests.csv`, `summary.json`, `per_client.csv`, and `config.json`. A batch runner remains to be implemented. Every run must create fresh cache, policy, and statistics objects.
+Policy names are case-insensitive. `CUSTOM_NOADM` disables only Custom's admission filter as an ablation. `--capacity` is in bytes: 100 KiB = 102400. `--hit-latency-ms` defaults to 5 and is also used by Custom's saved-latency score. Misses use the resource's origin latency without adding hit latency.
 
-## Input format and troubleshooting
+Use `--resources PATH` and `--requests PATH` to select inputs. If `--output-dir` is omitted, the default is `results/<request-file-stem>_<POLICY>_<capacity>`. An existing nonempty directory is rejected; choose a new output directory for another run. Success returns exit code 0; invalid input, configuration, or output location returns 2.
 
-Use the original CSV schemas described in the [data dictionary](docs/DATA_DICTIONARY.md). Resources are identified by `scheme + "://" + host + path`; reference aliases A-E must not replace those fields. Timestamps must include a timezone, such as `2026-10-26T09:00:00Z`. Equal timestamps retain source-file order.
+Each run writes:
 
-The loader rejects missing columns or fields, malformed row lengths, invalid numeric values, duplicate resources, unknown resource references, non-GET requests, and timestamps without timezones. Diagnostics identify the file and source line where applicable.
+| File | Contents |
+|---|---|
+| requests.csv | Every hit/miss, eviction sequence, cache insertion-order contents, capacity usage, response, and cumulative counters |
+| summary.json | Global counts, byte totals, hit ratios, response times, and origin traffic |
+| per_client.csv | The same metrics grouped by client |
+| config.json | Policy, capacity, hit latency, input filenames and SHA256 hashes, request count, and source hashes |
 
-The simulation specification treats all resources as cacheable, including metadata containing `private, no-store` or status 404. Cache-Control and expiration are ignored. Resource URLs are never fetched.
+Output uses full URLs. Reference validation maps those URLs to A-E without changing the general simulator. Ratios are 0-1; CSV and JSON preserve unrounded metrics. Empty traces and zero-byte denominators yield zero ratios, with counts retained.
 
-If a file cannot be found, check the input path. A `NotImplementedError` or abstract-class instantiation error indicates an unfinished component. See the [development roadmap](docs/DEVELOPMENT.md) for implementation order.
+## Batch experiments
+
+```bash
+python3 -m experiments.run --output-dir results/my_matrix
+```
+
+The default matrix has 4 workloads × 5 capacities × 5 policies/variants × 10 seeds = 1,000 runs. To run a smaller matrix:
+
+```bash
+python3 -m experiments.run --output-dir results/my_small_matrix --workloads mixed --capacities 102400 1048576 --policies LRU CUSTOM --seeds 0 1
+```
+
+Every policy receives the same trace for each workload and seed. All runs start with fresh objects. Batch output consists of `runs.csv` with per-seed and per-client metrics; `summary.csv` with arithmetic means and sample standard deviations; `d_compatible.csv` with D's rounded aggregate schema; `traces/` with exact generated inputs; and `config.json` with parameters, trace hashes, resource hash, source hashes, and Python version. Batch mode avoids exporting every request log; replay a saved trace through `main.py` when debugging one run.
+
+## Optional figures
+
+```bash
+python3 -m pip install -r requirements-plots.txt
+python3 -m experiments.plot --results-dir results/my_matrix --output-dir report/figures
+```
+
+The plotting command expects the full default matrix and creates four figures in PNG and SVG: capacity/latency, admission ablation, mixed-workload traffic trade-offs, and mixed-workload per-client latency. It reads actual aggregate and per-seed files. These figures are report inputs rather than a completed report.
+
+## Troubleshooting
+
+Unknown resources, duplicate metadata, invalid numeric values, non-GET methods, and timestamps without timezones are rejected with file and row diagnostics where applicable. Cache-Control and status 404 do not alter the simplified cacheability rules. URLs are never fetched.
+
+A nonempty output directory error means the existing files have been preserved. A missing Matplotlib import affects only optional plotting. Input files and source code needed to rerun experiments are in this repository; private planning material is not required.

@@ -1,5 +1,7 @@
 # Generated results
 
-No simulation or experiment results have been generated. Supplied expected outputs are stored under `data/reference/` solely for validation.
+The local `reference/` runs and `d_reproduction/` matrix are produced by the integrated simulator. Instructor expected outputs remain separate under `data/reference/`.
 
-Each future run should have a separate directory containing `requests.csv`, `summary.json`, `per_client.csv`, and `config.json`. Generated results are ignored by `.gitignore`; explicitly include the required CSV files, configurations, and figures in the final reproducibility package.
+Single-run directories contain requests.csv, summary.json, per_client.csv, and config.json. Batch directories contain runs.csv, summary.csv, d_compatible.csv, generated traces, and config.json. For new runs, choose new or empty output directories.
+
+Generated results are ignored by .gitignore. Select the required CSVs, configurations, input traces, and figures explicitly when preparing the final release. See the public [validation record](../docs/VALIDATION.md) and [reproduction commands](../HOWTO.md).

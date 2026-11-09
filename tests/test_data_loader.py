@@ -1,4 +1,4 @@
-"""Tests for the implemented input layer; policy placeholders are not evaluated here."""
+"""Input-layer tests, independent of policy behavior."""
 import csv
 from pathlib import Path
 import tempfile

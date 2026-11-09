@@ -1,5 +1,7 @@
 # Technical report and figures
 
-The final report should be 3-4 pages and cover simulator architecture, data structures, custom-policy design and justification, experimental methodology, comparative figures, findings, and limitations.
+Four figures have been generated from the integrated simulator's synthetic experiment reproduction, in PNG and SVG: latency_by_capacity, admission_ablation, mixed_tradeoffs, and mixed_client_latency. Regenerate them using the commands in HOWTO.md. PNGs are embedded in the [draft findings](../docs/EXPERIMENTAL_FINDINGS.md).
 
-Store figures in `figures/` and derive them from actual experiment outputs. Address which policy performs best under which metric, when rankings change, and what trade-offs the custom strategy introduces. No report or figures have been generated yet. Complete the report and figures by November 25, 2026.
+The final 3-4 page technical report is still pending team review and authorship. It should cover architecture and data structures, the custom-policy rules and objective, experimental methodology, comparative figures, explanations, and limitations. Use actual exported numbers and align pseudocode with the [implemented Custom specification](../docs/CUSTOM_POLICY.md).
+
+Explain which policy wins under which metric, when rankings change, and which client or traffic trade-offs arise. Complete the final report and figures by November 25, 2026. The draft findings and plots do not constitute a completed submission report.

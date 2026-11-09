@@ -1,31 +1,31 @@
-# Development roadmap
+# Development status
 
-The target for completing all project deliverables is **November 25, 2026**. Implementation should proceed through independently reviewable modules.
+The team target is **November 25, 2026 for all deliverables**.
 
-## Current implementation
+## Completed integration milestone
 
-Implemented: shared models, CSV loading and validation, stable request sorting, and the `--validate-only` CLI. The input-layer tests run against both supplied fixtures and malformed input cases.
+- CSV loading and stable chronological request ordering using full URLs.
+- Shared cache storage, capacity accounting, oversized handling, eviction previews, and admission commits.
+- Unified request processing and deterministic FIFO, LRU, LFU, LA-GDSF, and no-admission ablation implementations.
+- Global and per-client metrics, request CSV export, configuration/input/source hashes, and protected output directories.
+- All instructor reference fields, D's frozen custom scenarios, dedicated tie-breaking tests, and core boundary tests.
+- Four portable seeded synthetic workloads, a batch runner, and a 1,000-run reproduction of D's results.
+- Standalone comparative figures and evidence-backed draft findings.
 
-Pending: contributor approval of interfaces, cache operations, simulation logic, policy implementations, statistics, export, reference comparison tooling, workload generation, batch experiments, figures, report, and demonstration video.
+This integration advances the initial scaffold using D's supplied prototype and the assignment rules. It does not imply that separate B/C modules have been received or approved. Existing adapters provide a common working baseline for contributor review.
 
-## Implementation sequence
+## Remaining team work
 
-1. Review `models.py`, the data dictionary, and the draft policy interface. Confirm URL identity, timestamp ordering, callbacks, and result fields before separate implementations diverge.
-2. Implement cache lookup, total-capacity checks, removal, snapshots, hit notification, and admission. Reject oversized resources before any eviction. Maintain `used_bytes == sum(item.size_bytes)` and `0 <= used_bytes <= capacity_bytes`.
-3. Implement single-request hit/miss handling, then the chronological loop. Hits use configured hit latency and zero traffic; misses use origin latency and resource-size traffic. Clients share one cache.
-4. Integrate FIFO, LRU, LFU, and statistics through the same simulator. Compare every reference row before checking aggregate metrics. Independently validate byte-hit ratio and per-client statistics.
-5. Connect real simulation to the CLI and implement exports. Save independent output directories and reproducible configurations. Build the batch runner on the single-run interface.
-6. Document and implement the custom policy, including deterministic tie-breaking and boundary cases. Evaluate all policies on the same workloads and capacities.
-7. Finish figures, usage documentation, the report, video, and the complete package. Reproduce the documented workflow from a clean directory by November 25.
+1. B reviews FIFO/LRU and their per-step evidence; C reviews LFU, statistics, batch execution, and Custom integration.
+2. D reviews the documented executable-prototype interpretation, especially post-eviction score calculation, admission filtering, and tie-breaking.
+3. E reviews whether D's synthetic workloads and capacities are the final experimental matrix, and checks the figures, statistical summaries, and client trade-offs. These workloads are generated data, not real browsing measurements.
+4. Agree the final public interface. The extended hooks are implemented, but there is no recorded team-wide sign-off.
+5. Turn verified findings into the final 3-4 page report, with consistent algorithm pseudocode and claims supported by exported data.
+6. Record and upload the five-person 10-minute video with individual contributions.
+7. Select final experiment artifacts, create the complete submission ZIP, and perform final clean-directory reproduction by November 25.
 
-## Integration ownership
+## Intended contribution areas
 
-| Contribution | Owner |
-|---|---|
-| Core simulator, cache infrastructure, CLI, export, integration | A |
-| FIFO, LRU, and reference validation | B |
-| LFU, statistics, experiment execution, and custom-policy implementation | C |
-| Custom-policy design, pseudocode, test scenarios, and trade-off analysis | D |
-| Experimental design, metric review, figures, and report analysis | E |
+A: core/cache/CLI/export/integration. B: FIFO/LRU/reference validation. C: LFU/statistics/experiment execution and Custom implementation review. D: Custom design, pseudocode, scenario expectations, and limitations. E: experimental design, metric review, figures, and report analysis.
 
-Interface changes must be coordinated across consumers. The custom algorithm is still unspecified; its design and implementation handoff must be agreed before coding. A working validation CLI does not establish simulator correctness or completion.
+The current code can support independent review and report work without waiting for the initial scaffold to become runnable. Private planning and personal notes remain outside this public repository.

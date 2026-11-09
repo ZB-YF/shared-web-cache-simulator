@@ -1,6 +1,6 @@
 # Testing and integration plan
 
-Only the implemented input layer currently has automated tests. The cache, simulator, policy, metrics, and output checks below are future acceptance criteria, not completed validation.
+The integrated suite now tests the input layer, cache infrastructure, simulation, policy behavior, metric formulas, and output boundaries. See [validation evidence](VALIDATION.md) for the completed checkpoint. The checks below remain the regression and final release checklist.
 
 ## Input layer
 
@@ -21,8 +21,8 @@ Run `python3 -m unittest discover -s tests -v`. Existing tests cover supplied da
 | Invalid victim identifier | Explicit failure without an infinite loop |
 | Removal | Byte accounting and policy metadata remain synchronized |
 | Equal request timestamps | Preserve source order; use step for deterministic recency |
-| Zero capacity | Proposed support: every positive-size resource is oversized |
-| Empty trace or zero-byte denominator | No division by zero; proposed zero metric with counts retained |
+| Zero capacity | Every positive-size resource is oversized |
+| Empty trace or zero-byte denominator | No division by zero; Zero metric with counts retained |
 | Miss with a different origin latency | Do not add hit latency to miss latency |
 | Repeat run with the same configuration | Fresh objects and identical numerical results |
 
