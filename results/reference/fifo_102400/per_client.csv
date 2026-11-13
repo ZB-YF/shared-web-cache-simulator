@@ -1,0 +1,4 @@
+client_id,request_count,hits,requested_bytes,hit_bytes,total_response_time_ms,origin_traffic_bytes,misses,hit_ratio,byte_hit_ratio,average_response_time_ms
+student-01,5,1,199680,32768,555.0,166912,4,0.2,0.1641025641025641,111.0
+student-02,5,2,139264,57344,275.0,81920,3,0.4,0.4117647058823529,55.0
+student-03,5,0,173056,0,600.0,173056,5,0.0,0.0,120.0

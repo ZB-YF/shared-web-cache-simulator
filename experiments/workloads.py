@@ -9,7 +9,7 @@ from pathlib import Path
 import random
 from urllib.parse import urlsplit
 
-from models import Request
+from cache_simulator.models import Request
 
 CAPACITIES = (100 * 1024, 500 * 1024, 1024 ** 2, 5 * 1024 ** 2, 10 * 1024 ** 2)
 NAMES = ('repetitive', 'sequential', 'mixed', 'scan_pollution')

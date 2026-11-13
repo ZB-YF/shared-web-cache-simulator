@@ -5,12 +5,12 @@ from pathlib import Path
 import platform
 from statistics import mean, stdev
 
-from data_loader import load_resources
+from cache_simulator.data_loader import load_resources
 from experiments.workloads import CAPACITIES, NAMES, generate, write_trace
-from models import SimulationConfig
-from output_writer import write_csv, write_json
-from policies import POLICIES
-from runner import run_simulation, sha256, source_hashes
+from cache_simulator.models import SimulationConfig
+from cache_simulator.output_writer import write_csv, write_json
+from cache_simulator.policies import POLICIES
+from cache_simulator.runner import run_simulation, sha256, source_hashes
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -46,7 +46,7 @@ def aggregate(rows):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--resources', type=Path, default=ROOT / 'data/resources.csv')
+    parser.add_argument('--resources', type=Path, default=ROOT / 'data/reference/resources.csv')
     parser.add_argument('--output-dir', type=Path, required=True, help='A new or empty directory')
     parser.add_argument('--seeds', type=int, nargs='+', default=list(range(10)))
     parser.add_argument('--capacities', type=int, nargs='+', default=list(CAPACITIES))

@@ -1,7 +1,7 @@
 """Contributor D's request sequences and frozen custom-policy hit/miss oracles."""
 from datetime import datetime, timedelta, timezone
 from experiments.workloads import find_resource
-from models import Request
+from cache_simulator.models import Request
 
 EXPECTED = {
     'T1_oversize': 'MMM',

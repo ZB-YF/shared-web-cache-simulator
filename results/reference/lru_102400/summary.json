@@ -1,0 +1,12 @@
+{
+  "average_response_time_ms": 92.33333333333333,
+  "byte_hit_ratio": 0.212,
+  "hit_bytes": 108544,
+  "hit_ratio": 0.2,
+  "hits": 3,
+  "misses": 12,
+  "origin_traffic_bytes": 403456,
+  "request_count": 15,
+  "requested_bytes": 512000,
+  "total_response_time_ms": 1385.0
+}

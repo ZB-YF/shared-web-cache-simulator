@@ -28,6 +28,8 @@ Workloads: repetitive and sequential (600 requests each), mixed and scan_polluti
 - `traces/`: all 40 generated request files for replay through the single-run CLI.
 - `config.json`: parameters, Python version, resource/source/trace hashes, and provenance.
 
-The batch runner refuses nonempty output directories. It records summary metrics rather than every request log; reproduce an individual run using `main.py --requests <saved-trace>` if detailed logs are needed. D's 100 supplied aggregate rows have been matched independently; see [validation evidence](../docs/VALIDATION.md).
+The batch runner refuses nonempty output directories. It records summary metrics rather than every request log; reproduce an individual run using `main.py --requests <saved-trace>` if detailed logs are needed. D's 100 supplied aggregate rows have been matched independently; see [validation evidence](../docs/validation.md).
 
-Optional plotting uses `python3 -m experiments.plot --results-dir results/my_matrix --output-dir report/figures` after installing `requirements-plots.txt`. Mean and standard-deviation figures support review; they are not the final report. Complete team review and all deliverables by November 25, 2026.
+Optional plotting uses `python3 -m experiments.plot --results-dir results/my_matrix --output-dir reports/figures` after installing `requirements-plots.txt`. Mean and standard-deviation figures support review; they are not the final report. Complete team review and all deliverables by November 25, 2026.
+
+The reviewed baseline is tracked at `results/experiments/d_reproduction/`. Historical configs retain the original source layout and hashes; new runs use the current package layout. Additional team inputs belong in `data/workloads/`; generated traces for a particular experiment stay inside that result snapshot.

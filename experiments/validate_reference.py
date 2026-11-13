@@ -2,10 +2,10 @@
 import csv
 from pathlib import Path
 
-from data_loader import load_requests, load_resources
+from cache_simulator.data_loader import load_requests, load_resources
 from experiments.workloads import find_resource
-from output_writer import request_row
-from runner import run_simulation
+from cache_simulator.output_writer import request_row
+from cache_simulator.runner import run_simulation
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -18,8 +18,8 @@ def reference_aliases(resources):
 
 
 def validate():
-    resources = load_resources(ROOT / 'data/resources.csv')
-    requests = load_requests(ROOT / 'data/requests_reference.csv', resources)
+    resources = load_resources(ROOT / 'data/reference/resources.csv')
+    requests = load_requests(ROOT / 'data/reference/requests_reference.csv', resources)
     aliases = reference_aliases(resources)
     reports = []
     for policy in ('FIFO', 'LRU', 'LFU'):

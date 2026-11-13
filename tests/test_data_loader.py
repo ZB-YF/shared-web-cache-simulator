@@ -4,9 +4,9 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from data_loader import load_requests, load_resources
+from cache_simulator.data_loader import load_requests, load_resources
 
-DATA = Path(__file__).resolve().parents[1] / "data"
+DATA = Path(__file__).resolve().parents[1] / "data/reference"
 
 
 class LoaderTests(unittest.TestCase):

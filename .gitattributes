@@ -1,0 +1,2 @@
+# Preserve original CSV bytes and hashes across platforms. CSV writers use CRLF.
+*.csv -text whitespace=cr-at-eol

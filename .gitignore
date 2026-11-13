@@ -1,7 +1,21 @@
+# Local runtime and editor files (retained locally, never published).
 __pycache__/
 *.py[cod]
 .venv/
 .DS_Store
+
+# Keep reviewed baseline results in Git; ignore ad hoc runs.
 results/*
 !results/.gitkeep
 !results/README.md
+!results/reference/
+!results/experiments/
+results/reference/*
+!results/reference/README.md
+!results/reference/fifo_102400/
+!results/reference/lru_102400/
+!results/reference/lfu_102400/
+!results/reference/custom_102400/
+results/experiments/*
+!results/experiments/README.md
+!results/experiments/d_reproduction/

@@ -4,17 +4,17 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from cache import Cache
-from data_loader import load_requests, load_resources
+from cache_simulator.cache import Cache
+from cache_simulator.data_loader import load_requests, load_resources
 from experiments.scenarios import EXPECTED, scenarios
 from experiments.validate_reference import validate
 from experiments.workloads import generate, write_trace
-from metrics import Statistics
-from models import Request, Resource, SimulationConfig
-from output_writer import write_request_results, write_summary
-from policies import create_policy
-from runner import run_simulation
-from simulator import Simulator
+from cache_simulator.metrics import Statistics
+from cache_simulator.models import Request, Resource, SimulationConfig
+from cache_simulator.output_writer import write_request_results, write_summary
+from cache_simulator.policies import create_policy
+from cache_simulator.runner import run_simulation
+from cache_simulator.simulator import Simulator
 
 ROOT = Path(__file__).resolve().parents[1]
 START = datetime(2026, 10, 26, tzinfo=timezone.utc)
@@ -33,8 +33,8 @@ class SimulationTests(unittest.TestCase):
         self.assertEqual([r['hits'] for r in validate()], [3, 3, 4])
 
     def test_custom_reference(self):
-        resources = load_resources(ROOT / 'data/resources.csv')
-        requests = load_requests(ROOT / 'data/requests_reference.csv', resources)
+        resources = load_resources(ROOT / 'data/reference/resources.csv')
+        requests = load_requests(ROOT / 'data/reference/requests_reference.csv', resources)
         results, stats = run_simulation(resources, requests, 'CUSTOM')
         self.assertEqual(''.join('H' if r.hit else 'M' for r in results), 'MMMHHMHHMHMHMHM')
         self.assertEqual(stats.summary()['origin_traffic_bytes'], 299008)
@@ -43,7 +43,7 @@ class SimulationTests(unittest.TestCase):
         self.assertFalse(results[8].evicted_resources)
 
     def test_d_frozen_scenarios_and_capacity(self):
-        resources = load_resources(ROOT / 'data/resources.csv')
+        resources = load_resources(ROOT / 'data/reference/resources.csv')
         for name, requests in scenarios(resources).items():
             with self.subTest(scenario=name):
                 results, _ = run_simulation(resources, requests, 'CUSTOM')
@@ -176,7 +176,7 @@ class SimulationTests(unittest.TestCase):
             self.assertEqual(len((path / 'per_client.csv').read_text().splitlines()), 1)
 
     def test_reproducible_workloads_and_csv_roundtrip(self):
-        resources = load_resources(ROOT / 'data/resources.csv')
+        resources = load_resources(ROOT / 'data/reference/resources.csv')
         first = generate(resources, 'mixed', 7)
         self.assertEqual(first, generate(resources, 'mixed', 7))
         with tempfile.TemporaryDirectory() as directory:
