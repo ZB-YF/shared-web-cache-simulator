@@ -45,3 +45,7 @@ Compare integer bytes and counts exactly; use appropriate tolerance for floating
 - Check that origin bytes equal total requested bytes minus hit bytes.
 - Run the documented commands from a clean directory without relying on private notes or files outside this repository.
 - Complete code, data, figures, report, video link, packaging, and reproducibility checks by November 25, 2026.
+
+## Merged contributor checks
+
+The current suite contains 33 tests. B's five added FIFO/LRU tests and C's three added LFU/metrics tests are merged, with supporting [B](b_fifo_lru_review.md) and [C](c_lfu_reference_review.md) review notes. Their completed checks should not be relisted as pending initial validation. The remaining C run-artifact handoff, D rule confirmation, E experiment selection, and report/video requirements are tracked in [development status](development.md).

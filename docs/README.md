@@ -11,8 +11,10 @@ Run all terminal examples from the repository root.
 | LA-GDSF rules and prototype interpretation | [Custom policy](custom_policy.md) |
 | Test coverage and release checks | [Test plan](test_plan.md) |
 | Recorded correctness and reproduction evidence | [Validation](validation.md) |
+| B FIFO/LRU review received in merged PR #1 | [B review](b_fifo_lru_review.md) |
+| C LFU/metric/experiment review received in merged PR #2 | [C review](c_lfu_reference_review.md) |
 | Completed work, contribution areas, remaining deliverables | [Development status](development.md) |
-| Google Drive delivery and sole-maintainer integration | [Contribution workflow](contributing.md) |
+| B/C pull requests, D/E Drive handoff, and maintainer integration | [Contribution workflow](contributing.md) |
 | Repository inventory, path changes, retained candidates | [Repository review](repository_review.md) |
 | Machine-readable map for every original file | [Reorganization manifest](reorganization_manifest.json) |
 

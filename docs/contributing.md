@@ -1,44 +1,52 @@
 # Team delivery and maintainer workflow
 
-This repository has **one GitHub maintainer**. Other team members submit their work through **Google Drive**. The maintainer manually reviews, integrates, verifies, commits, and pushes approved changes. Contributors do not need GitHub write access, branches, or pull requests.
+A is the **sole maintainer of main and the final integrator**. B and C submit code, tests, review notes, and experiment evidence through **GitHub pull requests**. D and E submit design, analysis, and report material through **Google Drive**. A reviews and merges B/C PRs and manually integrates D/E deliveries. Everyone can contribute without directly pushing to main.
 
-## Submit through Google Drive
+## B and C: submit a pull request
 
-For each delivery, provide a clearly named folder such as `b_fifo_lru_2026-11-16` containing:
-
-1. Your source files, documents, figures, or review notes. Keep the original delivered files intact in Drive.
-2. A short handoff note explaining what changed, which repository files it affects, and whether it replaces an earlier delivery.
-3. Reproduction commands and expected results for executable work, including input files, capacities, seeds, and dependencies when relevant.
-4. Test or manual-check evidence and any unresolved questions.
-
-Use English for material intended for the public repository. Personal notes may stay in private working material. Avoid including Python caches, editor settings, credentials, or unrelated downloads in a delivery.
-
-## Where each contribution belongs
-
-| Area | Integration destination | Review focus |
-|---|---|---|
-| A: simulator core and final integration | cache_simulator/, main.py, docs/usage.md | Input paths, shared cache, CLI, result export |
-| B: FIFO/LRU and reference checks | cache_simulator/policies/fifo.py, lru.py; tests/ | Insertion vs access order; per-request expected fields |
-| C: LFU, statistics, experiments, Custom integration | cache_simulator/policies/, metrics.py; experiments/ | LFU reset/ties, formulas, seed/config consistency |
-| D: Custom design and test expectations | docs/custom_policy.md; experiments/scenarios.py; tests/ | Prototype/pseudocode consistency, admission, tie-breaking |
-| E: methodology, interpretation, report figures | reports/; docs/development.md | Workload validity, CSV-backed claims, per-client trade-offs |
-
-Paths in the table are repository-relative. The current implementation is a working integration baseline; its existence does not imply approval of each member's independently delivered work.
-
-## Maintainer integration checklist
-
-1. Preserve the original Google Drive delivery and record its contributor, date, and files in private integration notes. Public raw-delivery archives are not required.
-2. Compare the delivery with the current module and documented interfaces. Integrate only intentional changes; do not replace the entire repository with a contributor's copy.
-3. Keep source code in cache_simulator/, input datasets in data/, tests in tests/, result snapshots in results/, and report material in reports/.
-4. Run the relevant checks, with the existing baseline commands:
+1. Update from the latest main before starting. Work on a feature branch or fork; do not push directly to main.
+2. Keep the PR focused. Describe the change, affected files, commands run, expected/observed results, and unresolved questions.
+3. Run relevant tests and the reference validator before requesting review:
 
    ```bash
    python3 -m unittest discover -s tests -v
    python3 -m experiments.validate_reference
    ```
 
-5. For experiment changes, save the exact parameters, seeds, input traces, hashes, and both per-seed and aggregate metrics. Use a new output directory; do not overwrite a historical result snapshot.
-6. Review `.gitignore` and `git status` so the intended CSVs, configs, and figures are actually included. The current baseline directories are allowlisted; new review-approved snapshots need an explicit allowlist entry.
-7. Inspect `git diff`, update the affected documentation, then commit and push as the sole maintainer. Mention the contributor and integration scope in the commit message when appropriate.
+4. Attach review evidence as repository files, with clear provenance. B's [PR #1](https://github.com/ZB-YF/shared-web-cache-simulator/pull/1) and C's [PR #2](https://github.com/ZB-YF/shared-web-cache-simulator/pull/2) are already merged; further work should use a new PR based on current main.
+5. For experimental claims, include the original run configuration, source commit or hashes, parameters/seeds, and a reproducible comparison record or checking script. A local path mentioned in prose is not itself a delivered artifact.
+6. Generated result directories are ignored unless explicitly allowlisted. If a new result snapshot is needed, add the narrow .gitignore exception and the intended files in the same PR. Check the PR's file list before submission.
 
-Do not delete original deliveries, change reported numbers by hand, or claim independent review that has not occurred. Team algorithm and final-report decisions remain listed in [development status](development.md).
+If a replay is byte-identical to the published baseline, do not duplicate all trace and CSV bytes merely to prove completion. Supply the original run config and a verifiable comparison record with metric-file checksums, trace checks, and the exact published snapshot referenced. If results differ, preserve the new files and explain the first difference. Do not fabricate missing historical run artifacts or relabel a maintainer's replay as C's independent run.
+
+## D and E: submit through Google Drive
+
+Provide a dated folder such as `d_custom_review_2026-11-22` or `e_report_analysis_2026-11-22` with:
+
+1. The actual design document, corrected pseudocode, analysis, figure source, or report section intended for integration. Keep the original delivered files intact in Drive.
+2. A short handoff note listing what changed, which repository documents it affects, and whether it replaces an earlier version.
+3. For D, an explicit statement about the implemented rules checked and any disagreement with the code. For E, the selected experiment snapshot/matrix and the exact CSV rows or fields supporting conclusions.
+4. Any remaining issue, missing input, and expected next delivery time.
+
+Use English for material intended for the public repository. Private discussion may be in Chinese. A final file/link must be made available to A; a verbal update alone does not establish receipt. The maintainer records delivery status only from accessible materials and does not assume every Drive file has been reviewed.
+
+## Contribution areas and current evidence
+
+| Area | Integration destination | Available evidence and next handoff |
+|---|---|---|
+| A: core and final integration | cache_simulator/, main.py, documentation | Working implementation; final package and clean-run verification remain |
+| B: FIFO/LRU | cache_simulator/policies/; tests/; docs/b_fifo_lru_review.md | PR #1 merged, five focused tests; report explanation and video segment next |
+| C: LFU/metrics/experiments | tests/; experiments/; docs/c_lfu_reference_review.md | PR #2 merged, three focused tests; independent-run configuration/comparison evidence and report methods next |
+| D: Custom design | docs/custom_policy.md; scenario tests; report | Original design integrated; final rule confirmation, corrected pseudocode, and report section via Drive |
+| E: methodology and interpretation | reports/; reviewed result snapshot | Final matrix/snapshot choice, CSV-backed conclusions, report draft and selected figures via Drive |
+
+## Maintainer integration checklist
+
+1. Review each PR or preserve and inspect each original Drive delivery. Credit the actual author and distinguish independent review from existing integration work.
+2. Compare the change with current interfaces. Merge intentional changes without replacing the whole project with someone else's copy.
+3. Keep code in cache_simulator/, inputs in data/, tests in tests/, result snapshots in results/, and report material in reports/.
+4. Run relevant checks, preserve historical results, and review Git's file list and diff. An algorithm change requires its affected experiment results to be checked again.
+5. For B/C, resolve review issues and merge the tested PR into main. For D/E, integrate the received English material, commit with appropriate attribution, and push as maintainer.
+6. Update status documents only for evidence actually received. Keep private planning and unreviewed raw deliveries outside the public repository.
+
+Do not delete original deliveries, edit reported numbers by hand, or claim team sign-off that has not happened. See [development status](development.md) for outstanding work and completion criteria.

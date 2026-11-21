@@ -57,8 +57,8 @@ Moving source modules requires changes to imports, repository-root resolution, i
 - Documentation links, package imports, source syntax, and Git inclusion of reviewed data are checked.
 - The staged repository is tested from a separate clean directory before push.
 
-Detailed correctness context is in [validation evidence](validation.md). Review and integration ownership follows the [Google Drive / sole-maintainer workflow](contributing.md).
+Detailed correctness context is in [validation evidence](validation.md). Review and integration ownership follows the [current PR/Drive contribution workflow](contributing.md).
 
 ## Unresolved project work
 
-The final report, video, and team sign-off remain pending. The documented Custom pseudocode/prototype discrepancy still requires D's review; no algorithm rule was changed to resolve it during this reorganization. B/C review of their implementation areas and E's final experiment selection remain as described in [development status](development.md). No raw private planning documents or Drive-original files were added to this public repository.
+The final report, video, and team sign-off remain pending. The documented Custom pseudocode/prototype discrepancy still requires D's review; no algorithm rule was changed to resolve it during this reorganization. At the November 13 checkpoint B/C reviews and E's selection were pending; B/C reviews have since merged. See [development status](development.md) for the November 21 evidence and remaining handoffs. No raw private planning documents or Drive-original files were added to this public repository.

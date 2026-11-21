@@ -12,7 +12,7 @@ A university course project that replays local HTTP request traces through one s
 | See the four policies on the reference trace | [Reference run outputs](results/reference/) |
 | Open the existing experiment CSVs | [Reproduced experiment baseline](results/experiments/d_reproduction/) |
 | See the graphs and their interpretation | [Experimental findings](reports/experimental_findings.md) and [figures](reports/figures/) |
-| Submit or integrate a team contribution | [Google Drive handoff and maintainer workflow](docs/contributing.md) |
+| Submit or integrate a team contribution | [B/C pull requests, D/E Google Drive handoff](docs/contributing.md) |
 
 The baseline CSVs, configuration files, generated traces, and PNG/SVG figures are included in GitHub. You can read them without installing Python or rerunning experiments.
 
@@ -83,11 +83,20 @@ This example uses a fresh output location to leave the reviewed [published figur
 
 ## Status and collaboration
 
-All 25 existing tests pass, the standard policies match every supplied reference field, and the custom policy reproduces D's reference result. The repository reorganization preserves algorithms, datasets, existing numerical outputs, and figures. See [validation evidence](docs/validation.md) and the [repository review and migration notes](docs/repository_review.md).
+**Status checked November 21, 2026:** the current suite has **33 passing tests**. FIFO/LRU/LFU match all ten supplied reference fields on all 15 requests, and Custom reproduces D's reference result: 7 hits, 68.666666... ms average response, and 299008 origin bytes. The existing 1000-run synthetic baseline and figures remain available; the latest PRs add reviews and tests without changing algorithms or replacing that baseline.
 
-**There is one GitHub maintainer.** Other team members submit source, documents, checks, and findings through Google Drive. The maintainer reviews, integrates, tests, commits, and pushes those files. Team members are not required to push branches or open pull requests. Public project content is in English; private planning remains outside the repository.
+| Contribution | Evidence available | Status |
+|---|---|---|
+| B: FIFO/LRU | [Merged PR #1](https://github.com/ZB-YF/shared-web-cache-simulator/pull/1), [review](docs/b_fifo_lru_review.md), five focused tests | Review and tests integrated |
+| C: LFU, metrics, experiments | [Merged PR #2](https://github.com/ZB-YF/shared-web-cache-simulator/pull/2), [review](docs/c_lfu_reference_review.md), three focused tests | Review and tests integrated; original independent-run configuration/comparison evidence still to be handed off |
+| D: Custom policy | Delivered prototype/design, integrated [LA-GDSF specification](docs/custom_policy.md), scenario and reference checks | Implementation integrated; final design confirmation and consistent report pseudocode pending |
+| E: experiment/report analysis | Existing [baseline CSVs](results/experiments/d_reproduction/) and [draft findings/figures](reports/experimental_findings.md) are available to review | E's final experiment selection, interpretation, and report contribution are not yet present in the reviewed materials |
 
-The final team-reviewed report, video, and submission package are still pending. The target for completing all deliverables is **November 25, 2026**. Current ownership and next steps are in [development status](docs/development.md).
+**A is the sole maintainer of the main branch. B and C submit changes through pull requests; D and E submit materials through Google Drive.** The maintainer reviews B/C PRs, manually integrates D/E deliveries, runs checks, and handles final merges and publication. B/C should not push directly to main. Public project content stays in English; private planning remains outside this repository. See the [contribution workflow](docs/contributing.md) for artifact requirements.
+
+C's review records a separate replay, but its named output directories are not tracked or available in the local handoff reviewed for this update. This is an evidence-handoff gap, not a failed test. Complete Drive contents have not been inspected; unreceived D/E material may exist there. Progress is marked complete only when its evidence is available.
+
+The final team-reviewed 3-4 page report, five-person 10-minute video/link, and submission package remain pending. The target is **November 25, 2026 for all deliverables**. Detailed remaining work and proposed handoff dates are in [development status](docs/development.md). See [validation evidence](docs/validation.md) for commands and historical checkpoints.
 
 ## Design documentation
 

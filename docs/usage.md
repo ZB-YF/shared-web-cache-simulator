@@ -71,4 +71,4 @@ The reviewed reference runs are in `results/reference/fifo_102400/`, `lru_102400
 
 Historical config.json files retain their original source hashes and old source filenames. They describe the code snapshot that produced the saved results; they are not rewritten to pretend the output came from the reorganized code. See [repository review](repository_review.md) for the baseline commit and old-to-new path mapping. New runs record hashes for the current layout.
 
-For a new run, use a fresh ad hoc directory as in the examples. To publish reviewed results, the sole maintainer updates the explicit baseline allowlist in .gitignore and commits the chosen artifacts. Google Drive deliveries follow the [contribution workflow](contributing.md).
+For a new run, use a fresh ad hoc directory as in the examples. To publish reviewed results, the sole maintainer updates the explicit baseline allowlist in .gitignore and commits the chosen artifacts. B/C submit follow-up work through pull requests; D/E deliveries use Google Drive. Both routes follow the [contribution workflow](contributing.md).
