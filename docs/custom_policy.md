@@ -2,7 +2,7 @@
 
 ## Objective and provenance
 
-Contributor D supplied a latency-aware size/frequency policy, executable prototype, scenario oracles, workload generators, and preliminary aggregate results. This repository adapts that work to the shared simulator. The primary objective is lower average response time, with hit ratio secondary. Byte traffic and large-resource client performance are explicit trade-offs, not fairness guarantees.
+Contributor D supplied a latency-aware size/frequency policy, executable prototype, scenario oracles, workload generators, and preliminary aggregate results. The updated English handoff received November 22, 2026 resolves the earlier pseudocode mismatch and was checked against the integrated implementation; see [D revision review](d_custom_policy_review.md). This repository adapts that work to the shared simulator. The primary objective is lower average response time, with hit ratio secondary. Byte traffic and large-resource client performance are explicit trade-offs, not fairness guarantees.
 
 ## Score and retained state
 
@@ -28,9 +28,39 @@ For zero-byte resources, the implementation uses a one-byte effective denominato
 
 The main `CUSTOM` version enables admission filtering. `CUSTOM_NOADM` follows the same logic but always admits a fitting miss, providing the same ablation as D's `CUSTOM_noadm`.
 
+## Canonical pseudocode
+
+The insertion helper records the current processing step and adds the true resource size to used bytes. PRIORITY uses the configured hit latency and the one-byte denominator convention for zero-sized objects described above.
+
+```text
+ACCESS(r):
+    step += 1
+    F[r] += 1
+    if r is cached:
+        H[r] = PRIORITY(r, L)
+        last[r] = step
+        return HIT
+    record origin latency and size as miss response and traffic
+    if size[r] > capacity:
+        return MISS
+    select victims by (stored H, last), until enough space would be free
+    if victims exist and admission filtering is enabled:
+        H_cand = PRIORITY(r, L)
+        if H_cand < max(stored H[v] for v in victims):
+            return MISS
+    save all victim priorities before removal
+    remove victims and their resident metadata; subtract their sizes
+    L = max(L, saved victim priorities) if any victims were removed
+    insert r with H_ins = PRIORITY(r, L) and last[r] = step
+    add size[r] to used bytes
+    return MISS
+```
+
+This is explanatory pseudocode; the implementation separates request observation, victim preview, admission, removal, and insertion callbacks. Resident metadata is removed while lifetime F remains available.
+
 ## Integration decisions
 
-D's prose and executable prototype disagree with the pseudocode at insertion: the pseudocode retains the candidate's pre-eviction score, whereas `proto.py` recomputes it after inflation changes. This implementation follows **the executable prototype and frozen scenario sequences**, and explicitly tests post-eviction scoring. The difference must be resolved in the final report text; do not copy the inconsistent pseudocode.
+The initial pseudocode retained a pre-eviction candidate score at insertion. D's November 22 revision explicitly separates H_cand (old L, admission comparison only) from H_ins (updated L, stored at insertion), matching the executable prototype and existing integrated code. The description mismatch is resolved. The original files are preserved; the [receipt and checks](d_custom_policy_review.json) identify the reviewed update.
 
 D's prototype hardcodes a 5 ms hit cost. Here the configured hit latency is passed to Custom, preserving the reference behavior at 5 ms and keeping nondefault configurations consistent. Full URLs replace the prototype's `(host, path)` keys. Workload selection order and random-number calls preserve D's supplied experiments.
 
@@ -44,6 +74,6 @@ The score favors small resources with frequent requests and large latency saving
 
 ## Regression targets
 
-The integrated tests retain D's T1-T4 and T6 frozen hit/miss sequences and reference sequence `MMMHHMHHMHMHMHM`. The supplied T5 sequence is exercised for capacity invariants, but D did not provide a frozen T5 oracle and its data do not establish an exact-score tie. A separate equal-size/equal-cost test explicitly verifies LRU tie-breaking and equality admission.
+The integrated tests retain D's T1-T4 and T6 frozen hit/miss sequences and reference sequence `MMMHHMHHMHMHMHM`. The earlier T5 sequence remains exercised for capacity invariants for continuity, but D did not provide a frozen oracle and removed that label from the revised delivery. A separate equal-size/equal-cost test explicitly verifies LRU tie-breaking and equality admission.
 
 On the 15-request reference trace, Custom has 7 hits, average response 68.666666... ms, and origin traffic 299008 bytes (292 KiB). These are D-derived regression targets verified by the integrated implementation, not instructor-provided Custom answers.

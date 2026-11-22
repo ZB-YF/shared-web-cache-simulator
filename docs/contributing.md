@@ -37,7 +37,7 @@ Use English for material intended for the public repository. Private discussion 
 | A: core and final integration | cache_simulator/, main.py, documentation | Working implementation; final package and clean-run verification remain |
 | B: FIFO/LRU | cache_simulator/policies/; tests/; docs/b_fifo_lru_review.md | PR #1 merged, five focused tests; report explanation and video segment next |
 | C: LFU/metrics/experiments | tests/; experiments/; docs/c_lfu_reference_review.md | PR #2 merged, three focused tests; independent-run configuration/comparison evidence and report methods next |
-| D: Custom design | docs/custom_policy.md; scenario tests; report | Original design integrated; final rule confirmation, corrected pseudocode, and report section via Drive |
+| D: Custom design | docs/custom_policy.md; scenario tests; report | Revised rules and pseudocode received and verified November 22; edited report section prepared; final report check and video via Drive |
 | E: methodology and interpretation | reports/; reviewed result snapshot | Final matrix/snapshot choice, CSV-backed conclusions, report draft and selected figures via Drive |
 
 ## Maintainer integration checklist

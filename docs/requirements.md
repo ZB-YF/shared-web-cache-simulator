@@ -18,7 +18,7 @@ This document records the technical simulation rules and validation targets. Mod
 - **FIFO:** Evict the oldest insertion. Hits do not change insertion order.
 - **LRU:** Evict the resource whose last access is oldest.
 - **LFU:** Count accesses since insertion. Evict the lowest frequency, breaking ties by LRU. Reset frequency after eviction and reinsertion.
-- **Custom:** Define, implement, justify, and evaluate an additional strategy. Document its objective, tie-breaking, limitations, and trade-offs. It need not outperform every baseline under every workload. The integrated LA-GDSF design includes a documented admission filter; standard policies retain mandatory admission for fitting misses. Team review of the Custom interpretation remains outstanding.
+- **Custom:** Define, implement, justify, and evaluate an additional strategy. Document its objective, tie-breaking, limitations, and trade-offs. It need not outperform every baseline under every workload. The integrated LA-GDSF design includes a documented admission filter; standard policies retain mandatory admission for fitting misses. D's revised score-timing description has been checked against the implementation; final assembled-report and experiment selection review remain outstanding.
 
 ## Performance metrics
 

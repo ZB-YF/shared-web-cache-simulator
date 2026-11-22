@@ -48,4 +48,4 @@ Compare integer bytes and counts exactly; use appropriate tolerance for floating
 
 ## Merged contributor checks
 
-The current suite contains 33 tests. B's five added FIFO/LRU tests and C's three added LFU/metrics tests are merged, with supporting [B](b_fifo_lru_review.md) and [C](c_lfu_reference_review.md) review notes. Their completed checks should not be relisted as pending initial validation. The remaining C run-artifact handoff, D rule confirmation, E experiment selection, and report/video requirements are tracked in [development status](development.md).
+The current suite contains 35 tests. B's five added FIFO/LRU tests and C's three added LFU/metrics tests are merged, with supporting [B](b_fifo_lru_review.md) and [C](c_lfu_reference_review.md) review notes. Their completed checks should not be relisted as pending initial validation. D's revised rule description is now checked; two added tests cover T4 aging and multi-eviction insertion scoring. The remaining C run-artifact handoff, E experiment selection, and final report/video requirements are tracked in [development status](development.md).

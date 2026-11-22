@@ -9,6 +9,7 @@ Run all terminal examples from the repository root.
 | Input schemas, URL identity, reference aliases | [Data dictionary](data_dictionary.md) |
 | Module ownership, policy callbacks, exported fields | [Interfaces](interfaces.md) |
 | LA-GDSF rules and prototype interpretation | [Custom policy](custom_policy.md) |
+| D revised Custom delivery and verification | [D revision review](d_custom_policy_review.md) |
 | Test coverage and release checks | [Test plan](test_plan.md) |
 | Recorded correctness and reproduction evidence | [Validation](validation.md) |
 | B FIFO/LRU review received in merged PR #1 | [B review](b_fifo_lru_review.md) |

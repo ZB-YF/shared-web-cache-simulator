@@ -83,20 +83,20 @@ This example uses a fresh output location to leave the reviewed [published figur
 
 ## Status and collaboration
 
-**Status checked November 21, 2026:** the current suite has **33 passing tests**. FIFO/LRU/LFU match all ten supplied reference fields on all 15 requests, and Custom reproduces D's reference result: 7 hits, 68.666666... ms average response, and 299008 origin bytes. The existing 1000-run synthetic baseline and figures remain available; the latest PRs add reviews and tests without changing algorithms or replacing that baseline.
+**Status checked November 22, 2026:** the current suite has **35 passing tests** (the earlier 33 plus two checks for D's clarified behavior). FIFO/LRU/LFU match all ten supplied reference fields on all 15 requests, and Custom reproduces D's reference result: 7 hits, 68.666666... ms average response, and 299008 origin bytes. The existing 1000-run synthetic baseline and figures remain available. D's revised score-timing pseudocode matches the implemented algorithm; the updated prototype was compared again across 1000 runs and 900000 request events, with unchanged results.
 
 | Contribution | Evidence available | Status |
 |---|---|---|
 | B: FIFO/LRU | [Merged PR #1](https://github.com/ZB-YF/shared-web-cache-simulator/pull/1), [review](docs/b_fifo_lru_review.md), five focused tests | Review and tests integrated |
 | C: LFU, metrics, experiments | [Merged PR #2](https://github.com/ZB-YF/shared-web-cache-simulator/pull/2), [review](docs/c_lfu_reference_review.md), three focused tests | Review and tests integrated; original independent-run configuration/comparison evidence still to be handed off |
-| D: Custom policy | Delivered prototype/design, integrated [LA-GDSF specification](docs/custom_policy.md), scenario and reference checks | Implementation integrated; final design confirmation and consistent report pseudocode pending |
+| D: Custom policy | Updated English rules/pseudocode and report draft received; [revision review](docs/d_custom_policy_review.md), [report section](reports/custom_policy_design.md) | Score-timing mismatch resolved; implementation and published results unchanged; final assembled-report check and video pending |
 | E: experiment/report analysis | Existing [baseline CSVs](results/experiments/d_reproduction/) and [draft findings/figures](reports/experimental_findings.md) are available to review | E's final experiment selection, interpretation, and report contribution are not yet present in the reviewed materials |
 
 **A is the sole maintainer of the main branch. B and C submit changes through pull requests; D and E submit materials through Google Drive.** The maintainer reviews B/C PRs, manually integrates D/E deliveries, runs checks, and handles final merges and publication. B/C should not push directly to main. Public project content stays in English; private planning remains outside this repository. See the [contribution workflow](docs/contributing.md) for artifact requirements.
 
-C's review records a separate replay, but its named output directories are not tracked or available in the local handoff reviewed for this update. This is an evidence-handoff gap, not a failed test. Complete Drive contents have not been inspected; unreceived D/E material may exist there. Progress is marked complete only when its evidence is available.
+C's review records a separate replay, but its named output directories are not tracked or available in the local handoff reviewed for this update. This is an evidence-handoff gap, not a failed test. D's updated local handoff has been inspected; complete Drive contents have not been inspected, and other unreceived final materials may exist there. Progress is marked complete only when its evidence is available.
 
-The final team-reviewed 3-4 page report, five-person 10-minute video/link, and submission package remain pending. The target is **November 25, 2026 for all deliverables**. Detailed remaining work and proposed handoff dates are in [development status](docs/development.md). See [validation evidence](docs/validation.md) for commands and historical checkpoints.
+Report-ready [A architecture](reports/simulator_architecture.md) and [D policy-design](reports/custom_policy_design.md) sections are available for assembly. The final team-reviewed 3-4 page report, five-person 10-minute video/link, and submission package remain pending. The target is **November 25, 2026 for all deliverables**. Detailed remaining work and proposed handoff dates are in [development status](docs/development.md). See [validation evidence](docs/validation.md) for commands and historical checkpoints.
 
 ## Design documentation
 

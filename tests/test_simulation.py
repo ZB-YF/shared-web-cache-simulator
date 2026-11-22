@@ -148,6 +148,34 @@ class SimulationTests(unittest.TestCase):
         self.assertEqual(policy.frequency['b'], 2)
         self.assertEqual(policy.inflation, 0)
 
+    def test_custom_aging_releases_former_hot_resource_in_d_scenario(self):
+        resources = load_resources(ROOT / 'data/reference/resources.csv')
+        requests = scenarios(resources)['T4_aging']
+        formerly_hot = requests[0].resource_id
+        custom, _ = run_simulation(resources, requests, 'CUSTOM')
+        lfu, _ = run_simulation(resources, requests, 'LFU')
+        self.assertEqual(sum(result.hit for result in custom), 14)
+        self.assertEqual([result.step for result in custom
+                          if formerly_hot in result.evicted_resources], [20])
+        self.assertFalse(any(formerly_hot in result.evicted_resources for result in lfu))
+        self.assertEqual(sum(result.hit for result in lfu), 4)
+
+    def test_custom_multi_eviction_prices_insertion_with_final_inflation(self):
+        resources = {key: resource(key, size, latency) for key, size, latency in
+                     [('a', 1024, 15), ('b', 1024, 25),
+                      ('c', 1024, 35), ('d', 2048, 85)]}
+        policy = create_policy('CUSTOM')
+        cache = Cache(3072, policy)
+        results = Simulator(resources, cache, SimulationConfig(3072)).run(trace('a', 'b', 'c', 'd'))
+        # Before eviction: a=10, b=20, c=30; d's candidate score is 40.
+        self.assertEqual(results[-1].evicted_resources, ('a', 'b'))
+        self.assertEqual(results[-1].cache_contents_oldest_first, ('c', 'd'))
+        self.assertEqual(results[-1].cache_used_bytes, 3072)
+        self.assertEqual(policy.inflation, 20)
+        self.assertEqual(policy.priority, {'c': 30, 'd': 60})
+        self.assertEqual(policy.frequency['a'], 1)
+        self.assertEqual(policy.frequency['b'], 1)
+
     def test_nondefault_hit_latency_used_by_custom_score(self):
         policy = create_policy('CUSTOM', 20)
         r = resource('a', 1024, 30)

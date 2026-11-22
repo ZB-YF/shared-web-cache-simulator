@@ -6,8 +6,18 @@ The final 3-4 page technical report is still pending team review and authorship.
 
 Explain which policy wins under which metric, when rankings change, and which client or traffic trade-offs arise. Complete the final report and figures by November 25, 2026. The draft findings and plots do not constitute a completed submission report.
 
+## Sections available for final assembly
+
+| Section | Status |
+|---|---|
+| [Simulator Architecture and Implementation](simulator_architecture.md) | A's code-based explanation is ready for report assembly |
+| [Custom Policy Design and Justification](custom_policy_design.md) | Adapted from D's revised English draft; score timing, limitations, and complexity align with the integrated code |
+| [Experimental findings and figures](experimental_findings.md) | Existing data-backed draft; E's final matrix/figure selection and narrative still pending |
+
+D's original ten-file update is preserved in the private handoff archive; [review evidence](../docs/d_custom_policy_review.md) records what was received, checked, and edited. These sections and figures still need team assembly and review as one 3-4 page report. They are not a completed report submission.
+
 ## Final handoff still needed
 
-E should identify the final result snapshot, workload/capacity/seed matrix, selected figures, and numeric evidence for the report's three central questions. D should deliver a confirmed, consistent Custom algorithm description and limitations. B/C's merged review notes are available for the standard-policy and metric sections. A integrates these contributions into the final 3-4 page report. D/E deliver via Drive; B/C follow-up text and checks use PRs.
+E should identify the final result snapshot, workload/capacity/seed matrix, selected figures, and numeric evidence for the three central questions, then complete the result-analysis narrative. B/C's merged review notes support the standard-policy and metric sections. C's original independent-run configuration/comparison evidence remains to be handed off separately from its already-merged review.
 
-The review notes do not include C's original independent-run artifact directories. Request original configuration/comparison evidence before describing that handoff as complete. The existing published baseline remains available, so final report drafting can proceed while evidence is collected. Proposed dates and acceptance criteria are in [development status](../docs/development.md).
+D's updated design and pseudocode no longer block report assembly. D should check the final combined wording and prepare the video contribution; no additional algorithm rewrite is requested. A integrates all sections, checks report length and numbers, and performs release packaging. Proposed dates and acceptance criteria are in [development status](../docs/development.md).

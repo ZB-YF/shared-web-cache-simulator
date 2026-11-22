@@ -1,0 +1,81 @@
+{
+  "received_on": "2026-11-22",
+  "contributor": "D",
+  "delivery": "Updated English Custom policy package",
+  "files": [
+    {
+      "name": "D_Part.md",
+      "sha256": "2f6324e65b7f705d9bfd2afe89867930bd56e43fdebd195bfae846bafc56f6e5",
+      "bytes": 32125
+    },
+    {
+      "name": "D_Pseudocode.md",
+      "sha256": "a56376d81efbda65c6fd21db6f1dd05fb92fb8cbacc0a8d63ee25f2cad9513e3",
+      "bytes": 5633
+    },
+    {
+      "name": "D_Requirements.md",
+      "sha256": "1851b91f7b45709f12536c49f8905b1584489db7fb611f52f5a3a9541cf6511f",
+      "bytes": 5855
+    },
+    {
+      "name": "D_Test_Cases_and_Report.md",
+      "sha256": "39f878d3db2cde86a485b70bada94dd5b25b20ba13296812d08377e48452490c",
+      "bytes": 8731
+    },
+    {
+      "name": "make_results.py",
+      "sha256": "610f13db6373fc74d689c04345835dcaa768d7be23d8de24046cec345fd45c46",
+      "bytes": 1488
+    },
+    {
+      "name": "proto.py",
+      "sha256": "8c46fdef403713d18abf68072ebd8917957878fcb3078dda85eaa9180475b9f3",
+      "bytes": 4243
+    },
+    {
+      "name": "results_D.csv",
+      "sha256": "a49ad6354b9c88afc1f27037d087b1d34484249b68bfdf872db9fff7624f4f19",
+      "bytes": 8471
+    },
+    {
+      "name": "scen.py",
+      "sha256": "176e7951ec0fa99dc7e215153e5623cae8abec682bdd7151d5ade5f5cdc3f11b",
+      "bytes": 858
+    },
+    {
+      "name": "test_custom.py",
+      "sha256": "01b2927eec8958568a336e959c599ce839c6b24f27933655c9b5c962c2c5babb",
+      "bytes": 1674
+    },
+    {
+      "name": "workloads.py",
+      "sha256": "53022f8f9dbd421db2211a8db61795891cc4ef2be16d728646deae01d16b93e5",
+      "bytes": 2087
+    }
+  ],
+  "base_commit": "dba972355ef13c3f38329d84abccbd92d4ed3801",
+  "algorithm_changed": false,
+  "pseudocode_discrepancy": "Resolved: pre-eviction candidate score, post-eviction insertion score",
+  "checks": {
+    "combined_package_code_matches_separate_files": true,
+    "prototype_logic_matches_previous_delivery": true,
+    "delivered_results_match_published_baseline_byte_for_byte": true,
+    "portable_original_test_script": "passed",
+    "automated_tests": 35,
+    "reference_fields": "15 rows x 10 fields for FIFO/LRU/LFU",
+    "matrix_runs_compared": 1000,
+    "request_events_compared": 900000,
+    "aggregate_rows_compared": 100,
+    "aggregate_cells_compared": 1700,
+    "outcome": "All compared values match contributor D executable prototype and supplied CSV"
+  },
+  "original_files": "Archived privately without modification; public code does not depend on delivery paths",
+  "editorial_adjustments": [
+    "Five named scenarios plus the reference trace, not six plus reference",
+    "Catalog maximum is 59637760 bytes = 56.875 MiB",
+    "Integrated victim preview is O(k*n); prototype sorts O(n log n)",
+    "Capture victim scores before deletion in executable pseudocode",
+    "Aging demonstrated on T4, not a universal eviction guarantee"
+  ]
+}

@@ -1,6 +1,6 @@
 # Module interfaces
 
-These contracts describe the integrated implementation. The admission extensions follow D's delivered Custom prototype; contributor review and team-wide sign-off are still pending.
+These contracts describe the integrated implementation. B/C's focused reviews are merged, and D's revised November 22 description agrees with the Custom admission callbacks; see [revision review](d_custom_policy_review.md). Final assembled-report and release sign-off remain pending.
 
 ## Request flow
 
