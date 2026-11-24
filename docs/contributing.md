@@ -13,7 +13,7 @@ A is the **sole maintainer of main and the final integrator**. B and C submit co
    python3 -m experiments.validate_reference
    ```
 
-4. Attach review evidence as repository files, with clear provenance. B's [PR #1](https://github.com/ZB-YF/shared-web-cache-simulator/pull/1) and C's [PR #2](https://github.com/ZB-YF/shared-web-cache-simulator/pull/2) are already merged; further work should use a new PR based on current main.
+4. Attach review evidence as repository files, with clear provenance. B's [PR #1](https://github.com/ZB-YF/shared-web-cache-simulator/pull/1) and C's [PR #2](https://github.com/ZB-YF/shared-web-cache-simulator/pull/2) and [evidence PR #3](https://github.com/ZB-YF/shared-web-cache-simulator/pull/3) are already merged; further work should use a new PR based on current main.
 5. For experimental claims, include the original run configuration, source commit or hashes, parameters/seeds, and a reproducible comparison record or checking script. A local path mentioned in prose is not itself a delivered artifact.
 6. Generated result directories are ignored unless explicitly allowlisted. If a new result snapshot is needed, add the narrow .gitignore exception and the intended files in the same PR. Check the PR's file list before submission.
 
@@ -36,7 +36,7 @@ Use English for material intended for the public repository. Private discussion 
 |---|---|---|
 | A: core and final integration | cache_simulator/, main.py, documentation | Working implementation; final package and clean-run verification remain |
 | B: FIFO/LRU | cache_simulator/policies/; tests/; docs/b_fifo_lru_review.md | PR #1 merged, five focused tests; report explanation and video segment next |
-| C: LFU/metrics/experiments | tests/; experiments/; docs/c_lfu_reference_review.md | PR #2 merged, three focused tests; independent-run configuration/comparison evidence and report methods next |
+| C: LFU/metrics/experiments | tests/; experiments/; docs/c_lfu_reference_review.md | PR #2 tests/review and PR #3 original configs/replay evidence merged; report methods and video next |
 | D: Custom design | docs/custom_policy.md; scenario tests; report | Revised rules and pseudocode received and verified November 22; edited report section prepared; final report check and video via Drive |
 | E: methodology and interpretation | reports/; reviewed result snapshot | Final matrix/snapshot choice, CSV-backed conclusions, report draft and selected figures via Drive |
 

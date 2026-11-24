@@ -77,5 +77,25 @@
     "Integrated victim preview is O(k*n); prototype sorts O(n log n)",
     "Capture victim scores before deletion in executable pseudocode",
     "Aging demonstrated on T4, not a universal eviction guarantee"
-  ]
+  ],
+  "supplement_2026_11_24": {
+    "received_on": "2026-11-24",
+    "original_filename": "LA-GDSF Design.md",
+    "published_path": "docs/d_la_gdsf_design.md",
+    "sha256": "ec7ff6078cce18c05880ba23b698a3815933e2f0b61f311dd0eb919dabca282e",
+    "bytes": 25528,
+    "publication": "Unmodified original Markdown under a normalized repository filename",
+    "embedded_source_matches_previous_verified_delivery": {
+      "proto.py": true,
+      "workloads.py": true,
+      "scen.py": true,
+      "test_custom.py": true,
+      "make_results.py": true
+    },
+    "algorithm_change": false,
+    "classification": "Consolidated contributor design/reference-prototype/test/pilot-result material",
+    "canonical_implementation": "cache_simulator/policies/custom.py",
+    "maintained_specification": "docs/custom_policy.md",
+    "report_section": "reports/custom_policy_design.md"
+  }
 }

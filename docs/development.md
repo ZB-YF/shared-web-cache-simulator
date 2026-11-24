@@ -1,6 +1,6 @@
 # Development and delivery status
 
-**Reviewed on November 22, 2026. Target: all deliverables completed by November 25, 2026.** This status uses the merged GitHub main branch, its published results, and accessible local D handoff material. It does not establish that every private Google Drive file has been received or reviewed.
+**Reviewed on November 24, 2026. Target: all deliverables completed by November 25, 2026.** This status uses the merged GitHub main branch, its published results, and accessible local D handoff material. It does not establish that every private Google Drive file has been received or reviewed.
 
 ## Completed and verified
 
@@ -9,6 +9,7 @@
 - The existing synthetic matrix has 1000 per-seed runs, 100 aggregate rows, and 40 saved traces. The baseline, its configuration, four PNG/SVG figure pairs, and draft findings are in the repository.
 - B's [PR #1](https://github.com/ZB-YF/shared-web-cache-simulator/pull/1) is merged: [FIFO/LRU review](b_fifo_lru_review.md) plus five focused tests for access order, multiple eviction, reinsertion, oversized misses, and shared-client history.
 - C's [PR #2](https://github.com/ZB-YF/shared-web-cache-simulator/pull/2) is merged: [LFU/metric/experiment review](c_lfu_reference_review.md) plus three focused tests. Its review reconstructs LFU decisions and per-client metrics and reports an independent full-matrix replay with CSV and trace checks.
+- C's [PR #3](https://github.com/ZB-YF/shared-web-cache-simulator/pull/3) is now merged: original configs and an [evidence supplement](c_run_evidence_20261123.md). Maintainer checks matched all 27 batch and 25 reference source hashes, verified 40 trace hashes/counts, and reproduced metric CSVs/reference hashes from matching historical snapshots.
 - D's updated English rules, pseudocode, test plan, and report draft were received on November 22. The revised H_cand/H_ins description matches existing code, resolving the earlier mismatch. The updated prototype and integrated simulator again match across 1000 runs and 900000 events; D's supplied CSV and published baseline are byte-identical. See [D revision review](d_custom_policy_review.md).
 - Concise [A architecture](../reports/simulator_architecture.md) and [D policy-design](../reports/custom_policy_design.md) report sections are prepared. They still need assembly with E's results/analysis into the final report.
 
@@ -18,13 +19,15 @@
 |---|---|---|---|
 | A | Core, integration, published baseline; B/C PRs merged | Update status; select final artifacts with the team; integrate report/video materials; verify release | Final report, working video link, reproducible ZIP, and clean-directory run checked |
 | B | FIFO/LRU review and tests received via PR | Concise report explanation and approximately two-minute video segment | Explain a policy divergence with an actual example; final text/segment delivered |
-| C | LFU/metric tests and review received via PR | Original replay configuration plus verifiable result-comparison evidence in a follow-up PR; report methods/metrics and video segment | A can verify which code/inputs/seeds were run and how replay results reconcile with the published snapshot |
+| C | LFU/metric tests/review and original-config/replay evidence received via merged PRs #2/#3 | Concise LFU/metrics/experimental-methods report text and video segment | Text and demonstration agree with accepted code, configurations, and final data |
 | D | Updated rules/pseudocode/test plan and report draft received and checked; timing mismatch resolved | Check the assembled report and prepare the two-minute video segment via Drive | Final report preserves the accepted rules and limitations; video contribution delivered |
 | E | Baseline CSVs, generators, four figures, and draft findings available as inputs | Final matrix/snapshot and figure selection; CSV-backed interpretation; report body via Drive | At least three workloads, multiple capacities, metric trade-offs, and per-client effects explained with traceable numbers |
 
-C's review names `results/c_lfu_reference_20261116/` and `results/c_matrix_20261116_final/`. Those directories are not tracked and were not present in the local handoff reviewed on November 21. This is a provenance/artifact handoff gap, not evidence that C failed to run the experiments. If their CSVs are identical to the published baseline, an original config and reproducible checksum/comparison record may establish the handoff without duplicating the entire matrix. If the original artifacts are unavailable, label any new run with its actual date and source version.
+C's original configurations and comparison record are now in [the evidence supplement](c_run_evidence_20261123.md), closing the November 21 handoff gap. The three batch metric CSVs and all 40 generated traces reproduce the published values. The original batch config records Python 3.14.5; the maintainer replay used 3.14.2, with configuration matching after accounting for the actual Python version. The reference config and reported output hashes reproduce exactly. The raw Drive CSV package was not downloaded for these checks; the supplied checksums were independently reproduced, and duplicate baseline CSVs were not required for acceptance.
 
-D's revised design package is now received and checked. No E-specific final selection/report was found in the reviewed materials; other work may exist on Drive. Existing figures and D's design section do not constitute E's sign-off or a final technical report. C's independent-run artifact handoff remains unchanged by this D delivery.
+D's additional [LA-GDSF design package](d_la_gdsf_design.md) was received and published unchanged on November 24. Its embedded prototype code matches the earlier verified delivery and introduces no algorithm change. The [review notes](d_custom_policy_review.md) distinguish original contributor material from the maintained specification and edited report section.
+
+No E-specific final selection/report was found in the reviewed materials; other work may exist on Drive. Existing figures and the A/D report sections do not constitute E's final selection or a completed technical report.
 
 ## D's confirmed algorithm description
 
@@ -36,7 +39,7 @@ These are proposed coordination dates, not claims of team acceptance. All times 
 
 | Date | Required checkpoint |
 |---|---|
-| November 22, 20:00 | D rules/pseudocode received; collect C's replay evidence and E's final matrix/snapshot/figure list, then agree code/data freeze |
+| November 22, 20:00 | Historical checkpoint: D rules/pseudocode received; C evidence has since merged in PR #3; E's final matrix/snapshot/figure list still required |
 | November 23, 20:00 | Complete 3-4 page report draft; all five contributors check their text and numbers |
 | November 24 | Finalize report; finish the five-person 10-minute video, upload, and verify its link |
 | November 25 | Check the full ZIP and input/config/figure completeness; reproduce from a clean directory; finish all deliverables |

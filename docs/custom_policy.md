@@ -2,6 +2,8 @@
 
 ## Objective and provenance
 
+D's [original consolidated design package](d_la_gdsf_design.md) is available for attribution and reference. This maintained specification and the [revision review](d_custom_policy_review.md) record the integrated rules and editorial corrections.
+
 Contributor D supplied a latency-aware size/frequency policy, executable prototype, scenario oracles, workload generators, and preliminary aggregate results. The updated English handoff received November 22, 2026 resolves the earlier pseudocode mismatch and was checked against the integrated implementation; see [D revision review](d_custom_policy_review.md). This repository adapts that work to the shared simulator. The primary objective is lower average response time, with hit ratio secondary. Byte traffic and large-resource client performance are explicit trade-offs, not fairness guarantees.
 
 ## Score and retained state

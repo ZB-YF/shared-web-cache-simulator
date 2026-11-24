@@ -1,6 +1,6 @@
 # Validation evidence
 
-Updated November 22, 2026 after receipt and checking of D's revised design package. The earlier integration checkpoint and D-prototype comparison below remain historical evidence; this update does not establish final team approval or complete the report/video deliverables.
+Updated November 24, 2026 after C's evidence PR #3 and publication of D's additional consolidated design document. The earlier integration checkpoint and D-prototype comparison below remain historical evidence; this update does not establish final team approval or complete the report/video deliverables.
 
 ## Automated correctness checks
 
@@ -18,9 +18,15 @@ Integration tests cover all instructor reference fields; D's custom reference re
 ## Merged contributor reviews
 
 - [B review](b_fifo_lru_review.md), merged in [PR #1](https://github.com/ZB-YF/shared-web-cache-simulator/pull/1): reconstructed FIFO/LRU trace, global/client metrics, and five focused tests. The review distinguishes its reconstruction from unaided handwritten work.
-- [C review](c_lfu_reference_review.md), merged in [PR #2](https://github.com/ZB-YF/shared-web-cache-simulator/pull/2): LFU eviction decisions, independent client-metric reconstruction, three focused tests, and a reported seeded replay. The reviewed replay CSVs/configs were not delivered in the PR or found in the local handoff, so full independent-run artifact receipt remains pending.
+- [C review](c_lfu_reference_review.md), merged in [PR #2](https://github.com/ZB-YF/shared-web-cache-simulator/pull/2): LFU eviction decisions, independent client-metric reconstruction, three focused tests, and a reported seeded replay. That initial PR did not include original run artifacts; the original configs and comparison record have since been received in [PR #3](https://github.com/ZB-YF/shared-web-cache-simulator/pull/3), closing the follow-up evidence handoff.
 
 The contributor PRs change tests and review documents only. D's revised score-timing rules have since been received and checked as described below; E's final matrix selection and the assembled report remain pending. See [development status](development.md) for precise acceptance criteria.
+
+## November 24 follow-up evidence
+
+C's [original configs and replay record](c_run_evidence_20261123.md) were checked before merging PR #3: all 27 batch and 25 reference source hashes match the named snapshots; all 40 trace hashes/counts match; three fresh batch metric CSVs match both the stated checksums and the published baseline; reference files match the stated hashes. Batch configuration matches apart from the reviewer's actual Python version (3.14.2 versus the recorded 3.14.5). The reference config reproduces byte for byte. The actual merged tree is identical to the tested prospective merge tree. Raw Drive originals were not downloaded; the submitted hash claims were independently reproduced.
+
+D's additional [consolidated design source](d_la_gdsf_design.md) is published unchanged. All five embedded Python scripts match the earlier verified delivery. This is documentation/provenance publication, not a new algorithm or replacement result snapshot; the maintained [specification](custom_policy.md) and [review notes](d_custom_policy_review.md) remain the current interpretation.
 
 ## Reference checks
 

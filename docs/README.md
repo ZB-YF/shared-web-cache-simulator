@@ -9,6 +9,8 @@ Run all terminal examples from the repository root.
 | Input schemas, URL identity, reference aliases | [Data dictionary](data_dictionary.md) |
 | Module ownership, policy callbacks, exported fields | [Interfaces](interfaces.md) |
 | LA-GDSF rules and prototype interpretation | [Custom policy](custom_policy.md) |
+| C original run configs and replay comparison, merged PR #3 | [C run evidence](c_run_evidence_20261123.md) |
+| D original consolidated design package as delivered | [Original LA-GDSF design](d_la_gdsf_design.md), with [review notes](d_custom_policy_review.md) |
 | D revised Custom delivery and verification | [D revision review](d_custom_policy_review.md) |
 | Test coverage and release checks | [Test plan](test_plan.md) |
 | Recorded correctness and reproduction evidence | [Validation](validation.md) |

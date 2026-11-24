@@ -1,2 +1,5 @@
 # Preserve original CSV bytes and hashes across platforms. CSV writers use CRLF.
 *.csv -text whitespace=cr-at-eol
+
+# Preserve D's original Markdown bytes, including its hard line breaks.
+docs/d_la_gdsf_design.md -text whitespace=-blank-at-eol
