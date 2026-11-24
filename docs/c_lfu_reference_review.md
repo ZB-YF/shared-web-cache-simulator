@@ -130,3 +130,6 @@ files were not changed. No discrepancy remains in the checks recorded here.
 The final choice of experiment snapshot and report interpretation belongs to
 team integration. The generated C CSVs, traces, and configuration are ignored
 by Git and must be delivered separately from a pull request.
+
+For the verbatim original configs, matching source commits, checksums, and a
+fresh byte-for-byte replay comparison, see the [C run evidence supplement](c_run_evidence_20261123.md).

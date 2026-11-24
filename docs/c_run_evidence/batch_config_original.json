@@ -1,0 +1,352 @@
+{
+  "aggregation": "Arithmetic mean across seeds; sample standard deviation in summary.csv",
+  "capacities_bytes": [
+    102400,
+    512000,
+    1048576,
+    5242880,
+    10485760
+  ],
+  "hit_latency_ms": 5,
+  "policies": [
+    "FIFO",
+    "LRU",
+    "LFU",
+    "CUSTOM",
+    "CUSTOM_NOADM"
+  ],
+  "provenance": "Synthetic workloads adapted from contributor D; integrated simulator rerun",
+  "python_version": "3.14.5",
+  "resources_file": "resources.csv",
+  "resources_sha256": "b2117bca54a566a999cd21333bb34a3dc25e0d0f371cf9aad8bfb7c63d1869e7",
+  "runs": 1000,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "source_sha256": {
+    "cache_simulator/__init__.py": "7e8c2e44d222913fad9fc2c31e0e635e7a80d39a7f08e6a243b9d2f8d328ca6e",
+    "cache_simulator/cache.py": "ea85cb6012cc2a3a97876943383106e85a6461b16dcd5ffe09062e0c651f0f78",
+    "cache_simulator/cli.py": "0a02453d8ed1eee3e5fb9798c06f7d457588670c65e21d8e868e30605bfc1c1d",
+    "cache_simulator/data_loader.py": "f39b96e12db3a4e09a09eb56937ae2dd5f3dd0bf486cb6c461bf0b13a7e8d228",
+    "cache_simulator/metrics.py": "2340209cbe7d79899e85539a98348fdebf4f33aa48a78257c0a3ca1a674ea487",
+    "cache_simulator/models.py": "66a4efc6476eff10b3d29061ea7e4dc4999f4fdd2a03d77b2be56818bc6b55fd",
+    "cache_simulator/output_writer.py": "0970fd1fa44cdde1dd8fba59a80561ac726d257ea6974b2709768eb533ccf474",
+    "cache_simulator/policies/__init__.py": "42e313b572805231c80901ff5eae62bdc7802b3846940d8a9ca71caa7843eaf0",
+    "cache_simulator/policies/base.py": "5aeda58163e7a5d6e9ed3e2a360ea8bf4a8ffe13b1c81ff12d32454c536eca2c",
+    "cache_simulator/policies/custom.py": "37b4fe8c8e15e59058c106dd89bfbe98bb4c4bcaa0835452188ba100a3d3f171",
+    "cache_simulator/policies/fifo.py": "d87e120d58a66b9f18862a774b52d8b9e9ec6e8524ac84859c8f3e7f9a75171e",
+    "cache_simulator/policies/lfu.py": "7c2bf85a7d21739c418f1523ebea6c149b9fecac31d3f97d04163c32a7f0def9",
+    "cache_simulator/policies/lru.py": "bebb05cc36b4a18244c7a37c65332629881fbcfd0be6b541441978b9f218daa6",
+    "cache_simulator/runner.py": "ecb4818db96f635072393825d35806589b73f751091fe6e45b06273bf9f89b61",
+    "cache_simulator/simulator.py": "b3104244bc70d8cdc1993783ce8af04aa20d279d73a24d7c835bfe621438e0a6",
+    "experiments/__init__.py": "611e958be1e671a5cce79744c2a13ad95f5dd0ee31c9f14d3f6ba6ae6058bdd5",
+    "experiments/plot.py": "749792a45f3a273697db82fea4f1f09b80979fcd6c32ee50fc572ed8c5d75594",
+    "experiments/run.py": "0efbad6417bfdee92cb2452ff6872e2e158e6d2482693ca1e0a54bd08bd9edae",
+    "experiments/scenarios.py": "63d5a0b926d6426b2718ee2a15a9e2b7c8027cb5262d4f0be71fe1d88e59cd4a",
+    "experiments/validate_reference.py": "b48c40c17befe37611e97ce8b3720c3f66bbbcee75ffae21002085e7ebaf7c57",
+    "experiments/workloads.py": "ddc63acac6c4250063bdf1cef5eb01fb3f816794d85d49986b031f9526572c6f",
+    "main.py": "613a023b1e30a681589678a5fac8a543c227a008c9ade6ce31855ea32c1e70b1",
+    "tests/test_cli.py": "90e53d252441d95b7a37cbf53cd9b6f7c1a451ebd8881cf4ac492b08475c8a33",
+    "tests/test_data_loader.py": "e2f3dfb2ed5d84f5ac663bd36d62f40c3f95449ff995dc86c0fff27e6c6a0cd2",
+    "tests/test_fifo_lru.py": "e295d27c80999dcae8dc585f5962fceca87b58b2e33e0793f6df704eab1e4d7e",
+    "tests/test_lfu_metrics.py": "554a34077720bb2363fa26c27bb41e952d9b6809e5ae549f53b4f4d41a81c942",
+    "tests/test_simulation.py": "65f76bbb9448c865ab0c2037b7f7ae28fc0f433a7579314eddbdb6ac13dfa492"
+  },
+  "traces": [
+    {
+      "path": "traces/repetitive_seed0.csv",
+      "request_count": 600,
+      "seed": 0,
+      "sha256": "749d4ec4fc564ff4291071ff1b0b9743c32eec332167ec457dd288bfd154383d",
+      "workload": "repetitive"
+    },
+    {
+      "path": "traces/repetitive_seed1.csv",
+      "request_count": 600,
+      "seed": 1,
+      "sha256": "ae8f5c52ffeb917e657d30f216673a58370993a708aa2eae64c8f40f90a60e49",
+      "workload": "repetitive"
+    },
+    {
+      "path": "traces/repetitive_seed2.csv",
+      "request_count": 600,
+      "seed": 2,
+      "sha256": "564d6402e37efedda8e1920e9f01c8d7f4b1621e751e6ca2bfabc050f2ded198",
+      "workload": "repetitive"
+    },
+    {
+      "path": "traces/repetitive_seed3.csv",
+      "request_count": 600,
+      "seed": 3,
+      "sha256": "ed7020de0b3afbdb7da370eb7abaa7a263704652c3c483a58d7307518a4f1327",
+      "workload": "repetitive"
+    },
+    {
+      "path": "traces/repetitive_seed4.csv",
+      "request_count": 600,
+      "seed": 4,
+      "sha256": "f0357d34148af022045278311dda758cbc24ceaa16155e3ce4ce2f535299418c",
+      "workload": "repetitive"
+    },
+    {
+      "path": "traces/repetitive_seed5.csv",
+      "request_count": 600,
+      "seed": 5,
+      "sha256": "05640c5e7e50d4dce74d7a243706f6cdc1eaafdd1d30fd0d49296b90e0d516bf",
+      "workload": "repetitive"
+    },
+    {
+      "path": "traces/repetitive_seed6.csv",
+      "request_count": 600,
+      "seed": 6,
+      "sha256": "eec2b7c4ba336f60efe3c7a288e7a34d88568567ed3aea45be5295e5691fb34b",
+      "workload": "repetitive"
+    },
+    {
+      "path": "traces/repetitive_seed7.csv",
+      "request_count": 600,
+      "seed": 7,
+      "sha256": "4fb3a0d7226e40e3c1dabf1c36c3eb3761aee829568c0cc9b870e97cebc56b94",
+      "workload": "repetitive"
+    },
+    {
+      "path": "traces/repetitive_seed8.csv",
+      "request_count": 600,
+      "seed": 8,
+      "sha256": "b244dbde07d9eac2bc7e8d1b1c2845eec8848869bf478b5901670ec958377dec",
+      "workload": "repetitive"
+    },
+    {
+      "path": "traces/repetitive_seed9.csv",
+      "request_count": 600,
+      "seed": 9,
+      "sha256": "25bc3fd9f866c3479c30afe2b8fe3c1cf174d76c306fc503bf3397d12d42c3ac",
+      "workload": "repetitive"
+    },
+    {
+      "path": "traces/sequential_seed0.csv",
+      "request_count": 600,
+      "seed": 0,
+      "sha256": "5179d9dd5f663e2636b6398866270c2895f8b5b6ac81544bd88b022063d88b87",
+      "workload": "sequential"
+    },
+    {
+      "path": "traces/sequential_seed1.csv",
+      "request_count": 600,
+      "seed": 1,
+      "sha256": "3bf310fecbafce7e544c640d88d8fecc813e34d4c1d42f0f57bc960a134ecda4",
+      "workload": "sequential"
+    },
+    {
+      "path": "traces/sequential_seed2.csv",
+      "request_count": 600,
+      "seed": 2,
+      "sha256": "f0eea169a48a2e7cab36dfcd4831afa5c4b2a156643028bbab711d66e7f1d95e",
+      "workload": "sequential"
+    },
+    {
+      "path": "traces/sequential_seed3.csv",
+      "request_count": 600,
+      "seed": 3,
+      "sha256": "42e4ea55f28f8e5f5343246bbc726d44464ea2f8daf73958f64b9ed9f9602ff5",
+      "workload": "sequential"
+    },
+    {
+      "path": "traces/sequential_seed4.csv",
+      "request_count": 600,
+      "seed": 4,
+      "sha256": "31fcc8e57943477af04d4125df3487116cfb8f2c06105fca4d9d6e0c58faab6f",
+      "workload": "sequential"
+    },
+    {
+      "path": "traces/sequential_seed5.csv",
+      "request_count": 600,
+      "seed": 5,
+      "sha256": "5b18c795d87a1e50b998152a6d63168b46b3562ffed6731df2cd81fff662a641",
+      "workload": "sequential"
+    },
+    {
+      "path": "traces/sequential_seed6.csv",
+      "request_count": 600,
+      "seed": 6,
+      "sha256": "c5215b6bee2feeadbe4d5dc9149e8a46e390b59fda0efde90e9c4d78503c4fb7",
+      "workload": "sequential"
+    },
+    {
+      "path": "traces/sequential_seed7.csv",
+      "request_count": 600,
+      "seed": 7,
+      "sha256": "9cc0329c4b58c4763674cc2c41a671796da9748c2f3ca1a6720e97a26685f56d",
+      "workload": "sequential"
+    },
+    {
+      "path": "traces/sequential_seed8.csv",
+      "request_count": 600,
+      "seed": 8,
+      "sha256": "39571898c3b29f668587a16a7254816add8fe60b7d4ee8bc4ec14302d2b2e6b6",
+      "workload": "sequential"
+    },
+    {
+      "path": "traces/sequential_seed9.csv",
+      "request_count": 600,
+      "seed": 9,
+      "sha256": "2a0f0a28e2863f78e64bc112ab40000a2d074f58d261169819db6b568a09a6e4",
+      "workload": "sequential"
+    },
+    {
+      "path": "traces/mixed_seed0.csv",
+      "request_count": 1200,
+      "seed": 0,
+      "sha256": "b6db76a2f6623bea84d8370869da7b39cb98c363bba8962b68324a6a0794edaa",
+      "workload": "mixed"
+    },
+    {
+      "path": "traces/mixed_seed1.csv",
+      "request_count": 1200,
+      "seed": 1,
+      "sha256": "0f295dbc46bbc4415009b592d9ed11036318d19f51823b53543d1013eaf2fa8c",
+      "workload": "mixed"
+    },
+    {
+      "path": "traces/mixed_seed2.csv",
+      "request_count": 1200,
+      "seed": 2,
+      "sha256": "90a44c20be2b6cbb702fd6289be21d0f772d2c9525b5393641418ba3dcfe1723",
+      "workload": "mixed"
+    },
+    {
+      "path": "traces/mixed_seed3.csv",
+      "request_count": 1200,
+      "seed": 3,
+      "sha256": "a35b1382dd4858c9fc4b5ff02d4ceb9d06f68cbfa8180a2452ba9ab56a348594",
+      "workload": "mixed"
+    },
+    {
+      "path": "traces/mixed_seed4.csv",
+      "request_count": 1200,
+      "seed": 4,
+      "sha256": "7350258b7fb7e3d3be16c7acc8c6333f05e4afdcf5f438c7a57b5727e3b150d2",
+      "workload": "mixed"
+    },
+    {
+      "path": "traces/mixed_seed5.csv",
+      "request_count": 1200,
+      "seed": 5,
+      "sha256": "5ba01d17911e1ebccdf3eff17377270289bd35c2a57baba6b9d43adcfdf795bb",
+      "workload": "mixed"
+    },
+    {
+      "path": "traces/mixed_seed6.csv",
+      "request_count": 1200,
+      "seed": 6,
+      "sha256": "24fe4bee19aff0d961208623019ff1d042eacd8b27bfc991826fa47a2eb04cb5",
+      "workload": "mixed"
+    },
+    {
+      "path": "traces/mixed_seed7.csv",
+      "request_count": 1200,
+      "seed": 7,
+      "sha256": "fb36e7162cf98d639eeabb6fa72f7ea3796e453f93009a52a7dceeb7a247a400",
+      "workload": "mixed"
+    },
+    {
+      "path": "traces/mixed_seed8.csv",
+      "request_count": 1200,
+      "seed": 8,
+      "sha256": "7968fce27fd092193fd5615b9994692bf3804f9d5531c417b5ba4bd1795631a6",
+      "workload": "mixed"
+    },
+    {
+      "path": "traces/mixed_seed9.csv",
+      "request_count": 1200,
+      "seed": 9,
+      "sha256": "e4b152fb79d9e3f1d7b71847d11a0b5cb6d3c83199440d6cc9bd3167ec14e3ec",
+      "workload": "mixed"
+    },
+    {
+      "path": "traces/scan_pollution_seed0.csv",
+      "request_count": 1200,
+      "seed": 0,
+      "sha256": "56066391bf7e142c02c86dc4a2e893902dfc34b3c6cce245662ef25e5915682f",
+      "workload": "scan_pollution"
+    },
+    {
+      "path": "traces/scan_pollution_seed1.csv",
+      "request_count": 1200,
+      "seed": 1,
+      "sha256": "7fe3ecd95c5e78b934a07e742eb0ec8e44d3a284cd8e1c67dbfce3baaa18850c",
+      "workload": "scan_pollution"
+    },
+    {
+      "path": "traces/scan_pollution_seed2.csv",
+      "request_count": 1200,
+      "seed": 2,
+      "sha256": "8f56f2136cbb22675d419668fd1fc37c85848904224d578541df103085a9cbc1",
+      "workload": "scan_pollution"
+    },
+    {
+      "path": "traces/scan_pollution_seed3.csv",
+      "request_count": 1200,
+      "seed": 3,
+      "sha256": "2d18ec3686cfbd08ff477b89bb1ad96f31e2d6ef38f036b40736fc97b3e053e8",
+      "workload": "scan_pollution"
+    },
+    {
+      "path": "traces/scan_pollution_seed4.csv",
+      "request_count": 1200,
+      "seed": 4,
+      "sha256": "5820fb2f3ee391ef45f19422387c611cb29e7526a9e973eff8896efa6a33733c",
+      "workload": "scan_pollution"
+    },
+    {
+      "path": "traces/scan_pollution_seed5.csv",
+      "request_count": 1200,
+      "seed": 5,
+      "sha256": "4dce3c82cc1922f4d06dbb03eeb1e501e2ce6890c3457bb37f508151dbf30b6e",
+      "workload": "scan_pollution"
+    },
+    {
+      "path": "traces/scan_pollution_seed6.csv",
+      "request_count": 1200,
+      "seed": 6,
+      "sha256": "a4003f33733b6d3f5211b2cdd9f0846ec27fca82154a7d9d0040e501c83207a5",
+      "workload": "scan_pollution"
+    },
+    {
+      "path": "traces/scan_pollution_seed7.csv",
+      "request_count": 1200,
+      "seed": 7,
+      "sha256": "db62f473b84dbf07ce93dc0387685668e03b7ccf5899b14eb3b930c06c1ac541",
+      "workload": "scan_pollution"
+    },
+    {
+      "path": "traces/scan_pollution_seed8.csv",
+      "request_count": 1200,
+      "seed": 8,
+      "sha256": "8b3c8f0e03ea8d87dbb31128d988cca17e970b3c93e9e589a826f3f7e1e3f5ff",
+      "workload": "scan_pollution"
+    },
+    {
+      "path": "traces/scan_pollution_seed9.csv",
+      "request_count": 1200,
+      "seed": 9,
+      "sha256": "0bc2c8d12b906b9984287e6b3e558c5fd28616c47532766dd6a81f1a93c3387d",
+      "workload": "scan_pollution"
+    }
+  ],
+  "workloads": [
+    "repetitive",
+    "sequential",
+    "mixed",
+    "scan_pollution"
+  ]
+}
