@@ -4,6 +4,8 @@ The current team has five members, so the assignment requires **10 minutes total
 
 Each member prepares their own explanation of their actual contribution. The maintainer collects the materials and coordinates recording after the team has checked the results.
 
+D has already recorded her segment, according to the maintainer. Retain her existing recording for assembly; no additional design rewrite or rerecording is requested. B/C/E's remaining materials and A's assembly work continue separately. Video scripts and presentation drafts stay in the maintainer's private project folder.
+
 | Segment | Speaker | Focus |
 |---|---|---|
 | 00:00-02:00 | A | Shared simulator overview, architecture, and live CLI run |
@@ -18,7 +20,7 @@ Cover all five revised questions: best policy and metric, workload effects, capa
 
 ## Recording and upload still required
 
-- Each member confirms their contribution and records their own segment; revise the draft wording where necessary.
+- Collect the remaining contributors' explanations and recordings. Retain D's completed segment without requesting another recording.
 - A assembles the five segments, checks duration, legibility, audio, and the live demonstration.
 - Upload the completed video to YouTube. Unlisted visibility is allowed.
 - Verify playback without the owner's account, then submit its link on Brightspace. Add the verified link to the final submission materials.

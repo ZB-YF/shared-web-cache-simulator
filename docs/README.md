@@ -16,6 +16,7 @@ Terminal examples assume the project root unless an absolute path is shown. Publ
 | C's original configs and replay record, merged PR #3 | [C run evidence](c_run_evidence_20261123.md) |
 | D's original consolidated source and its interpretation | [Original design](d_la_gdsf_design.md), [review](d_custom_policy_review.md) |
 | Test coverage and release acceptance | [Test plan](test_plan.md), [validation evidence](validation.md) |
+| Program test report and supporting result observations | [Test report](../reports/test_report_20261125.md), [run notes](../reports/provided_experimental_findings.md) |
 | Current work and remaining team deliverables | [Development status](development.md) |
 | B/C PRs, D/E Drive handoff, sole-maintainer workflow | [Contributing](contributing.md) |
 | Historical file inventory and path mapping | [Repository review](repository_review.md), [manifest](reorganization_manifest.json) |

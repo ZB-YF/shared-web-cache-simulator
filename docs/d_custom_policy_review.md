@@ -52,7 +52,7 @@ The report draft is credited to D's revised design and edited for consistency wi
 
 ## Updated handoff status
 
-D's revised rules, corrected score-timing pseudocode, test plan, and draft report contribution have been received and checked. The earlier request to resolve that pseudocode discrepancy is closed. D still needs to check the assembled final report and prepare the approximately two-minute video contribution. C's independent replay artifact handoff and E's final matrix/figure selection and report analysis remain tracked separately in [development status](development.md).
+D's revised rules, corrected score-timing pseudocode, test plan, and draft report contribution have been received and checked. The earlier request to resolve that pseudocode discrepancy is closed. On November 25 the maintainer reported that D's video was also recorded. Retain her accepted design and existing recording for assembly; no additional rewrite, review cycle or recording is requested. C's original replay-evidence handoff is complete through PR #3. B/C/E's remaining explanations, checks and analysis are tracked separately in [development status](development.md).
 
 ## November 24 consolidated design supplement
 

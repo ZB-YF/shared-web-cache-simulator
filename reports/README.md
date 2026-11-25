@@ -6,6 +6,8 @@ The revised evaluation uses the three instructor-provided traces at six capaciti
 
 | Material | Purpose |
 |---|---|
+| [Program test report](test_report_20261125.md) | Actual test commands, checks, evidence and reproducibility scope |
+| [Provided-trace run notes](provided_experimental_findings.md) | Numeric observations from exported results for team review |
 | [Formal figures](figures/provided_20261125/) | Six figure pairs in PNG and SVG |
 | [Formal result CSVs and provenance](../results/experiments/provided_20261125/) | All 72 combinations, client metrics, characterization, and configuration |
 
@@ -13,7 +15,7 @@ The formal figures are `workload_characteristics`, `policy_comparison_5mib`, `ca
 
 The report and video must address all five questions listed in the revised assignment: which policy wins under which metric; how workload characteristics affect results; how capacity affects policy rankings; whether all clients benefit equally; and the Custom policy's trade-offs. Use the same trace, resource metadata, capacity, and assumptions for fair comparisons. Explicitly state LA-GDSF's additional admission rule and lifetime frequency.
 
-The generated outputs are available for team analysis. The integrated report is not published yet: contributor explanations, E's results analysis/conclusions and final figure selection must be collected before A assembles and uploads it. Individual presentation contributions and the actual video remain outstanding.
+Program-generated test reports and supporting run notes can be published with their evidence. The integrated four-page report and video/presentation drafts remain private: contributor explanations, E's results analysis/conclusions and final figure selection must be collected before A assembles and uploads the report. D has already recorded her segment, according to the maintainer; retain it for assembly without requesting new work. Other outstanding presentation contributions and the combined video remain separate handoffs.
 
 
 ## Preserved contribution and supplementary sources
@@ -27,4 +29,4 @@ The generated outputs are available for team analysis. The integrated report is 
 
 The historical synthetic figures remain `latency_by_capacity`, `admission_ablation`, `mixed_tradeoffs`, and `mixed_client_latency` in `figures/`. They can support supplementary analysis, but cannot be presented as outcomes of the three provided CSVs. Original outputs and configurations are retained.
 
-B/C's merged reviews and C's [original-config/replay supplement](../docs/c_run_evidence_20261123.md) remain accepted evidence. The maintainer's November 25 statistics and fixed-input pipeline update extends that work; it is not a new submission authored by C. E remains responsible for results interpretation, figure selection and report analysis/conclusions; D supplies the Custom explanation and limitations; B/C supply their policy and metric sections. Generated outputs do not mark those contributions complete. See [development status](../docs/development.md).
+B/C's merged reviews and C's [original-config/replay supplement](../docs/c_run_evidence_20261123.md) remain accepted evidence. The maintainer's November 25 statistics and fixed-input pipeline update extends that work; it is not a new submission authored by C. E remains responsible for results interpretation, figure selection and report analysis/conclusions. D's accepted Custom explanation and existing recording are retained; B/C supply their policy and metric sections. Generated outputs and maintainer run notes do not mark the remaining contributor work complete. See [development status](../docs/development.md).

@@ -8,6 +8,7 @@ A university course project that replays local HTTP request traces through one s
 |---|---|
 | Install, run, test, or reproduce results | [HOWTO](HOWTO.md) and [usage conventions](docs/usage.md) |
 | Open the required experiment results | [72-run provided-trace evaluation](results/experiments/provided_20261125/) |
+| Read test evidence and numeric run notes | [Test report](reports/test_report_20261125.md) and [run notes](reports/provided_experimental_findings.md) |
 | Inspect generated experiment figures | [Formal figure outputs](reports/figures/provided_20261125/) |
 | Check report handoff status | [Report materials and remaining work](reports/README.md) |
 | Inspect input traces and reference answers | [Input datasets](data/README.md) |
@@ -15,7 +16,7 @@ A university course project that replays local HTTP request traces through one s
 | Submit or integrate a contribution | [B/C PRs, D/E Google Drive](docs/contributing.md) |
 | See remaining team tasks | [Development status](docs/development.md) and [video plan](video/README.md) |
 
-CSV results, input/source configurations, and generated graphs are included so they can be inspected without rerunning the simulator. The integrated report is withheld until contributor materials have been collected and combined. Report analysis, figure selection, individual explanations, and video contributions remain team responsibilities.
+CSV results, input/source configurations, generated graphs, test reports and supporting run notes are included so they can be inspected without rerunning the simulator. The integrated four-page report and video/presentation drafts remain private until contributor materials have been collected and combined. Report interpretation, figure selection, individual explanations, and outstanding video contributions remain team responsibilities.
 
 ## Quick start
 
@@ -71,10 +72,12 @@ results/
   experiments/provided_20261125/      Required 72-run results and characterization
   experiments/d_reproduction/        Preserved 1000-run synthetic snapshot and traces
 reports/
+  test_report_20261125.md             Program checks and recorded run evidence
+  provided_experimental_findings.md   Supporting notes on the provided-trace outputs
   figures/provided_20261125/          Six formal PNG/SVG figure pairs
   experimental_findings.md           Preserved supplementary synthetic findings
 docs/                                Requirements, design, validation, collaboration
-video/                               Timecoded script, recording and upload checklist
+video/                               Presentation requirements and recording/upload status
 requirements-plots.txt               Optional Matplotlib dependency
 ```
 
@@ -99,7 +102,7 @@ FIFO/LRU/LFU reproduce all ten supplied fields for all 15 reference requests. Cu
 |---|---|---|
 | B: FIFO/LRU | [PR #1](https://github.com/ZB-YF/shared-web-cache-simulator/pull/1), [review](docs/b_fifo_lru_review.md), five tests | Review formal policy analysis and record own video segment |
 | C: LFU/metrics/reproduction | [PR #2](https://github.com/ZB-YF/shared-web-cache-simulator/pull/2), [PR #3](https://github.com/ZB-YF/shared-web-cache-simulator/pull/3), [review](docs/c_lfu_reference_review.md), [original evidence](docs/c_run_evidence_20261123.md) | Review the added metrics/methods and record own segment; earlier evidence handoff is complete |
-| D: LA-GDSF | [Original design](docs/d_la_gdsf_design.md), [revision review](docs/d_custom_policy_review.md), [report section](reports/custom_policy_design.md) | Review formal results, final rule/limitation wording, and record own segment |
+| D: LA-GDSF | [Original design](docs/d_la_gdsf_design.md), [revision review](docs/d_custom_policy_review.md), [report section](reports/custom_policy_design.md); video recorded per maintainer update | Retain existing design and recording for assembly; no further rewrite or recording requested |
 | E: results/report | Formal CSVs and generated figures are available as analysis inputs | Deliver workload/capacity/client interpretation, select figures, write report analysis/conclusions, and record own segment |
 | A: maintainer | Core, integration, new-requirements update, and reproducible result publication | Collect contributor materials, integrate the report afterward, coordinate recording/upload and final checks |
 

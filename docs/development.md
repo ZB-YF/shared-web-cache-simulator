@@ -12,6 +12,7 @@ The revised assignment keeps the simulator/policy/reference rules and adds a spe
 | Characterization and hypotheses | Included before policy execution | Formal `characterization/` outputs |
 | Required experiments | 72 cells: 3 workloads × 6 capacities × 4 policies, including 5 MiB | [Formal result snapshot](../results/experiments/provided_20261125/) |
 | Generated charts | Available from fixed-input results; team selection and interpretation pending | [Figures](../reports/figures/provided_20261125/) |
+| Test reports and run notes | Published as evidence and supporting material, separate from the integrated report | [Test report](../reports/test_report_20261125.md), [run notes](../reports/provided_experimental_findings.md) |
 | Integrated report | Withheld until contributor materials are collected and integrated | [Report index](../reports/README.md) |
 | Video | Individual contributions, recording/upload/link outstanding | [Video plan](../video/README.md) |
 | Submission | Program and results are reproducible; final package awaits report and video | [HOWTO](../HOWTO.md), final acceptance below |
@@ -25,16 +26,16 @@ This update was prepared during maintainer integration. It does not imply that C
 | A | Core, integration, accepted PRs, dataset/result publication | Coordinate review; check final numbers/report length; assemble members' recordings, verify YouTube link, inspect final extracted ZIP, and submit |
 | B | FIFO/LRU review, reference comparison, five merged tests | Check formal FIFO/LRU workload/capacity explanations; provide corrections if needed and record own two-minute segment |
 | C | LFU/metric tests, review, original configs, independent historical replay evidence | Review the new statistics and fixed-trace methods; reproduce/check a selected result; record own two-minute segment. The earlier evidence handoff is complete |
-| D | LA-GDSF design/prototype, clarified score timing, accepted scenarios/report text | Check formal Custom gains/traffic costs and limitations, preserve admission/lifetime-frequency explanation, and record own segment |
+| D | LA-GDSF design/prototype, clarified score timing, accepted scenarios/report text; video recorded per maintainer update | Retain existing materials and recording for assembly; no new rewrite or recording requested |
 | E | Existing report-analysis role; generated CSVs and charts available as inputs | Deliver workload and results interpretation, choose report figures, write analysis/conclusions and record own segment |
 
 B/C deliver changes through PRs. D/E use Google Drive. A alone reviews, integrates, merges, and publishes to main. Ask for concrete files, a PR, or a Drive link and the unresolved issue; do not request completed reference tests or historical evidence again without a new discrepancy.
 
 ## Final acceptance still required
 
-1. All five contributors review their contribution claims and the integrated report. Confirm its 3-4 page length, exact snapshot, units, metric definitions, and interpretations.
+1. Collect B/C/E's remaining explanations and analysis, then integrate them with accepted A/D materials. Confirm the report's 3-4 page length, exact snapshot, units, metric definitions and interpretations. Keep the final report and presentation drafts private until integration; D's existing design and recording do not need another revision cycle.
 2. Verify the package contains every source/input/script/result/figure/report needed for reproduction, and rerun the HOWTO from its extracted directory without private paths.
-3. Record the real simulator demonstration and all five individual segments. Assemble a 10-minute video, check playback/audio/legibility, upload to YouTube, and verify its link without the owner's login.
+3. Record the real simulator demonstration and collect the remaining individual segments, retaining D's completed recording. Assemble the five-member 10-minute video, check playback/audio/legibility, upload to YouTube, and verify its link without the owner's login.
 4. Submit the complete ZIP and video link on Brightspace. Generated files and a script are preparation, not evidence of upload or submission.
 
 Use the 72-run provided-trace matrix as the primary evaluation. The historical 1000-run synthetic matrix remains supplementary; its input seeds, old configs, CSVs, traces, and graphs are preserved. At mixed/5 MiB the new results show all clients improve in mean latency under Custom relative to the standard policies; do not reuse the old synthetic client-harm conclusion as if it described this trace. Lower response time can still accompany higher origin traffic.

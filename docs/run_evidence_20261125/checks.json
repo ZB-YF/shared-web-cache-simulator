@@ -1,0 +1,22 @@
+{
+  "checked_at_utc": "2026-11-25T07:20:10.455631+00:00",
+  "commands": [
+    {
+      "command": "python3 -m unittest discover -s tests -v",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 -m experiments.validate_reference",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 -m experiments.verify_provided --results-dir results/experiments/provided_20261125",
+      "exit_code": 0
+    }
+  ],
+  "log_sha256": "c0afd30fd840aa5fc650aa06661e61823c595a1f0b4aa7b6c9ce826f858f6bb2",
+  "python_version": "3.14.2",
+  "scope": "Maintainer program and run verification; not contributor report authorship or final submission approval",
+  "source_commit": "8e2316e1de939ed6f6c211fab6b30d09e2c707ea",
+  "status": "PASS"
+}

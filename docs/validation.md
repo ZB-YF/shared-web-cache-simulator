@@ -1,5 +1,7 @@
 # Validation evidence
 
+The [program test report](../reports/test_report_20261125.md) summarizes the checks below. The latest [captured output](run_evidence_20261125/checks.txt) and [execution metadata](run_evidence_20261125/checks.json) record actual commands and exit codes. These reports and [run notes](../reports/provided_experimental_findings.md) are public supporting evidence; the final four-page report and presentation drafts remain private.
+
 ## November 25 revised-requirements checkpoint
 
 The update retains policy algorithms, reference fixtures, historical results/configs, and original contributions. It adds capacity-aware statistics, the three original evaluation traces, fixed-input characterization and matrix execution, and formal visualizations/report materials.

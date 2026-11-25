@@ -1,0 +1,65 @@
+$ python3 -m unittest discover -s tests -v
+test_invalid_capacity_produces_no_output (test_cli.CommandLineTests.test_invalid_capacity_produces_no_output) ... ok
+test_run_from_another_directory_and_refuse_overwrite (test_cli.CommandLineTests.test_run_from_another_directory_and_refuse_overwrite) ... ok
+test_small_batch_writes_replayable_inputs_and_seed_metrics (test_cli.CommandLineTests.test_small_batch_writes_replayable_inputs_and_seed_metrics) ... ok
+test_duplicate_resources_rejected (test_data_loader.LoaderTests.test_duplicate_resources_rejected) ... ok
+test_invalid_resource_numbers (test_data_loader.LoaderTests.test_invalid_resource_numbers) ... ok
+test_missing_columns (test_data_loader.LoaderTests.test_missing_columns) ... ok
+test_non_get_and_naive_timestamp_rejected (test_data_loader.LoaderTests.test_non_get_and_naive_timestamp_rejected) ... ok
+test_sort_by_instant_and_preserve_equal_time_order (test_data_loader.LoaderTests.test_sort_by_instant_and_preserve_equal_time_order) ... ok
+test_supplied_data_and_url_identity (test_data_loader.LoaderTests.test_supplied_data_and_url_identity) ... ok
+test_unknown_resource_reports_source_row (test_data_loader.LoaderTests.test_unknown_resource_reports_source_row) ... ok
+test_clients_share_cache_and_lru_access_history (test_fifo_lru.FifoLruTests.test_clients_share_cache_and_lru_access_history) ... ok
+test_eviction_and_reinsertion_create_new_policy_state (test_fifo_lru.FifoLruTests.test_eviction_and_reinsertion_create_new_policy_state) ... ok
+test_hit_changes_lru_victim_but_not_fifo_victim (test_fifo_lru.FifoLruTests.test_hit_changes_lru_victim_but_not_fifo_victim) ... ok
+test_multiple_evictions_follow_each_policy_order (test_fifo_lru.FifoLruTests.test_multiple_evictions_follow_each_policy_order) ... ok
+test_oversized_misses_do_not_evict_existing_resources (test_fifo_lru.FifoLruTests.test_oversized_misses_do_not_evict_existing_resources) ... ok
+test_multiple_evictions_recheck_frequency_then_lru_tie (test_lfu_metrics.LfuMetricsTests.test_multiple_evictions_recheck_frequency_then_lru_tie) ... ok
+test_reinsertion_resets_old_frequency (test_lfu_metrics.LfuMetricsTests.test_reinsertion_resets_old_frequency) ... ok
+test_shared_hit_and_per_client_denominators (test_lfu_metrics.LfuMetricsTests.test_shared_hit_and_per_client_denominators) ... ok
+test_characterization_and_new_metrics_match_hand_calculation (test_provided_experiments.ProvidedExperimentTests.test_characterization_and_new_metrics_match_hand_calculation) ... ok
+test_characterize_only_never_runs_policies_and_limits_top_five (test_provided_experiments.ProvidedExperimentTests.test_characterize_only_never_runs_policies_and_limits_top_five) ... ok
+test_cli_is_portable_exports_optional_logs_and_refuses_overwrite (test_provided_experiments.ProvidedExperimentTests.test_cli_is_portable_exports_optional_logs_and_refuses_overwrite) ... ok
+test_full_matrix_has_exactly_72_distinct_cells (test_provided_experiments.ProvidedExperimentTests.test_full_matrix_has_exactly_72_distinct_cells) ... ok
+test_invalid_or_missing_inputs_do_not_create_output (test_provided_experiments.ProvidedExperimentTests.test_invalid_or_missing_inputs_do_not_create_output) ... ok
+test_custom_admission_bypass_is_neither_eviction_nor_oversized (test_required_metrics.RequiredMetricsTests.test_custom_admission_bypass_is_neither_eviction_nor_oversized) ... ok
+test_empty_and_zero_capacity_conventions (test_required_metrics.RequiredMetricsTests.test_empty_and_zero_capacity_conventions) ... ok
+test_individual_evictions_and_repeated_oversized_requests (test_required_metrics.RequiredMetricsTests.test_individual_evictions_and_repeated_oversized_requests) ... ok
+test_resource_equal_to_total_capacity_is_not_oversized (test_required_metrics.RequiredMetricsTests.test_resource_equal_to_total_capacity_is_not_oversized) ... ok
+test_summary_and_client_exports_include_new_fields (test_required_metrics.RequiredMetricsTests.test_summary_and_client_exports_include_new_fields) ... ok
+test_utilization_samples_hits_and_per_client_shared_occupancy (test_required_metrics.RequiredMetricsTests.test_utilization_samples_hits_and_per_client_shared_occupancy) ... ok
+test_all_reference_fields (test_simulation.SimulationTests.test_all_reference_fields) ... ok
+test_capacity_edges_and_zero_size (test_simulation.SimulationTests.test_capacity_edges_and_zero_size) ... ok
+test_custom_aging_releases_former_hot_resource_in_d_scenario (test_simulation.SimulationTests.test_custom_aging_releases_former_hot_resource_in_d_scenario) ... ok
+test_custom_bypass_keeps_state_and_counts_misses (test_simulation.SimulationTests.test_custom_bypass_keeps_state_and_counts_misses) ... ok
+test_custom_multi_eviction_prices_insertion_with_final_inflation (test_simulation.SimulationTests.test_custom_multi_eviction_prices_insertion_with_final_inflation) ... ok
+test_custom_reference (test_simulation.SimulationTests.test_custom_reference) ... ok
+test_custom_tie_and_admission_equality (test_simulation.SimulationTests.test_custom_tie_and_admission_equality) ... ok
+test_d_frozen_scenarios_and_capacity (test_simulation.SimulationTests.test_d_frozen_scenarios_and_capacity) ... ok
+test_empty_run_and_exports (test_simulation.SimulationTests.test_empty_run_and_exports) ... ok
+test_invalid_victim_and_read_only_preview (test_simulation.SimulationTests.test_invalid_victim_and_read_only_preview) ... ok
+test_lfu_tie_break_and_reset (test_simulation.SimulationTests.test_lfu_tie_break_and_reset) ... ok
+test_multiple_evictions_and_duplicate_admission (test_simulation.SimulationTests.test_multiple_evictions_and_duplicate_admission) ... ok
+test_nondefault_hit_latency_used_by_custom_score (test_simulation.SimulationTests.test_nondefault_hit_latency_used_by_custom_score) ... ok
+test_oversized_does_not_evict_or_change_inflation (test_simulation.SimulationTests.test_oversized_does_not_evict_or_change_inflation) ... ok
+test_reproducible_workloads_and_csv_roundtrip (test_simulation.SimulationTests.test_reproducible_workloads_and_csv_roundtrip) ... ok
+test_shared_cache_and_independent_metrics (test_simulation.SimulationTests.test_shared_cache_and_independent_metrics) ... ok
+test_single_use_sort_and_config_guard (test_simulation.SimulationTests.test_single_use_sort_and_config_guard) ... ok
+test_complete_audit_and_detection_of_corrupted_metric (test_verify_provided.ProvidedVerificationTests.test_complete_audit_and_detection_of_corrupted_metric) ... ok
+test_independent_formulas_count_resources_and_every_occupancy_sample (test_verify_provided.ProvidedVerificationTests.test_independent_formulas_count_resources_and_every_occupancy_sample) ... ok
+
+----------------------------------------------------------------------
+Ran 48 tests in 0.796s
+
+OK
+Exit code: 0
+
+$ python3 -m experiments.validate_reference
+PASS FIFO: 15 requests, all 10 reference fields; hits=3, origin=421888 bytes
+PASS LRU: 15 requests, all 10 reference fields; hits=3, origin=403456 bytes
+PASS LFU: 15 requests, all 10 reference fields; hits=4, origin=370688 bytes
+Exit code: 0
+
+$ python3 -m experiments.verify_provided --results-dir results/experiments/provided_20261125
+PASS: 72 cells, 432 client rows, 216000 request events; source snapshot matches=True
+Exit code: 0
