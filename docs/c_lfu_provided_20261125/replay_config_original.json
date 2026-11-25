@@ -1,0 +1,86 @@
+{
+  "aggregation": "One deterministic replay per workload/capacity/policy cell; no seed averaging",
+  "capacities_bytes": [
+    102400,
+    512000,
+    1048576,
+    2097152,
+    5242880,
+    10485760
+  ],
+  "characterize_only": false,
+  "completed_at_utc": "2026-11-25T08:00:05.902851+00:00",
+  "execution_order": "All inputs loaded, characterization and hypotheses written, then policy replays",
+  "hit_latency_ms": 5.0,
+  "policies": [
+    "LFU"
+  ],
+  "provenance": "Instructor-provided fixed request traces; no synthetic generation or resampling",
+  "python_version": "3.14.5",
+  "ratio_units": "hit_ratio, byte_hit_ratio, and average_cache_utilization are fractions from 0 to 1",
+  "request_logs": false,
+  "resources_file": "data/reference/resources.csv",
+  "resources_sha256": "b2117bca54a566a999cd21333bb34a3dc25e0d0f371cf9aad8bfb7c63d1869e7",
+  "runs": 18,
+  "source_sha256": {
+    "cache_simulator/__init__.py": "7e8c2e44d222913fad9fc2c31e0e635e7a80d39a7f08e6a243b9d2f8d328ca6e",
+    "cache_simulator/cache.py": "ea85cb6012cc2a3a97876943383106e85a6461b16dcd5ffe09062e0c651f0f78",
+    "cache_simulator/cli.py": "0a02453d8ed1eee3e5fb9798c06f7d457588670c65e21d8e868e30605bfc1c1d",
+    "cache_simulator/data_loader.py": "f39b96e12db3a4e09a09eb56937ae2dd5f3dd0bf486cb6c461bf0b13a7e8d228",
+    "cache_simulator/metrics.py": "5b23158cf7f716e5f31e0c3b0a79cfb56342cc40092dfec12eabffdd9a7dd684",
+    "cache_simulator/models.py": "66a4efc6476eff10b3d29061ea7e4dc4999f4fdd2a03d77b2be56818bc6b55fd",
+    "cache_simulator/output_writer.py": "0970fd1fa44cdde1dd8fba59a80561ac726d257ea6974b2709768eb533ccf474",
+    "cache_simulator/policies/__init__.py": "42e313b572805231c80901ff5eae62bdc7802b3846940d8a9ca71caa7843eaf0",
+    "cache_simulator/policies/base.py": "5aeda58163e7a5d6e9ed3e2a360ea8bf4a8ffe13b1c81ff12d32454c536eca2c",
+    "cache_simulator/policies/custom.py": "37b4fe8c8e15e59058c106dd89bfbe98bb4c4bcaa0835452188ba100a3d3f171",
+    "cache_simulator/policies/fifo.py": "d87e120d58a66b9f18862a774b52d8b9e9ec6e8524ac84859c8f3e7f9a75171e",
+    "cache_simulator/policies/lfu.py": "7c2bf85a7d21739c418f1523ebea6c149b9fecac31d3f97d04163c32a7f0def9",
+    "cache_simulator/policies/lru.py": "bebb05cc36b4a18244c7a37c65332629881fbcfd0be6b541441978b9f218daa6",
+    "cache_simulator/runner.py": "74e5c5eef63a208e684f56ab5fe869498d52f9d7df77a98e89098855abaab60a",
+    "cache_simulator/simulator.py": "b3104244bc70d8cdc1993783ce8af04aa20d279d73a24d7c835bfe621438e0a6",
+    "experiments/__init__.py": "611e958be1e671a5cce79744c2a13ad95f5dd0ee31c9f14d3f6ba6ae6058bdd5",
+    "experiments/plot.py": "749792a45f3a273697db82fea4f1f09b80979fcd6c32ee50fc572ed8c5d75594",
+    "experiments/plot_provided.py": "c8b69999621636a0ce7a5b5d80808ffdd2ddbf1f18b379ae45cd7da3685787aa",
+    "experiments/provided.py": "135d6b9dd974030a606e9da98590295584d049db0c387e51f5ef7165d4032cd8",
+    "experiments/run.py": "0efbad6417bfdee92cb2452ff6872e2e158e6d2482693ca1e0a54bd08bd9edae",
+    "experiments/scenarios.py": "63d5a0b926d6426b2718ee2a15a9e2b7c8027cb5262d4f0be71fe1d88e59cd4a",
+    "experiments/validate_reference.py": "b48c40c17befe37611e97ce8b3720c3f66bbbcee75ffae21002085e7ebaf7c57",
+    "experiments/verify_provided.py": "23d4c37dc2d8a7513707beae165b4b929c9a5f6b6b05d2bf678e23d354783bfa",
+    "experiments/workloads.py": "ddc63acac6c4250063bdf1cef5eb01fb3f816794d85d49986b031f9526572c6f",
+    "main.py": "613a023b1e30a681589678a5fac8a543c227a008c9ade6ce31855ea32c1e70b1",
+    "tests/test_cli.py": "90e53d252441d95b7a37cbf53cd9b6f7c1a451ebd8881cf4ac492b08475c8a33",
+    "tests/test_data_loader.py": "e2f3dfb2ed5d84f5ac663bd36d62f40c3f95449ff995dc86c0fff27e6c6a0cd2",
+    "tests/test_fifo_lru.py": "e295d27c80999dcae8dc585f5962fceca87b58b2e33e0793f6df704eab1e4d7e",
+    "tests/test_lfu_metrics.py": "554a34077720bb2363fa26c27bb41e952d9b6809e5ae549f53b4f4d41a81c942",
+    "tests/test_provided_experiments.py": "8c75f9bfc38d548f937cc426cdacc496d3d1f35b338f17c8a8f97c6854065a51",
+    "tests/test_required_metrics.py": "63589ba0cdd698208592f97e53e84d5e5e4de9678d8e44cf9c7942668eb392cc",
+    "tests/test_simulation.py": "546f141694ec8063f6f8433dfb781532d2ed46af734eab890f8bec858c45d2a5",
+    "tests/test_verify_provided.py": "00d02d7e25ca7ac78eaa8f5bc3076f1b0cbb4424590e1126310166d4bab752bd"
+  },
+  "started_at_utc": "2026-11-25T08:00:05.776112+00:00",
+  "traces": [
+    {
+      "file": "data/workloads/provided/requests_sequential.csv",
+      "request_count": 3000,
+      "sha256": "7486650b74bc47d98dee38226d464c670181806c8b35e98abcc940cf3d18915c",
+      "workload": "sequential"
+    },
+    {
+      "file": "data/workloads/provided/requests_repetitive.csv",
+      "request_count": 3000,
+      "sha256": "6f091f07b83781afdf8fb908c65437c522cd9be96ab414a827f51f55429b0dca",
+      "workload": "repetitive"
+    },
+    {
+      "file": "data/workloads/provided/requests_mixed.csv",
+      "request_count": 3000,
+      "sha256": "8f8a34f1129cd147cd6467ec5467bb626d9e82d76d8803d97b9707ba0c7a41f8",
+      "workload": "mixed"
+    }
+  ],
+  "workloads": [
+    "sequential",
+    "repetitive",
+    "mixed"
+  ]
+}
