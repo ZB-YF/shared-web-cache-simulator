@@ -80,8 +80,12 @@ historical HEAD.
 The [comparison script](c_lfu_provided_20261125/compare_replay.py) joins rows
 by `(workload, capacity_bytes, policy)` and client rows additionally by
 `client_id`, then compares every CSV field as exported. It also verifies the
-input, source, capacity, and latency fields in both configs. Run it after a
-fresh LFU-only replay:
+input, source, capacity, and latency fields in both configs. The experiment's
+`source_hashes()` scans every `.py` file in the repository. A new replay therefore
+records this comparison script as one additional Python file; the checker allows
+only that extra path while requiring all 33 original source paths and hashes to
+match exactly. Any other added, missing, or changed Python file fails the check.
+Run it after a fresh LFU-only replay:
 
 ```bash
 python3 docs/c_lfu_provided_20261125/compare_replay.py results/c_lfu_provided_replay_20261125
