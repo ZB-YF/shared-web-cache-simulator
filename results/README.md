@@ -1,24 +1,26 @@
 # Published simulation outputs
 
-These reviewed baseline files are included in Git so teammates can inspect the same CSVs and configuration snapshots without running the simulator.
+The selected snapshots are included so teammates can inspect CSVs, provenance, and figures without installing Python.
 
 | Directory | Contents |
 |---|---|
-| [reference/](reference/) | Single runs of FIFO, LRU, LFU, and Custom on the instructor trace at 100 KiB |
-| [experiments/d_reproduction/](experiments/d_reproduction/) | 1000 seeded synthetic runs, aggregate summaries, configuration, and 40 exact request traces |
+| [reference/](reference/) | Preserved 100 KiB reference runs for FIFO, LRU, LFU, and Custom |
+| [experiments/provided_20261125/](experiments/provided_20261125/) | Required 72-run evaluation of the three instructor-provided traces at six capacities |
+| [experiments/d_reproduction/](experiments/d_reproduction/) | Preserved supplementary synthetic matrix: 1000 seeded runs, 100 aggregate rows, 40 generated traces |
 
 ## Which file should I open?
 
-- `requests.csv`: inspect the exact hit/miss, evictions, insertion-order cache state, response time, and cumulative counters of a single run.
-- `summary.json`: read that run's global metrics.
-- `per_client.csv`: compare its client-specific metrics.
-- `runs.csv`: inspect each seed's results in a batch.
-- `summary.csv`: compare batch means and sample standard deviations.
-- `d_compatible.csv`: compare the batch with D's rounded pre-experiment schema.
-- `config.json`: identify policy, parameters, input/source hashes, and provenance.
+- Formal `runs.csv`: one global result per workload, capacity, and policy. Includes evictions, oversized request counts, and mean utilization as well as hit ratios, latency, and traffic.
+- Formal `per_client.csv`: client metrics identified by workload, capacity, and policy; select mixed and 5242880 bytes for the required fairness comparison.
+- Formal `characterization/*.csv`: workload counts, popularity distribution/top five, requested bytes, and capacity-dependent oversized request counts.
+- `characterization/hypotheses.md`: preliminary expectations derived from workload characterization before policy execution.
+- `config.json`: identify input/source hashes, parameters, and provenance.
+- Single-run `requests.csv`: inspect hit/miss, ordered victims, insertion-order cache contents, response, and cumulative counters.
+- Single-run `summary.json` and `per_client.csv`: global and client summaries.
+- Historical synthetic `summary.csv` and `d_compatible.csv`: seeded means/deviations and D's original rounded comparison schema.
 
-[Report figures](../reports/figures/) and [draft findings](../reports/experimental_findings.md) are derived from these results. Instructor expected outputs remain separate in [data/reference/](../data/reference/).
+Use [generated figures](../reports/figures/provided_20261125/) to inspect the results; the team will supply report interpretation and final figure selection. See [report handoff status](../reports/README.md). Instructor expected answers remain unchanged under [data/reference/](../data/reference/).
 
-The existing numerical files, generated traces, and original configs were preserved byte for byte during reorganization. Old source paths in historical configs refer to the code layout at generation time, not today's imports. The [migration map](../docs/reorganization_manifest.json) and baseline commit documented in the [repository review](../docs/repository_review.md) provide that context.
+Historical reference and synthetic output bytes, including old config source paths/hashes, remain as generated. Those source hashes describe historical snapshots, not the current tree. New runs record current sources. See the [repository review](../docs/repository_review.md) and [migration map](../docs/reorganization_manifest.json).
 
-Ad hoc new directories such as `results/my_custom_run` remain ignored by Git. New runs must use new or empty output directories. Only the maintainer selects additional reviewed snapshots for tracking; see [contribution workflow](../docs/contributing.md).
+Ad hoc result directories remain ignored by Git. Tools refuse nonempty output directories; choose a fresh name instead of overwriting evidence. Only the maintainer selects additional snapshots for tracking, following the [contribution workflow](../docs/contributing.md).

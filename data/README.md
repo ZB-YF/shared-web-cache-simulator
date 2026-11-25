@@ -1,8 +1,12 @@
 # Input datasets
 
-- [reference/](reference/): the original instructor resource metadata, 15-request reference trace, three expected policy outputs, and answer key. The CSV contents are preserved unchanged.
-- [workloads/](workloads/): reserved for additional team-authored experimental input traces. It currently contains only its original placeholder.
+| Directory | Purpose |
+|---|---|
+| [reference/](reference/) | Instructor resource metadata, 15-request validation trace, three expected outputs, and answer key |
+| [workloads/provided/](workloads/provided/) | Three instructor-provided 3000-request workloads required for formal evaluation |
 
-The 40 seeded traces generated for D's reproduced matrix stay with that specific [result snapshot](../results/experiments/d_reproduction/traces/). Keeping them there preserves the association with the seed list and hashes in its config.json. They are synthetic data, not additional instructor inputs.
+Use the **same `reference/resources.csv`** for all required experiments. The original CSV bytes and filenames are preserved. Input records use full URL identifiers; see the [data dictionary](../docs/data_dictionary.md).
 
-[Input schemas](../docs/data_dictionary.md) explain fields and resource identity. Outputs belong under results/, not beside the instructor expectations.
+D's 40 generated synthetic traces remain inside [their historical result snapshot](../results/experiments/d_reproduction/traces/) alongside the matching seed/configuration hashes. Additional team-authored traces can be placed under `workloads/` with their provenance clearly stated. Generated traces are not instructor-provided inputs merely because their names describe similar browsing patterns.
+
+Outputs belong under `results/`; keep instructor expectations separate from generated simulator results.

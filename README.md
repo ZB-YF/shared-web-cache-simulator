@@ -1,107 +1,108 @@
 # Shared Web Cache Simulator
 
-A university course project that replays local HTTP request traces through one shared cache. It compares FIFO, LRU, LFU, and a custom latency-aware policy (LA-GDSF), measuring response time, hit ratios, origin traffic, and per-client performance. The simulator does not access resource URLs over the network.
+A university course project that replays local HTTP request traces through one shared cache. It compares FIFO, LRU, LFU, and LA-GDSF, a custom latency-aware policy. It measures hit ratios, response time, origin traffic, client performance, evictions, oversized requests, and cache utilization. Resource URLs are never fetched over the network.
 
 ## Start here
 
 | What you need | Where to look |
 |---|---|
-| Run the program or tests | [Usage guide](docs/usage.md) |
-| Read the code | [Core package](cache_simulator/) and [policy implementations](cache_simulator/policies/) |
-| Inspect instructor inputs and expected answers | [Reference dataset](data/reference/) |
-| See the four policies on the reference trace | [Reference run outputs](results/reference/) |
-| Open the existing experiment CSVs | [Reproduced experiment baseline](results/experiments/d_reproduction/) |
-| See the graphs and their interpretation | [Experimental findings](reports/experimental_findings.md) and [figures](reports/figures/) |
-| Submit or integrate a team contribution | [B/C pull requests, D/E Google Drive handoff](docs/contributing.md) |
+| Install, run, test, or reproduce results | [HOWTO](HOWTO.md) and [usage conventions](docs/usage.md) |
+| Open the required experiment results | [72-run provided-trace evaluation](results/experiments/provided_20261125/) |
+| Inspect generated experiment figures | [Formal figure outputs](reports/figures/provided_20261125/) |
+| Check report handoff status | [Report materials and remaining work](reports/README.md) |
+| Inspect input traces and reference answers | [Input datasets](data/README.md) |
+| Read the code | [Core](cache_simulator/) and [policies](cache_simulator/policies/) |
+| Submit or integrate a contribution | [B/C PRs, D/E Google Drive](docs/contributing.md) |
+| See remaining team tasks | [Development status](docs/development.md) and [video plan](video/README.md) |
 
-The baseline CSVs, configuration files, generated traces, and PNG/SVG figures are included in GitHub. You can read them without installing Python or rerunning experiments.
+CSV results, input/source configurations, and generated graphs are included so they can be inspected without rerunning the simulator. The integrated report is withheld until contributor materials have been collected and combined. Report analysis, figure selection, individual explanations, and video contributions remain team responsibilities.
 
-## Setup and quick start
+## Quick start
 
-Use **Python 3.10 or newer**. Simulation, experiments, and tests use only the standard library. From the repository root:
+Use **Python 3.10 or newer**. Simulation, analysis, experiments, and tests require only the standard library. From the project root:
 
 ```bash
 python3 main.py --validate-only
 python3 -m experiments.validate_reference
 python3 -m unittest discover -s tests -v
-python3 main.py --policy CUSTOM --capacity 102400 --output-dir results/my_custom_run
+python3 main.py --requests data/workloads/provided/requests_mixed.csv --policy CUSTOM --capacity 5242880 --output-dir results/my_mixed_custom
+python3 -m experiments.provided --output-dir results/my_provided_matrix
 ```
 
-Use `python` instead of `python3` if that is your Python 3 command. No package installation or build step is needed. The supplied data contains 21 resources and 15 requests from 3 clients. The reference cache capacity is 100 KiB (102400 bytes) and hit latency is 5 ms. Output directories must be new or empty; choose another name when repeating a run.
+No compilation or real HTTP proxy is required. Output directories must be new or empty; choose a fresh name for repeat runs. `--capacity` is bytes. The reference validation uses 100 KiB (102400 bytes), and the required policy/client comparison uses 5 MiB (5242880 bytes). Hit latency is 5 ms. Every run starts empty and processes requests sequentially.
 
-Each simulation writes `requests.csv`, `summary.json`, `per_client.csv`, and `config.json`. Policy names are FIFO, LRU, LFU, CUSTOM, and CUSTOM_NOADM (the custom admission-filter ablation). See the [usage guide](docs/usage.md) for inputs, parameters, output fields, and troubleshooting.
+The root `main.py` is a thin entry point into `cache_simulator.cli`; it already supports selecting a resource file, request file, policy, and capacity. The November 25 update extends statistics and adds a fixed-input experiment pipeline while preserving cache-replacement algorithms. Each single run exports detailed requests, global/client summaries, and input/source provenance.
+
+## Required evaluation
+
+The revised assignment uses **three instructor-provided traces × six capacities × four primary policies = 72 deterministic runs**. Each trace contains 3000 requests from six clients for 21 resources. All runs use the same `data/reference/resources.csv` and unchanged workload CSVs.
+
+The six capacities are **100 KiB, 500 KiB, 1 MiB, 2 MiB, 5 MiB, and 10 MiB**. The assignment explicitly requires six but gives only five examples; the additional 2 MiB is a documented project choice. The fixed traces need no random seeds or repeated-run averaging.
+
+The pipeline first characterizes workloads and records preliminary hypotheses, then runs all policies. It supports the three required comparisons: policy effects at 5 MiB, six-capacity effects, and individual clients on mixed at 5 MiB. Added metrics count individual evicted resources, requests exceeding total capacity, and mean post-request occupancy. Ratios are exported as 0-1 values.
+
+To regenerate formal graphs:
+
+```bash
+python3 -m pip install -r requirements-plots.txt
+python3 -m experiments.plot_provided --results-dir results/my_provided_matrix --output-dir results/my_provided_figures
+```
+
+The six PNG/SVG figure pairs cover workload characteristics, policy metrics at 5 MiB, capacity effects, storage metrics, and mixed clients at 5 MiB. See [experiment instructions](experiments/README.md) for output schemas and characterization-only or request-log options.
 
 ## Repository structure
 
 ```text
-main.py                         Small CLI entry point; existing run commands still work
-cache_simulator/                All simulator source code
-  cli.py                        Argument parsing and single-run execution
-  cache.py, simulator.py        Shared storage and request processing
-  data_loader.py, models.py     Input validation and shared data types
-  metrics.py, output_writer.py  Statistics and CSV/JSON export
-  runner.py                     Fresh run construction and provenance hashes
-  policies/                     FIFO, LRU, LFU, and LA-GDSF implementations
-experiments/                    Workload generation, batch runs, validation, plotting
-  README.md                     Experimental matrix and output meanings
+main.py                              Single-run CLI entry point
+HOWTO.md                             Setup, parameters, reproduction, troubleshooting
+cache_simulator/                     Shared cache, loader, simulator, metrics, exports
+  policies/                          FIFO, LRU, LFU, and LA-GDSF
+experiments/
+  provided.py                        Required fixed-trace characterization and matrix
+  plot_provided.py                   Required workload/policy/capacity/client figures
+  validate_reference.py              Original expected-output comparison
+  run.py, workloads.py, plot.py       Supplementary seeded synthetic reproduction
 data/
-  reference/                    Original resource/request CSVs, expected CSVs, answer key
-  workloads/                    Reserved for additional team-authored input traces
-tests/                          Automated input, CLI, cache, policy, and integration tests
+  reference/                         Metadata, reference trace, expected CSVs, answer key
+  workloads/provided/                Three original instructor evaluation traces
+tests/                               Input, CLI, policy, metric, and experiment checks
 results/
-  reference/                    Reviewed 100 KiB runs for the four primary policies
-  experiments/d_reproduction/   Existing 1000-run baseline, summary CSVs, config, 40 traces
+  reference/                         Preserved historical 100 KiB runs
+  experiments/provided_20261125/      Required 72-run results and characterization
+  experiments/d_reproduction/        Preserved 1000-run synthetic snapshot and traces
 reports/
-  experimental_findings.md      Draft analysis based on the reproduced data
-  figures/                      Four comparative figures, each in PNG and SVG
-  README.md                     Report status and figure index
-docs/                           Usage, design, validation, collaboration, repository review
-video/                          Demonstration planning and eventual video-link information
-requirements-plots.txt          Optional plotting dependencies
+  figures/provided_20261125/          Six formal PNG/SVG figure pairs
+  experimental_findings.md           Preserved supplementary synthetic findings
+docs/                                Requirements, design, validation, collaboration
+video/                               Timecoded script, recording and upload checklist
+requirements-plots.txt               Optional Matplotlib dependency
 ```
 
-Python modules and ordinary documentation filenames use lowercase snake_case. Standard landing files retain `README.md`; instructor CSV names are preserved. New default single-run directory names use lowercase policy names. Policy identifiers inside CSV data retain their existing uppercase spelling.
+Ordinary module/document names use lowercase snake_case. Conventional landing files retain `README.md`/`HOWTO.md`, and instructor filenames and original contribution contents are preserved. Historical configs retain the actual old source paths and hashes that produced them.
 
-## Reproduce experiments and figures
+## Preserved supplementary experiments
 
-The default matrix replays four synthetic workloads across five capacities, four primary policies plus one ablation, and seeds 0-9: **1000 runs and 100 aggregate rows**.
+D's synthetic matrix remains available at [d_reproduction](results/experiments/d_reproduction/): four generated workloads, five capacities, five policy/ablation variants, and ten seeds produce 1000 runs and 100 aggregate rows. It includes scan pollution and Custom's no-admission ablation. Its [original findings](reports/experimental_findings.md), 40 traces, and four original PNG/SVG figure pairs are retained.
 
 ```bash
-python3 -m experiments.run --output-dir results/my_matrix
+python3 -m experiments.run --output-dir results/my_synthetic_matrix
+python3 -m experiments.plot --results-dir results/my_synthetic_matrix --output-dir results/my_synthetic_figures
 ```
 
-The existing [baseline](results/experiments/d_reproduction/) is already available. A new batch creates per-seed metrics, means and sample standard deviations, D-compatible rounded summaries, exact request traces, and configuration hashes. These are synthetic workloads derived from contributor D's delivery, not real browsing measurements.
+These experiments are supplementary. They do not replace the required provided-trace evaluation, and their conclusions must not be attributed to the instructor's new CSVs.
 
-Matplotlib is needed only to regenerate figures:
+## Validation and collaboration
 
-```bash
-python3 -m pip install -r requirements-plots.txt
-python3 -m experiments.plot --results-dir results/experiments/d_reproduction --output-dir results/my_figures
-```
+FIFO/LRU/LFU reproduce all ten supplied fields for all 15 reference requests. Custom reproduces D's 7-hit reference result: 68.666666... ms average response and 299008 origin bytes. The November 25 suite has **48 passing tests**: the 35 historical checks, six required-metric checks, five fixed-input experiment checks, and two independent-verifier checks. The formal audit checks 72 cells, 432 client rows and 216000 events with matching source hashes. See [validation](docs/validation.md) for evidence and [test plan](docs/test_plan.md) for release acceptance.
 
-This example uses a fresh output location to leave the reviewed [published figures](reports/figures/) intact. The plotting tool expects the complete default matrix. Ad hoc runs under `results/` are ignored by Git; the maintainer explicitly selects reviewed artifacts for publication.
-
-## Status and collaboration
-
-**Status checked November 24, 2026:** the current suite has **35 passing tests** (the earlier 33 plus two checks for D's clarified behavior). FIFO/LRU/LFU match all ten supplied reference fields on all 15 requests, and Custom reproduces D's reference result: 7 hits, 68.666666... ms average response, and 299008 origin bytes. The existing 1000-run synthetic baseline and figures remain available. D's revised score-timing pseudocode matches the implemented algorithm; the updated prototype was compared again across 1000 runs and 900000 request events, with unchanged results.
-
-| Contribution | Evidence available | Status |
+| Contribution | Accepted material | Follow-up |
 |---|---|---|
-| B: FIFO/LRU | [Merged PR #1](https://github.com/ZB-YF/shared-web-cache-simulator/pull/1), [review](docs/b_fifo_lru_review.md), five focused tests | Review and tests integrated |
-| C: LFU, metrics, experiments | [PR #2](https://github.com/ZB-YF/shared-web-cache-simulator/pull/2), [PR #3](https://github.com/ZB-YF/shared-web-cache-simulator/pull/3), [review](docs/c_lfu_reference_review.md), [original configs and replay evidence](docs/c_run_evidence_20261123.md) | Tests/review and independent-run evidence received and checked; report/video contribution remains |
-| D: Custom policy | Updated rules/report draft and [original consolidated design](docs/d_la_gdsf_design.md) received; [revision review](docs/d_custom_policy_review.md), [edited report section](reports/custom_policy_design.md) | Score-timing mismatch resolved; implementation and published results unchanged; final assembled-report check and video pending |
-| E: experiment/report analysis | Existing [baseline CSVs](results/experiments/d_reproduction/) and [draft findings/figures](reports/experimental_findings.md) are available to review | E's final experiment selection, interpretation, and report contribution are not yet present in the reviewed materials |
+| B: FIFO/LRU | [PR #1](https://github.com/ZB-YF/shared-web-cache-simulator/pull/1), [review](docs/b_fifo_lru_review.md), five tests | Review formal policy analysis and record own video segment |
+| C: LFU/metrics/reproduction | [PR #2](https://github.com/ZB-YF/shared-web-cache-simulator/pull/2), [PR #3](https://github.com/ZB-YF/shared-web-cache-simulator/pull/3), [review](docs/c_lfu_reference_review.md), [original evidence](docs/c_run_evidence_20261123.md) | Review the added metrics/methods and record own segment; earlier evidence handoff is complete |
+| D: LA-GDSF | [Original design](docs/d_la_gdsf_design.md), [revision review](docs/d_custom_policy_review.md), [report section](reports/custom_policy_design.md) | Review formal results, final rule/limitation wording, and record own segment |
+| E: results/report | Formal CSVs and generated figures are available as analysis inputs | Deliver workload/capacity/client interpretation, select figures, write report analysis/conclusions, and record own segment |
+| A: maintainer | Core, integration, new-requirements update, and reproducible result publication | Collect contributor materials, integrate the report afterward, coordinate recording/upload and final checks |
 
-**A is the sole maintainer of the main branch. B and C submit changes through pull requests; D and E submit materials through Google Drive.** The maintainer reviews B/C PRs, manually integrates D/E deliveries, runs checks, and handles final merges and publication. B/C should not push directly to main. Public project content stays in English; private planning remains outside this repository. See the [contribution workflow](docs/contributing.md) for artifact requirements.
+**A is the sole main-branch maintainer. B and C submit via pull requests; D and E submit via Google Drive.** A reviews, integrates, runs checks, merges, and publishes. The new statistics and provided-trace integration were prepared during maintainer integration; they are not presented as a new C submission. Public content stays in English, and private plans remain outside the repository. Complete Drive contents have not been inspected, so absence here is not a claim that no private draft exists.
 
-C's merged evidence supplement supplies original configs, matching source snapshots, output checksums, trace identities, and replay comparisons. Maintainer checks reproduced the metric files and reference hashes; C's original batch recorded Python 3.14.5 while the maintainer replay used 3.14.2. The accepted evidence references the identical published baseline without duplicating every CSV. D's original consolidated document is now included with a clear distinction from the maintained specification. Complete Drive contents have not been inspected; other final materials may exist there.
-
-Report-ready [A architecture](reports/simulator_architecture.md) and [D policy-design](reports/custom_policy_design.md) sections are available for assembly. The final team-reviewed 3-4 page report, five-person 10-minute video/link, and submission package remain pending. The target is **November 25, 2026 for all deliverables**. Detailed remaining work and proposed handoff dates are in [development status](docs/development.md). See [validation evidence](docs/validation.md) for commands and historical checkpoints.
-
-## Design documentation
-
-- [Simulation requirements](docs/requirements.md)
-- [Input data dictionary](docs/data_dictionary.md)
-- [Module and policy interfaces](docs/interfaces.md)
-- [Custom-policy rules and documented integration decisions](docs/custom_policy.md)
-- [Testing and integration checklist](docs/test_plan.md)
+The team target is **November 25, 2026**. The official Brightspace deadline is **December 4, 2026 at 17:59 Shanghai time**. Final team review, all five members' participation in the **10-minute video**, the YouTube link, and submission remain outstanding until checked. See [report status](reports/README.md), [video checklist](video/README.md), and [development status](docs/development.md).

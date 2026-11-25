@@ -19,3 +19,4 @@ results/reference/*
 results/experiments/*
 !results/experiments/README.md
 !results/experiments/d_reproduction/
+!results/experiments/provided_20261125/

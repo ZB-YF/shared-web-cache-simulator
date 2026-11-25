@@ -1,74 +1,60 @@
-# Usage
+# Usage and output conventions
 
-## Setup and input validation
+Start with the complete [HOWTO](../HOWTO.md) for setup, input selection, required experiments, optional plotting, and troubleshooting. Python 3.10+ and the standard library suffice for simulations, analysis, tests, and batch runs.
 
-Use Python 3.10+ from the repository root. No dependencies are needed for simulation, testing, or batch execution.
+## Main entry point
 
 ```bash
 python3 main.py --validate-only
 python3 -m experiments.validate_reference
 python3 -m unittest discover -s tests -v
+python3 main.py --requests data/workloads/provided/requests_mixed.csv --policy CUSTOM --capacity 5242880 --output-dir results/my_mixed_custom
 ```
 
-Default input paths are resolved from the repository root using the package location, so invoking main.py from another working directory also works. The defaults are data/reference/resources.csv and data/reference/requests_reference.csv. Resources use full URLs as identifiers. Inputs are UTF-8 CSV; timestamps must include a timezone. Equal timestamps retain source order. See the [data dictionary](data_dictionary.md) for the exact schema.
+`main.py` delegates to `cache_simulator.cli`. It already accepts `--resources`, `--requests`, `--policy`, `--capacity` in bytes, `--hit-latency-ms` (default 5), `--output-dir`, and `--validate-only`. Selecting the new data does not require a separate simulator or changed policy algorithms. Input defaults resolve from the project location; explicit relative paths resolve from the current working directory.
 
-## Run a policy
+Policies are FIFO, LRU, LFU, CUSTOM, and CUSTOM_NOADM (supplementary admission ablation), case-insensitively. Without `--output-dir`, results go to `results/<request-file-stem>_<lowercase-policy>_<capacity>`. A nonempty destination is rejected. Success exits 0; invalid input, configuration, or output exits 2.
 
-```bash
-python3 main.py --policy FIFO --capacity 102400 --output-dir results/my_fifo_run
-python3 main.py --policy LRU --capacity 102400 --output-dir results/my_lru_run
-python3 main.py --policy LFU --capacity 102400 --output-dir results/my_lfu_run
-python3 main.py --policy CUSTOM --capacity 102400 --output-dir results/my_custom_run
-```
+Resources use full URLs as identifiers. Inputs are UTF-8 CSV with timezone-aware timestamps; equal timestamps retain source order. See the [data dictionary](data_dictionary.md). Cache-Control and status 404 do not change the assignment's simplified cacheability rules. No network requests occur.
 
-Policy names are case-insensitive. `CUSTOM_NOADM` disables only Custom's admission filter as an ablation. `--capacity` is in bytes: 100 KiB = 102400. `--hit-latency-ms` defaults to 5 and is also used by Custom's saved-latency score. Misses use the resource's origin latency without adding hit latency.
-
-Use `--resources PATH` and `--requests PATH` to select inputs. If `--output-dir` is omitted, the default is `results/<request-file-stem>_<policy>_<capacity>` (lowercase policy name). An existing nonempty directory is rejected; choose a new output directory for another run. Success returns exit code 0; invalid input, configuration, or output location returns 2.
-
-Each run writes:
+## Single-run outputs
 
 | File | Contents |
 |---|---|
-| requests.csv | Every hit/miss, eviction sequence, cache insertion-order contents, capacity usage, response, and cumulative counters |
-| summary.json | Global counts, byte totals, hit ratios, response times, and origin traffic |
-| per_client.csv | The same metrics grouped by client |
-| config.json | Policy, capacity, hit latency, input filenames and SHA256 hashes, request count, and source hashes |
+| `requests.csv` | Every hit/miss, ordered eviction list, insertion-order contents, post-request used bytes, response, and cumulative counters |
+| `summary.json` | Global counts, hit ratios, response/traffic metrics, evictions, oversized requests, and average utilization |
+| `per_client.csv` | Metrics grouped by requesting client |
+| `config.json` | Policy, capacity, hit latency, input filenames/hashes, request count, and source hashes |
 
-Output uses full URLs. Reference validation maps those URLs to A-E without changing the general simulator. Ratios are 0-1; CSV and JSON preserve unrounded metrics. Empty traces and zero-byte denominators yield zero ratios, with counts retained.
+Ratios are unrounded 0-1 values, traffic is bytes, and latency is milliseconds. `cache_evictions` counts resources removed, not requests that cause a removal. `oversized_resource_requests` compares resource size with total capacity, not free space. `average_cache_utilization` averages post-request occupied/capacity ratios across **all** requests. Empty denominators and zero-capacity utilization use 0.
 
-## Batch experiments
+Per-client response/hit metrics concern that client's requests. Additional per-client utilization means shared occupancy observed after those requests; it is not a dedicated client cache. The shared cache allows one client's insertion to benefit another client's later request.
 
-```bash
-python3 -m experiments.run --output-dir results/my_matrix
-```
-
-The default matrix has 4 workloads × 5 capacities × 5 policies/variants × 10 seeds = 1,000 runs. To run a smaller matrix:
+## Required fixed-input evaluation
 
 ```bash
-python3 -m experiments.run --output-dir results/my_small_matrix --workloads mixed --capacities 102400 1048576 --policies LRU CUSTOM --seeds 0 1
+python3 -m experiments.provided --output-dir results/my_provided_matrix
+python3 -m experiments.provided --output-dir results/my_characterization --characterize-only
 ```
 
-Every policy receives the same trace for each workload and seed. All runs start with fresh objects. Batch output consists of `runs.csv` with per-seed and per-client metrics; `summary.csv` with arithmetic means and sample standard deviations; `d_compatible.csv` with D's rounded aggregate schema; `traces/` with exact generated inputs; and `config.json` with parameters, trace hashes, resource hash, source hashes, and Python version. Batch mode avoids exporting every request log; replay a saved trace through the root `main.py` entry point when debugging one run.
-
-## Optional figures
+Use three instructor workloads, six capacities, four primary policies, and 5 ms hit latency: **72 deterministic runs**. Workload analysis and `characterization/hypotheses.md` precede policy execution. Global results and client results are separate CSVs. Add `--request-logs` for every run's detailed events, or replay one combination through `main.py`. See the [experiment guide](../experiments/README.md) for schemas, parameters, and the three required comparisons.
 
 ```bash
 python3 -m pip install -r requirements-plots.txt
-python3 -m experiments.plot --results-dir results/my_matrix --output-dir results/my_figures
+python3 -m experiments.plot_provided --results-dir results/my_provided_matrix --output-dir results/my_provided_figures
 ```
 
-The plotting command expects the full default matrix and creates four figures in PNG and SVG: capacity/latency, admission ablation, mixed-workload traffic trade-offs, and mixed-workload per-client latency. It reads actual aggregate and per-seed files. These figures are report inputs rather than a completed report.
+## Supplementary generated experiments
 
-## Troubleshooting
+```bash
+python3 -m experiments.run --output-dir results/my_synthetic_matrix
+python3 -m experiments.plot --results-dir results/my_synthetic_matrix --output-dir results/my_synthetic_figures
+```
 
-Unknown resources, duplicate metadata, invalid numeric values, non-GET methods, and timestamps without timezones are rejected with file and row diagnostics where applicable. Cache-Control and status 404 do not alter the simplified cacheability rules. URLs are never fetched.
+The synthetic pipeline remains 4 workloads × 5 capacities × 5 policy/ablation variants × 10 seeds = 1000 runs. It retains per-seed values, means/sample deviations, D-compatible summaries, and exact generated traces. It does not substitute for the required fixed-input matrix.
 
-A nonempty output directory error means the existing files have been preserved. A missing Matplotlib import affects only optional plotting. Input files and source code needed to rerun experiments are in this repository; private planning material is not required.
+## Included evidence and provenance
 
-## Existing results included in GitHub
+The repository includes [reference runs](../results/reference/), the [formal 72-run snapshot](../results/experiments/provided_20261125/), and the preserved [synthetic snapshot](../results/experiments/d_reproduction/). Formal figures are under `reports/figures/provided_20261125/`; older synthetic figures remain in their original locations.
 
-The reviewed reference runs are in `results/reference/fifo_102400/`, `lru_102400/`, `lfu_102400/`, and `custom_102400/`. The reproduced synthetic matrix is in `results/experiments/d_reproduction/`, with four PNG/SVG figure pairs in `reports/figures/`. These files are tracked, so a Git clone or downloaded repository includes the same evidence available to the maintainer.
-
-Historical config.json files retain their original source hashes and old source filenames. They describe the code snapshot that produced the saved results; they are not rewritten to pretend the output came from the reorganized code. See [repository review](repository_review.md) for the baseline commit and old-to-new path mapping. New runs record hashes for the current layout.
-
-For a new run, use a fresh ad hoc directory as in the examples. To publish reviewed results, the sole maintainer updates the explicit baseline allowlist in .gitignore and commits the chosen artifacts. B/C submit follow-up work through pull requests; D/E deliveries use Google Drive. Both routes follow the [contribution workflow](contributing.md).
+Historical configs retain the source paths/hashes of their original code snapshots. They are not relabeled as current runs. The [repository review](repository_review.md) and [migration map](reorganization_manifest.json) explain the earlier reorganization. New runs hash current sources. The maintainer explicitly selects published snapshots; ad hoc result directories remain ignored. B/C submit via PR and D/E via Google Drive, following the [contribution workflow](contributing.md).

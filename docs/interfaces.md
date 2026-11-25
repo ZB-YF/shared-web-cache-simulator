@@ -39,6 +39,7 @@ flowchart TD
 | Cache.snapshot() | None | Immutable URL tuple in insertion order |
 | Simulator.process_request(request, step) | One request; step starts at 1 | RequestResult including cumulative counters |
 | Simulator.run(requests) | Chronological Request list | Request results; single-use run with an explicit error on reuse |
+| Statistics(capacity_bytes=102400) | Configured total capacity in bytes | Fresh counters with capacity-aware oversized/utilization metrics; runner passes actual simulation capacity |
 | Statistics.record(result) | RequestResult | Aggregate metrics without changing cache or policy state |
 | Statistics.summary()/per_client() | Recorded state | Global dict and per-client list[dict] |
 
@@ -83,6 +84,8 @@ step,resource_id,client_id,result,evicted,cache_contents_oldest_first,cache_used
 
 Use HIT/MISS for `result`, `-` for no evictions, and comma-separated identifiers for lists, escaped through `csv.writer`. General output uses full URLs; the reference comparator maps them to A-E. Compute `cache_used_KiB` as bytes divided by 1024 without truncation. Do not round internal numeric values prematurely.
 
-Summary keys include `request_count`, `hits`, `misses`, `hit_ratio`, `byte_hit_ratio`, `average_response_time_ms`, and `origin_traffic_bytes`. Per-client records add `client_id`. Ratios use 0-1 internally. Coordinate schema changes with metric and visualization contributors.
+Summary keys include `request_count`, `hits`, `misses`, `requested_bytes`, `hit_bytes`, `total_response_time_ms`, `hit_ratio`, `byte_hit_ratio`, `average_response_time_ms`, `origin_traffic_bytes`, `cache_evictions`, `oversized_resource_requests`, and `average_cache_utilization`. Evictions count individual removed resources; oversized requests compare size with configured total capacity; utilization is mean post-request `cache_used_bytes / capacity_bytes` over all requests. Empty runs and zero-capacity utilization use 0.
 
-Each single run exports `requests.csv`, `summary.json`, `per_client.csv`, and `config.json`. Configuration should identify the policy, capacity in bytes, hit latency, input paths and SHA256 hashes, request count, source hashes. Batch configuration also records workload, random seeds, Python version, and exact generated trace hashes. Separate nondeterministic metadata such as run time from reproducibility comparisons of numerical results.
+Per-client records add `client_id` and expose the same metric keys. Client eviction counts are victims triggered by that client's requests, and client utilization is shared occupancy observed after that client's requests, not private cache allocation. Ratios, including average utilization, use 0-1 internally. Schema changes must stay consistent across metrics, CSV export, experiment aggregation, and plots.
+
+Each single run exports `requests.csv`, `summary.json`, `per_client.csv`, and `config.json`. Configuration should identify the policy, capacity in bytes, hit latency, input paths and SHA256 hashes, request count, source hashes. The provided-trace batch records all three fixed input identities, six capacity values, four primary policies, Python version, source hashes, and actual runtime metadata. It has no seed dimension. Supplementary synthetic batch configuration records seeds and exact generated trace hashes. Separate nondeterministic metadata such as run time from comparisons of numerical results. See the [experiment guide](../experiments/README.md) for the separate global/client CSV schemas.

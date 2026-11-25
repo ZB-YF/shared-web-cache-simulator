@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "oracle": "Original contributor D prototype",
+  "prototype_sha256": "8c46fdef403713d18abf68072ebd8917957878fcb3078dda85eaa9180475b9f3",
+  "matrix_cells": 72,
+  "request_events": 216000,
+  "compared_fields": [
+    "client",
+    "resource",
+    "hit",
+    "ordered_evictions",
+    "post_request_cache_used_bytes"
+  ]
+}

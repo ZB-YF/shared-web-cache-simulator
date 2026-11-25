@@ -18,7 +18,7 @@ def run_simulation(resources, requests, policy='FIFO', config=None):
     replacement = create_policy(policy, config.hit_latency_ms)
     simulator = Simulator(resources, Cache(config.capacity_bytes, replacement), config)
     results = simulator.run(requests)
-    statistics = Statistics()
+    statistics = Statistics(config.capacity_bytes)
     for result in results:
         statistics.record(result)
     return results, statistics

@@ -1,5 +1,34 @@
 # Validation evidence
 
+## November 25 revised-requirements checkpoint
+
+The update retains policy algorithms, reference fixtures, historical results/configs, and original contributions. It adds capacity-aware statistics, the three original evaluation traces, fixed-input characterization and matrix execution, and formal visualizations/report materials.
+
+```bash
+python3 -m unittest discover -s tests -v
+python3 -m experiments.validate_reference
+python3 -m experiments.provided --output-dir results/my_provided_matrix
+python3 -m experiments.verify_provided --results-dir results/my_provided_matrix --output results/my_provided_review.json
+```
+
+At the initial November 25 integration checkpoint, **46 tests passed**: 35 historical checks, six added metric checks, and five provided-trace experiment checks. The reference validator again matched all 15 rows and all ten supplied fields for FIFO, LRU, and LFU. Later release checks may extend this checkpoint; the command above runs the current full suite.
+
+The three received CSVs were validated against the existing resource metadata, which matches the received resource file byte for byte. Each supplied workload has 3000 requests, six clients, and 21 distinct requested resources. Original trace bytes and SHA256 values are recorded in [the dataset guide](../data/workloads/provided/README.md) and formal configuration.
+
+The [formal snapshot](../results/experiments/provided_20261125/) contains 72 default combinations: three provided traces, six capacities, and four primary policies. Global results include resource evictions, oversized request counts, and mean post-request utilization. Characterization and preliminary hypotheses are written before policy execution. Single-run CLI support for custom input/capacity/policy was already present; no replacement-policy rewrite is part of this update.
+
+The reproducibility verifier checks the selected result snapshot without changing it. The published [review record](provided_run_review.json) records the maintainer's final verification when available.
+
+Final November 25 source freeze: **48 tests pass** (35 historical + six metric + five experiment + two audit checks). The strict formal audit passes all 72 cells, 432 client rows, 216000 request events and 6552 exported metric values; its source snapshot matches exactly. A separate comparison with D's original prototype also matches the 72 runs and all events for hit/miss, ordered evictions and cache occupancy. The prototype remains an independently received contribution rather than a rewritten expected output.
+
+The historical 1000-run synthetic matrix was rerun after the metric additions. All old `runs.csv` fields and all 40 generated traces match; `summary.csv` and `d_compatible.csv` remain byte-identical. Fresh run CSVs additionally expose the new metric columns. Published historical artifacts were preserved.
+
+[Generated figures](../reports/figures/provided_20261125/) use the new snapshot. Do not infer policy guarantees from these finite traces. In particular, the earlier synthetic mixed-client trade-off is not automatically a finding for the new mixed input. Contributor report analysis, final assembly and video recording/upload remain outstanding.
+
+## Historical evidence through November 24
+
+The following retained record describes earlier code snapshots and the synthetic reproduction. References to “current” or “remaining” work below are historical as of their stated dates; the November 25 checkpoint and [development status](development.md) take precedence.
+
 Updated November 24, 2026 after C's evidence PR #3 and publication of D's additional consolidated design document. The earlier integration checkpoint and D-prototype comparison below remain historical evidence; this update does not establish final team approval or complete the report/video deliverables.
 
 ## Automated correctness checks

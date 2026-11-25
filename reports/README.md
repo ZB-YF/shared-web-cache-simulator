@@ -1,23 +1,30 @@
 # Technical report and figures
 
-Four figures have been generated from the integrated simulator's synthetic experiment reproduction, in PNG and SVG: latency_by_capacity, admission_ablation, mixed_tradeoffs, and mixed_client_latency. Regenerate them using the [usage guide](../docs/usage.md), preferably into a fresh output directory. PNGs are embedded in the [draft findings](experimental_findings.md).
+The revised evaluation uses the three instructor-provided traces at six capacities. Its results and figures are separate from the preserved synthetic experiments.
 
-The final 3-4 page technical report is still pending team review and authorship. It should cover architecture and data structures, the custom-policy rules and objective, experimental methodology, comparative figures, explanations, and limitations. Use actual exported numbers and align pseudocode with the [implemented Custom specification](../docs/custom_policy.md).
+## Required evaluation materials
 
-Explain which policy wins under which metric, when rankings change, and which client or traffic trade-offs arise. Complete the final report and figures by November 25, 2026. The draft findings and plots do not constitute a completed submission report.
-
-## Sections available for final assembly
-
-| Section | Status |
+| Material | Purpose |
 |---|---|
-| [Simulator Architecture and Implementation](simulator_architecture.md) | A's code-based explanation is ready for report assembly |
-| [Custom Policy Design and Justification](custom_policy_design.md) | Adapted from D's revised English draft; score timing, limitations, and complexity align with the integrated code |
-| [Experimental findings and figures](experimental_findings.md) | Existing data-backed draft; E's final matrix/figure selection and narrative still pending |
+| [Formal figures](figures/provided_20261125/) | Six figure pairs in PNG and SVG |
+| [Formal result CSVs and provenance](../results/experiments/provided_20261125/) | All 72 combinations, client metrics, characterization, and configuration |
 
-D's original ten-file update is preserved in the private handoff archive; the additional [consolidated design document](../docs/d_la_gdsf_design.md) is published unchanged for reference; [review evidence](../docs/d_custom_policy_review.md) records what was received, checked, and edited. These sections and figures still need team assembly and review as one 3-4 page report. They are not a completed report submission.
+The formal figures are `workload_characteristics`, `policy_comparison_5mib`, `capacity_effects`, `capacity_storage`, `mixed_clients_5mib`, and the compact report plot `capacity_latency`. They cover input differences, policy comparisons at 5 MiB, six-capacity trends, the added storage metrics, and mixed-workload client comparisons at 5 MiB. See the [HOWTO](../HOWTO.md) to regenerate them into a fresh directory.
 
-## Final handoff still needed
+The report and video must address all five questions listed in the revised assignment: which policy wins under which metric; how workload characteristics affect results; how capacity affects policy rankings; whether all clients benefit equally; and the Custom policy's trade-offs. Use the same trace, resource metadata, capacity, and assumptions for fair comparisons. Explicitly state LA-GDSF's additional admission rule and lifetime frequency.
 
-E should identify the final result snapshot, workload/capacity/seed matrix, selected figures, and numeric evidence for the three central questions, then complete the result-analysis narrative. B/C's merged review notes support the standard-policy and metric sections. C's original configurations and replay comparisons are now received in merged [PR #3](https://github.com/ZB-YF/shared-web-cache-simulator/pull/3); see the [evidence supplement](../docs/c_run_evidence_20261123.md).
+The generated outputs are available for team analysis. The integrated report is not published yet: contributor explanations, E's results analysis/conclusions and final figure selection must be collected before A assembles and uploads it. Individual presentation contributions and the actual video remain outstanding.
 
-D's updated design and pseudocode no longer block report assembly. D should check the final combined wording and prepare the video contribution; no additional algorithm rewrite is requested. A integrates all sections, checks report length and numbers, and performs release packaging. Proposed dates and acceptance criteria are in [development status](../docs/development.md).
+
+## Preserved contribution and supplementary sources
+
+| Source | Scope |
+|---|---|
+| [Simulator architecture](simulator_architecture.md) | A's architecture/data-structure explanation |
+| [Custom-policy design](custom_policy_design.md) | Edited report section based on D's accepted design |
+| [Original consolidated LA-GDSF document](../docs/d_la_gdsf_design.md) | D's original delivery, unchanged; see [review](../docs/d_custom_policy_review.md) |
+| [Earlier experimental findings](experimental_findings.md) | D-derived synthetic matrix and its four original PNG/SVG figure pairs |
+
+The historical synthetic figures remain `latency_by_capacity`, `admission_ablation`, `mixed_tradeoffs`, and `mixed_client_latency` in `figures/`. They can support supplementary analysis, but cannot be presented as outcomes of the three provided CSVs. Original outputs and configurations are retained.
+
+B/C's merged reviews and C's [original-config/replay supplement](../docs/c_run_evidence_20261123.md) remain accepted evidence. The maintainer's November 25 statistics and fixed-input pipeline update extends that work; it is not a new submission authored by C. E remains responsible for results interpretation, figure selection and report analysis/conclusions; D supplies the Custom explanation and limitations; B/C supply their policy and metric sections. Generated outputs do not mark those contributions complete. See [development status](../docs/development.md).

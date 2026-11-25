@@ -1,0 +1,4 @@
+workload,request_count,distinct_resources,distinct_clients,requested_bytes,requested_working_set_bytes,top_five_request_share
+sequential,3000,21,6,15836925952,110490624,0.246
+repetitive,3000,21,6,4380107776,110490624,0.8796666666666667
+mixed,3000,21,6,14038665216,110490624,0.301

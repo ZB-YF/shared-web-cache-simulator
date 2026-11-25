@@ -1,51 +1,57 @@
-# Testing and integration plan
+# Testing and release acceptance
 
-The integrated suite now tests the input layer, cache infrastructure, simulation, policy behavior, metric formulas, and output boundaries. See [validation evidence](validation.md) for the completed checkpoint. The checks below remain the regression and final release checklist.
+The suite covers input validation, shared-cache behavior, policy rules, metric formulas, CLI behavior, and the required fixed-input experiment pipeline. See [validation evidence](validation.md) for recorded checks. Run:
 
-## Input layer
+```bash
+python3 -m unittest discover -s tests -v
+python3 -m experiments.validate_reference
+```
 
-Run `python3 -m unittest discover -s tests -v`. Existing tests cover supplied data counts and URL identity, timestamp sorting and equal-time stability, unknown references, duplicate metadata, invalid numeric values, missing columns, non-GET requests, and timestamps without timezones. Extend coverage for empty fields, malformed row lengths, BOM handling, and header-only files when changing the loader.
+## Input and cache correctness
 
-## Cache and simulator acceptance cases
+Input tests cover known counts/URL identity, timezone-aware sorting and equal-time stability, unknown resources, duplicate metadata, invalid numeric fields, missing columns, non-GET requests, and naive timestamps. Supplied evaluation files must validate against the same metadata without editing their bytes.
 
-| Scenario | Expected behavior |
+| Scenario | Acceptance criterion |
 |---|---|
-| First request into an empty cache | Miss; origin latency; resource-size traffic; insert if it fits |
-| Repeated resource | Hit; configured hit latency; zero traffic; no reinsertion |
-| Same URL requested by another client | Shared-cache hit is possible; metrics belong to the requesting client |
-| Size equals capacity | Resource can be stored without exceeding capacity |
-| Size is capacity minus/plus one byte | Smaller fits; oversized request causes no insertion or eviction |
-| Repeated oversized resource | Miss and full origin traffic each time; existing cache remains unchanged |
-| Multiple evictions needed | Query the policy repeatedly and record actual removal order |
-| Duplicate admission | Explicit failure without double-counting bytes |
-| Invalid victim identifier | Explicit failure without an infinite loop |
-| Removal | Byte accounting and policy metadata remain synchronized |
-| Equal request timestamps | Preserve source order; use step for deterministic recency |
-| Zero capacity | Every positive-size resource is oversized |
-| Empty trace or zero-byte denominator | No division by zero; Zero metric with counts retained |
-| Miss with a different origin latency | Do not add hit latency to miss latency |
-| Repeat run with the same configuration | Fresh objects and identical numerical results |
+| First request | Miss, origin latency, full resource-size traffic, insert if admitted and fitting |
+| Repeated/cross-client request | Shared-cache hit possible; configured hit latency, zero origin bytes |
+| Size equals capacity | Fits without exceeding capacity |
+| Size exceeds total capacity | Never stored and does not evict existing objects |
+| Repeated oversized request | Miss every time; count every request and its full origin traffic |
+| Several victims required | Choose and record every actual victim in order |
+| LFU tie/reinsertion | LRU tie-breaking; frequency resets to 1 after reinsertion |
+| FIFO/LRU hit | FIFO insertion order unchanged; LRU recency updated |
+| Custom rejected admission | No actual evictions; occupancy retained; request still counts |
+| Zero capacity/empty trace | Valid single-run boundary behavior with zero utilization, no division by zero |
+| Repeat run | Fresh state and identical numerical outcomes for identical inputs/configuration |
 
-Check `used_bytes == sum(item.size_bytes)` and capacity bounds throughout operations. Use a small fake policy inside cache tests to verify infrastructure without presenting it as a completed production policy.
+Check `used_bytes == sum(cached resource sizes)` and `0 <= used_bytes <= capacity_bytes`. Infrastructure tests use small fake policies where appropriate. No algorithm or instructor answer is modified to make a comparison pass.
 
-## Standard policies and reference comparison
+## Reference and metric checks
 
-Compare every row of `data/reference/expected_fifo.csv`, `expected_lru.csv`, and `expected_lfu.csv`. Map full URLs to A-E only in reference comparison. Check step, resource, client, hit/miss, eviction order, insertion-order contents, used capacity, response time, cumulative bytes, and cumulative hits.
+Compare all 15 rows and all ten columns of `expected_fifo.csv`, `expected_lru.csv`, and `expected_lfu.csv`. URL aliases A-E are validation labels only. Check hit/miss, victim order, insertion-order display, used capacity, response, and cumulative counters. Investigate the first differing request. Compare integer counters exactly and floating averages with appropriate tolerance, without rounding intermediate results.
 
-Useful divergence points: at step 6 FIFO evicts A while LRU/LFU evict C; at step 8 LRU evicts B while LFU evicts D; step 9 requires multiple evictions. LRU access order must remain separate from insertion-order display. LFU must use LRU tie-breaking and reset counts on reinsertion.
+Independently verify global and client denominators, byte-hit ratio, and `origin_traffic_bytes == requested_bytes - hit_bytes`. Added metric checks must distinguish victim count from requests causing eviction, count repeated oversized requests relative to total capacity, and average occupancy after **every** request including hits/bypasses. The zero/empty conventions and capacity passed from the actual simulation configuration must be checked. Per-client utilization is observed shared occupancy, not allocated storage.
 
-Compare integer bytes and counts exactly; use appropriate tolerance for floating-point averages without rounding intermediate values. Independently calculate byte-hit ratio and per-client metrics. Investigate the first differing request instead of changing fixtures to match an implementation.
+## Provided-trace evaluation acceptance
 
-## Experiments and release
+- Characterize all three supplied traces before executing policy runs; retain popularity, top five, requested volume, distinct counts, and oversized counts for all six capacities.
+- Record preliminary hypotheses honestly as input-derived expectations, without claiming preregistration or a guaranteed winner.
+- Cover exactly the requested unique cells: 3 workloads × 6 capacities × 4 primary policies = 72 default runs, including 5 MiB.
+- Reuse identical resource metadata and fixed trace bytes for every relevant policy/capacity. Use empty initial state and 5 ms hit latency.
+- Save all global metrics and client rows with workload/capacity/policy identifiers. Client request counts must sum to global counts.
+- Check input/source/configuration hashes and matrix coverage. Fixed traces have no random seed dimension or artificial standard-deviation bars.
+- Reject missing/invalid traces, duplicate parameters, nonpositive experiment capacities, and nonempty output locations. Invalid inputs must not create a partial policy result set.
+- Compare the published matrix with a clean reproduction from the included source/data, separating runtime metadata from deterministic numerical evidence.
 
-- Compare all four policies with identical input, capacity, hit latency, and initial state.
-- Evaluate at least three workloads and multiple capacities; record exact bytes and generation seeds.
-- Validate the custom policy against at least five design scenarios and its documented tie-breaking rules.
-- Use unique output directories and input hashes. Per-client request counts must sum to the global count.
-- Check that origin bytes equal total requested bytes minus hit bytes.
-- Run the documented commands from a clean directory without relying on private notes or files outside this repository.
-- Complete code, data, figures, report, video link, packaging, and reproducibility checks by November 25, 2026.
+## Report and final submission acceptance
 
-## Merged contributor checks
+The required views are all workloads at 5 MiB, six-capacity curves, and mixed-client comparisons at 5 MiB. Figure labels and report numbers must trace to the published snapshot. Old synthetic findings remain explicitly supplementary; do not transfer a client-harm conclusion to new data without checking it.
 
-The current suite contains 35 tests. B's five added FIFO/LRU tests and C's three added LFU/metrics tests are merged, with supporting [B](b_fifo_lru_review.md) and [C](c_lfu_reference_review.md) review notes. Their completed checks should not be relisted as pending initial validation. D's revised rule description is now checked; two added tests cover T4 aging and multi-eviction insertion scoring. C's run-config and replay-evidence handoff has since merged in PR #3. E's final experiment selection and the report/video requirements remain tracked in [development status](development.md).
+The report must be 3-4 pages and cover all five revised questions. The ZIP must contain source, HOWTO/README, inputs, experiment scripts, CSVs/configs, figures, and report. Verify the extracted package without private paths or missing ignored files. Review contribution claims with all members. The five-person video must include all five participants, a real demonstration, a verified YouTube link, and the same result interpretation.
+
+The November 25 completion target and December 4 official deadline are unchanged. A reviewed script and generated package do not establish completed recording, upload, team sign-off, or Brightspace submission.
+
+## Preserved contributor checks
+
+B's five FIFO/LRU tests, C's three LFU/metrics tests and merged original-run evidence, and the two D-related integration tests remain accepted. The pre-update suite had 35 passing checks. The new requirements add statistics and fixed-input experiment checks without reopening the completed historical handoffs. See [B review](b_fifo_lru_review.md), [C review](c_lfu_reference_review.md), [C run evidence](c_run_evidence_20261123.md), and [D review](d_custom_policy_review.md).
