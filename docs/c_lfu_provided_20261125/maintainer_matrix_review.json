@@ -1,0 +1,36 @@
+{
+  "checks": [
+    "72 unique workload/capacity/policy combinations",
+    "Exact per-client coverage and independent metrics",
+    "Per-request capacity, origin traffic, latency, and oversized handling",
+    "Global/client additive counters and correctly weighted averages",
+    "Origin traffic equals requested bytes minus hit bytes",
+    "Policy-independent oversized counts for each input/capacity",
+    "Resource, request, and source provenance hashes"
+  ],
+  "matrix_cells": 72,
+  "method": "Fresh Simulator replays; metrics independently calculated from immutable RequestResult events without Statistics",
+  "metric_values_checked": 6552,
+  "per_client_rows": 432,
+  "request_events_checked": 216000,
+  "request_log_rows_checked": 0,
+  "resources_sha256": "b2117bca54a566a999cd21333bb34a3dc25e0d0f371cf9aad8bfb7c63d1869e7",
+  "result_sha256": {
+    "config.json": "a6756aa6e3075c7ce4249f095eaa1d238693e4341ed7779dcc130c534a5da9e2",
+    "per_client.csv": "5b360e610f918ae741c4e7bf2a8b0d5c7c37622fec5aa15c64d19fd764191a8b",
+    "runs.csv": "61bf24fc6170f6068ca608446ad06153b18009bda5976dc46e01a6ab707729aa"
+  },
+  "source_changes": {
+    "docs/c_lfu_provided_20261125/compare_replay.py": {
+      "current_sha256": "4fb381856abd9eea3ab203ce777614fe1039d7e5704f6d7eace31b2de1c3bd28",
+      "recorded_sha256": null
+    }
+  },
+  "source_snapshot_matches": false,
+  "status": "PASS",
+  "trace_sha256": {
+    "mixed": "8f8a34f1129cd147cd6467ec5467bb626d9e82d76d8803d97b9707ba0c7a41f8",
+    "repetitive": "6f091f07b83781afdf8fb908c65437c522cd9be96ab414a827f51f55429b0dca",
+    "sequential": "7486650b74bc47d98dee38226d464c670181806c8b35e98abcc940cf3d18915c"
+  }
+}

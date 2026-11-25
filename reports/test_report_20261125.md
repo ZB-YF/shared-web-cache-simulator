@@ -34,7 +34,7 @@ Run from the project root:
 ```bash
 python3 -m unittest discover -s tests -v
 python3 -m experiments.validate_reference
-python3 -m experiments.verify_provided --results-dir results/experiments/provided_20261125
+python3 -m experiments.verify_provided --results-dir results/experiments/provided_20261125 --allow-source-drift
 ```
 
 To create a fresh result snapshot, choose a new output directory:
@@ -45,6 +45,8 @@ python3 -m experiments.verify_provided --results-dir results/my_provided_matrix
 ```
 
 The fixed traces are deterministic, so repeated-run seed averaging is unnecessary. Config timestamps can change on a fresh run; the metric CSVs are reproducible for the same code and inputs. Source changes intentionally cause strict historical-snapshot verification to fail unless drift is explicitly allowed and recorded.
+
+After merged PR #4, the published snapshot has exactly one added-source difference: C's documentation-only comparison helper. The [post-merge review](../docs/c_lfu_provided_20261125/maintainer_matrix_review.json) records its hash and verifies that all 33 original sources and all numeric outputs remain unchanged. The flag above audits that historical snapshot with an explicit difference record; it does not assert an identical source set. Fresh current-checkout replays remain eligible for strict checks.
 
 The earlier 1000-run synthetic baseline was also checked during integration: all historical run fields, all 40 traces and both aggregate CSVs match. Original inputs, replacement algorithms and historical published outputs were preserved. See [validation history](../docs/validation.md) for the scope and historical checkpoints, [run notes](provided_experimental_findings.md) for numeric observations, and [HOWTO](../HOWTO.md) for setup.
 

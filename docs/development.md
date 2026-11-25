@@ -25,7 +25,7 @@ This update was prepared during maintainer integration. It does not imply that C
 |---|---|---|
 | A | Core, integration, accepted PRs, dataset/result publication | Coordinate review; check final numbers/report length; assemble members' recordings, verify YouTube link, inspect final extracted ZIP, and submit |
 | B | FIFO/LRU review, reference comparison, five merged tests | Check formal FIFO/LRU workload/capacity explanations; provide corrections if needed and record own two-minute segment |
-| C | LFU/metric tests, review, original configs, independent historical replay evidence | Review the new statistics and fixed-trace methods; reproduce/check a selected result; record own two-minute segment. The earlier evidence handoff is complete |
+| C | LFU/metric tests, historical configs/evidence, and merged PR #4's 18 provided-trace LFU runs with 108 client rows and new-metric checks | Retain accepted explanations/evidence for report assembly and prepare own two-minute segment; no duplicate replay handoff required |
 | D | LA-GDSF design/prototype, clarified score timing, accepted scenarios/report text; video recorded per maintainer update | Retain existing materials and recording for assembly; no new rewrite or recording requested |
 | E | Existing report-analysis role; generated CSVs and charts available as inputs | Deliver workload and results interpretation, choose report figures, write analysis/conclusions and record own segment |
 

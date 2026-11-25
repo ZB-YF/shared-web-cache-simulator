@@ -36,7 +36,7 @@ Use English for material intended for the public repository. Private discussion 
 |---|---|---|
 | A: core and final integration | cache_simulator/, main.py, documentation | Working implementation; final package and clean-run verification remain |
 | B: FIFO/LRU | cache_simulator/policies/; tests/; docs/b_fifo_lru_review.md | PR #1 merged, five focused tests; report explanation and video segment next |
-| C: LFU/metrics/experiments | tests/; experiments/; docs/c_lfu_reference_review.md | PR #2 tests/review and PR #3 original configs/replay evidence merged; report methods and video next |
+| C: LFU/metrics/experiments | tests/; experiments/; docs/c_lfu_reference_review.md | PR #2 tests/review, PR #3 historical configs, and PR #4 provided-trace LFU analysis/replay evidence merged; retain accepted material for report assembly and prepare own video |
 | D: Custom design | docs/custom_policy.md; scenario tests; report | Accepted design and report section retained; video recorded per maintainer's November 25 update; use existing materials for assembly without a new revision or recording request |
 | E: methodology and interpretation | reports/; reviewed result snapshot | Final matrix/snapshot choice, CSV-backed conclusions, report draft and selected figures via Drive |
 

@@ -14,6 +14,7 @@ Terminal examples assume the project root unless an absolute path is shown. Publ
 | B's FIFO/LRU review, merged PR #1 | [B review](b_fifo_lru_review.md) |
 | C's LFU/metric review, merged PR #2 | [C review](c_lfu_reference_review.md) |
 | C's original configs and replay record, merged PR #3 | [C run evidence](c_run_evidence_20261123.md) |
+| C's 18 LFU provided-trace runs, merged PR #4 | [LFU analysis and reproducible comparison](c_lfu_provided_20261125.md) |
 | D's original consolidated source and its interpretation | [Original design](d_la_gdsf_design.md), [review](d_custom_policy_review.md) |
 | Test coverage and release acceptance | [Test plan](test_plan.md), [validation evidence](validation.md) |
 | Program test report and supporting result observations | [Test report](../reports/test_report_20261125.md), [run notes](../reports/provided_experimental_findings.md) |

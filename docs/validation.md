@@ -4,6 +4,10 @@ The [program test report](../reports/test_report_20261125.md) summarizes the che
 
 ## November 25 revised-requirements checkpoint
 
+PR #4's revised LFU checker has been tested and merged. All 18 LFU global rows and 108 client rows match, and deliberate core-hash changes, missing sources, unexpected sources and altered metrics are rejected. The 48 tests and standard reference checks pass on the reviewed PR tree; the merged tree is identical. See [C's handoff](c_lfu_provided_20261125.md).
+
+The unchanged historical matrix predates that helper. A [post-merge full-matrix audit](c_lfu_provided_20261125/maintainer_matrix_review.json) explicitly allows and records source drift, confirms all 72 cells and 6552 metric values, and identifies only the added `docs/c_lfu_provided_20261125/compare_replay.py`. All 33 original source hashes remain unchanged. Keep original configs intact; use the published-snapshot command in [HOWTO](../HOWTO.md) rather than claiming the old and new source-file sets are identical.
+
 The update retains policy algorithms, reference fixtures, historical results/configs, and original contributions. It adds capacity-aware statistics, the three original evaluation traces, fixed-input characterization and matrix execution, and formal visualizations/report materials.
 
 ```bash

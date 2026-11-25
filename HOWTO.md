@@ -75,6 +75,14 @@ python3 -m experiments.verify_provided --results-dir results/my_provided_matrix 
 
 The published [formal snapshot](results/experiments/provided_20261125/) is already included. Reproduction writes a separate directory; do not overwrite the published evidence. Source hashes describe the actual code used. They can differ from historical configs after a code change even if numerical results agree.
 
+PR #4 adds C's documentation-only `compare_replay.py` after the published snapshot was generated. Its 33 original Python source hashes still match; the only added source is that reviewed helper. To audit the unchanged published matrix from the newer checkout, explicitly record the difference:
+
+```bash
+python3 -m experiments.verify_provided --results-dir results/experiments/provided_20261125 --allow-source-drift --output results/my_published_review.json
+```
+
+Inspect `source_changes`; the accepted [post-merge review](docs/c_lfu_provided_20261125/maintainer_matrix_review.json) contains only the added comparison helper, with no modified original source. Fresh runs created from the current checkout can still be verified strictly. C's LFU-specific commands and preserved original config are documented in the [handoff](docs/c_lfu_provided_20261125.md).
+
 ## Reproduce figures
 
 The supplied PNG/SVG graphs can be opened without installing plotting libraries. To regenerate formal graphs, install the optional plotting dependency:
