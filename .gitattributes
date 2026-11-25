@@ -3,3 +3,6 @@
 
 # Preserve D's original Markdown bytes, including its hard line breaks.
 docs/d_la_gdsf_design.md -text whitespace=-blank-at-eol
+
+# Matplotlib emits trailing separators inside generated SVG path definitions.
+reports/figures/provided_20261125/*.svg whitespace=-blank-at-eol
