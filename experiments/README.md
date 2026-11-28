@@ -23,7 +23,7 @@ Each trace has 3000 requests, six clients, and 21 requested resources. Fixed inp
 | `per_client.csv` | Client metrics with workload/capacity/policy identifiers |
 | `config.json` | Fixed-input provenance, parameters, hashes, source snapshot, and actual runtime information |
 
-The three required comparisons are selections from this matrix: all workloads and four policies at 5 MiB; capacity curves across six capacities; and per-client comparisons for mixed at 5 MiB. The published November 25 snapshot is [provided_20261125](../results/experiments/provided_20261125/).
+The three required comparisons are selections from this matrix: all workloads and four policies at 5 MiB; capacity curves across six capacities; and per-client comparisons for mixed at 5 MiB. Open the published [required evaluation](../evaluation/) for CSVs, characterization, figures and verification.
 
 Use `--characterize-only` to inspect workloads before policy execution. `--requests-dir`, `--resources`, `--capacities`, and `--policies` select other inputs or smaller diagnostic matrices. `--request-logs` additionally writes detailed event logs; default aggregate output avoids storing 216000 verbose event rows. The existing [single-run CLI](../HOWTO.md) also exports exact request logs for any selected combination.
 
@@ -47,4 +47,4 @@ This unchanged generator reproduces D's four synthetic workloads, five capacitie
 
 `workloads.py` preserves D's random-call and selection ordering while removing private paths. `runs.csv` contains per-seed metrics; `summary.csv` reports arithmetic means and sample standard deviations; `d_compatible.csv` preserves D's rounded schema; `traces/` contains exact generated requests; `config.json` records parameters and hashes. Every policy shares the same trace for each workload/seed.
 
-The reviewed historical snapshot is [d_reproduction](../results/experiments/d_reproduction/). Its original CSVs, configs, traces, and figures remain intact. Its 1000 runs do not replace the 72 required combinations using the instructor-provided traces. See [validation evidence](../docs/validation.md) for the independent prototype comparison.
+The reviewed historical snapshot is the [additional ten-seed synthetic study](../supplementary/synthetic/). Its original CSVs, configs, traces, and figures remain intact. Its 1000 runs do not replace the 72 required combinations using the instructor-provided traces. See [validation evidence](../docs/validation.md) for the independent prototype comparison.

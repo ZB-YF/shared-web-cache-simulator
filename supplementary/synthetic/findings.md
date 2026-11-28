@@ -1,6 +1,6 @@
-# Reproduced experimental findings
+# Additional synthetic experimental findings
 
-These are draft findings from the integrated simulator's reproduction of D's synthetic experiment matrix. They are inputs to team analysis, not a final report or claims about real browsing traffic. All figures show generated workloads with seeds 0-9. Ratios in the underlying CSV use 0-1; displayed percentages below multiply by 100.
+These are supplementary findings from the integrated simulator's reproduction of D's synthetic experiment matrix, separate from the [required 72-run evaluation](../../evaluation/). They are inputs to analysis, not a final report or claims about real browsing traffic. All figures show generated workloads with seeds 0-9. Ratios in the underlying CSV use 0-1; displayed percentages below multiply by 100.
 
 ## Reference trace
 
@@ -49,4 +49,4 @@ CUSTOM_NOADM removes only the admission filter while retaining lifetime frequenc
 
 ## Limits and next review
 
-The four workloads were created by D using the supplied 21-resource catalog. Each seed is replayed identically for every policy and capacity. These are unweighted arithmetic means over ten seeded runs; the batch outputs also preserve per-seed values and sample standard deviations. No train/test tuning claim, real-traffic claim, or guarantee of fairness is made. E should review the final workload choice and interpretation; D's revised pseudocode now agrees with the implemented score timing; see the [revision review](../docs/d_custom_policy_review.md). The final report still needs assembly and team review.
+The four workloads were created by D using the supplied 21-resource catalog. Each seed is replayed identically for every policy and capacity. These are unweighted arithmetic means over ten seeded runs; the batch outputs also preserve per-seed values and sample standard deviations. No train/test tuning claim, real-traffic claim, or guarantee of fairness is made. D's revised pseudocode agrees with the implemented score timing; see the [revision review](../../docs/d_custom_policy_review.md). E provides analysis and A authors the final integrated report, using the required provided-trace evaluation as its main evidence.

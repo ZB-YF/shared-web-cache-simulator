@@ -55,6 +55,6 @@ The synthetic pipeline remains 4 workloads × 5 capacities × 5 policy/ablation 
 
 ## Included evidence and provenance
 
-The repository includes [reference runs](../results/reference/), the [formal 72-run snapshot](../results/experiments/provided_20261125/), and the preserved [synthetic snapshot](../results/experiments/d_reproduction/). Formal figures are under `reports/figures/provided_20261125/`; older synthetic figures remain in their original locations.
+The repository includes the [required 72-run evaluation](../evaluation/), [reference runs](../results/reference/) and the [additional ten-seed synthetic study](../supplementary/synthetic/). Formal figures are under `evaluation/figures/`; supplementary synthetic figures are under `supplementary/synthetic/figures/`. Use `results/` for fresh local output.
 
 Historical configs retain the source paths/hashes of their original code snapshots. They are not relabeled as current runs. The [repository review](repository_review.md) and [migration map](reorganization_manifest.json) explain the earlier reorganization. New runs hash current sources. The maintainer explicitly selects published snapshots; ad hoc result directories remain ignored. B/C submit via PR and D/E via Google Drive, following the [contribution workflow](contributing.md).

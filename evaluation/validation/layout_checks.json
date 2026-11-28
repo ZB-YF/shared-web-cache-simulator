@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "date": "2026-11-28",
+  "method": "Check migrated files against pre-move SHA256; original source hashes against preserved formal config; resolve current relative Markdown links",
+  "mapped_files_present": 76,
+  "immutable_moved_files_sha256_match": 71,
+  "original_python_source_hashes_match": 33,
+  "relative_markdown_links_checked": 273,
+  "missing_moved_files": [],
+  "changed_immutable_files": [],
+  "changed_original_sources": [],
+  "broken_relative_markdown_links": [],
+  "unchanged_payload_types": [
+    "CSV",
+    "original JSON configuration",
+    "PNG",
+    "SVG"
+  ],
+  "published_results_regenerated": false,
+  "historical_raw_evidence_rewritten": false
+}

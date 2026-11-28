@@ -1,32 +1,36 @@
-# Technical report and figures
+# Report source materials
 
-The revised evaluation uses the three instructor-provided traces at six capacities. Its results and figures are separate from the preserved synthetic experiments.
+**A writes and integrates the final 3–4 page technical report. E provides data analysis as an input to that report.** The integrated draft and video/presentation drafts remain in the maintainer's private project folder; they are not published here.
 
-## Required evaluation materials
+## Main evaluation
+
+The required three-workload, six-capacity, four-policy study is collected in [evaluation/](../evaluation/):
 
 | Material | Purpose |
 |---|---|
-| [Program test report](test_report_20261125.md) | Actual test commands, checks, evidence and reproducibility scope |
-| [Provided-trace run notes](provided_experimental_findings.md) | Numeric observations from exported results for team review |
-| [Formal figures](figures/provided_20261125/) | Six figure pairs in PNG and SVG |
-| [Formal result CSVs and provenance](../results/experiments/provided_20261125/) | All 72 combinations, client metrics, characterization, and configuration |
+| [Global results](../evaluation/runs.csv) | All 72 experiment combinations |
+| [Client results](../evaluation/per_client.csv) | 432 client rows, including mixed at 5 MiB |
+| [Workload characterization](../evaluation/characterization/) | Input counts, distributions, top five, byte volumes, and oversized counts |
+| [Formal figures](../evaluation/figures/) | Six PNG/SVG figure pairs |
+| [Findings](../evaluation/findings.md) | Supporting numerical observations and limitations |
+| [Program test report](../evaluation/test_report.md) | Executed checks and reproducibility scope |
 
-The formal figures are `workload_characteristics`, `policy_comparison_5mib`, `capacity_effects`, `capacity_storage`, `mixed_clients_5mib`, and the compact report plot `capacity_latency`. They cover input differences, policy comparisons at 5 MiB, six-capacity trends, the added storage metrics, and mixed-workload client comparisons at 5 MiB. See the [HOWTO](../HOWTO.md) to regenerate them into a fresh directory.
+The report must explain the observed behavior and cover all five assignment questions: the best policy under each metric, workload effects, capacity effects, unequal client benefits, and Custom trade-offs. Use the same inputs and assumptions for fair comparisons, and explain LA-GDSF's lifetime frequency and additional admission rule. Complete results remain in CSV; selected comparisons belong in the short report.
 
-The report and video must address all five questions listed in the revised assignment: which policy wins under which metric; how workload characteristics affect results; how capacity affects policy rankings; whether all clients benefit equally; and the Custom policy's trade-offs. Use the same trace, resource metadata, capacity, and assumptions for fair comparisons. Explicitly state LA-GDSF's additional admission rule and lifetime frequency.
-
-Program-generated test reports and supporting run notes can be published with their evidence. The integrated four-page report and video/presentation drafts remain private: contributor explanations, E's results analysis/conclusions and final figure selection must be collected before A assembles and uploads the report. D has already recorded her segment, according to the maintainer; retain it for assembly without requesting new work. Other outstanding presentation contributions and the combined video remain separate handoffs.
-
-
-## Preserved contribution and supplementary sources
+## Design and contributor evidence
 
 | Source | Scope |
 |---|---|
-| [Simulator architecture](simulator_architecture.md) | A's architecture/data-structure explanation |
-| [Custom-policy design](custom_policy_design.md) | Edited report section based on D's accepted design |
-| [Original consolidated LA-GDSF document](../docs/d_la_gdsf_design.md) | D's original delivery, unchanged; see [review](../docs/d_custom_policy_review.md) |
-| [Earlier experimental findings](experimental_findings.md) | D-derived synthetic matrix and its four original PNG/SVG figure pairs |
+| [Simulator architecture](simulator_architecture.md) | A's architecture and data-structure explanation |
+| [Custom policy design](custom_policy_design.md) | Edited report section based on D's accepted design |
+| [Original LA-GDSF delivery](../docs/d_la_gdsf_design.md) | Preserved D document, with a separate [review](../docs/d_custom_policy_review.md) |
+| [B's FIFO/LRU review](../docs/b_fifo_lru_review.md) | Accepted baseline-policy validation |
+| [C's LFU review](../docs/c_lfu_reference_review.md) and [provided-trace evidence](../docs/c_lfu_provided_20261125.md) | Accepted tests, metric checks, and independent replay evidence |
 
-The historical synthetic figures remain `latency_by_capacity`, `admission_ablation`, `mixed_tradeoffs`, and `mixed_client_latency` in `figures/`. They can support supplementary analysis, but cannot be presented as outcomes of the three provided CSVs. Original outputs and configurations are retained.
+E's delivered analysis informs A's interpretation and figure selection. It does not transfer final report authorship to E. D's accepted explanation and existing recording are retained.
 
-B/C's merged reviews, C's [original-config/replay supplement](../docs/c_run_evidence_20261123.md), and merged PR #4's [18-run LFU provided-trace analysis](../docs/c_lfu_provided_20261125.md) are accepted evidence. The maintainer's November 25 statistics and fixed-input pipeline update extends that work; it is not a new submission authored by C. E remains responsible for results interpretation, figure selection and report analysis/conclusions. D's accepted Custom explanation and existing recording are retained; B/C supply their policy and metric sections. Generated outputs and maintainer run notes do not mark the remaining contributor work complete. See [development status](../docs/development.md).
+## Supplementary material
+
+The earlier ten-seed synthetic study, its original four figure pairs, and its findings are under [supplementary/synthetic/](../supplementary/synthetic/). They can support clearly labeled additional analysis; they are not outcomes of the three instructor-provided traces. Original numerical outputs and configurations are preserved.
+
+See [HOWTO](../HOWTO.md) for reproduction and [requirements](../docs/requirements.md) for report, video, and submission criteria.

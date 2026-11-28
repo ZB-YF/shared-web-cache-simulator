@@ -2,6 +2,8 @@
 
 The repository was reviewed and reorganized on November 13, 2026. Its purpose remains a small university course project. The changes group files by function and make existing results visible to teammates; they do not change simulation algorithms or introduce packaging/build infrastructure.
 
+This is a historical review. For the current root-level `evaluation/` and supplementary study locations, use the [current layout and migration guide](repository_layout.md). The before/after table below describes the November 13 checkpoint.
+
 ## Inventory and migration
 
 The initial inventory covered **117 project files and 26 local cache/system files** outside Git internals. Every Python/Markdown/text file was read, every CSV was parsed for schema and row count, every JSON config/summary was parsed, and all figure pairs were identified by format, dimensions, and purpose. Local Python bytecode and Finder metadata were classified as generated housekeeping files.

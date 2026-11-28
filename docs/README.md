@@ -17,9 +17,10 @@ Terminal examples assume the project root unless an absolute path is shown. Publ
 | C's 18 LFU provided-trace runs, merged PR #4 | [LFU analysis and reproducible comparison](c_lfu_provided_20261125.md) |
 | D's original consolidated source and its interpretation | [Original design](d_la_gdsf_design.md), [review](d_custom_policy_review.md) |
 | Test coverage and release acceptance | [Test plan](test_plan.md), [validation evidence](validation.md) |
-| Program test report and supporting result observations | [Test report](../reports/test_report_20261125.md), [run notes](../reports/provided_experimental_findings.md) |
-| Current work and remaining team deliverables | [Development status](development.md) |
+| Program test report and supporting result observations | [Test report](../evaluation/test_report.md), [run notes](../evaluation/findings.md) |
+| Technical status and contribution areas | [Development status](development.md) |
 | B/C PRs, D/E Drive handoff, sole-maintainer workflow | [Contributing](contributing.md) |
 | Historical file inventory and path mapping | [Repository review](repository_review.md), [manifest](reorganization_manifest.json) |
+| Current directory layout and result relocations | [Layout guide](repository_layout.md), [migration manifest](layout_migration.json) |
 
-Start with [published outputs](../results/README.md), [generated figures](../reports/figures/provided_20261125/) and [report handoff status](../reports/README.md) for the revised evaluation. Report interpretation and final assembly await contributor materials. The older [synthetic findings](../reports/experimental_findings.md) remain supplementary. The [video plan](../video/README.md) lists each member's outstanding contribution.
+Start with the [required evaluation](../evaluation/), [generated figures](../evaluation/figures/) and [report materials](../reports/README.md). E supplies data analysis and A writes the integrated report. The older [synthetic findings](../supplementary/synthetic/findings.md) remain supplementary. [Video requirements](../video/README.md) are separate from the report.

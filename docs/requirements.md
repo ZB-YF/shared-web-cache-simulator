@@ -82,4 +82,4 @@ Although the revised text still says “three central questions,” it lists fiv
 4. Do global improvements benefit all clients equally?
 5. What trade-offs does the custom policy introduce?
 
-Grading remains correctness 30%, performance/experiments 20%, Custom design 20%, analysis/visualization 20%, and code/documentation 10%. The team completion target is **November 25, 2026**; the official deadline remains **December 4, 2026 at 17:59 Shanghai time**. See [development status](development.md) for review and recording still required.
+Grading remains correctness 30%, performance/experiments 20%, Custom design 20%, analysis/visualization 20%, and code/documentation 10%. The official deadline is **December 4, 2026 at 17:59 Shanghai time**. See [implementation and contribution status](development.md) for the published evidence. E supplies data analysis, and A authors and integrates the final report.

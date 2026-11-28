@@ -2,7 +2,7 @@
 
 This note supplements C's merged [LFU reference review](c_lfu_reference_review.md)
 and [original-run evidence](c_run_evidence_20261123.md). It analyzes the
-November 25 [formal result matrix](../results/experiments/provided_20261125/runs.csv)
+November 25 [formal result matrix](../evaluation/runs.csv)
 using the three instructor-provided fixed traces. It does not change LFU or
 claim authorship of the team's new experiment pipeline.
 
@@ -35,7 +35,7 @@ or repeated-run averaging applies. Ratios in the CSV are fractions from 0 to
 | Mixed | 5 MiB | 2362 | 78.73% | 184.695 | 389 | 234 | 83.96% |
 | Mixed | 10 MiB | 2747 | 91.57% | 141.270 | 0 | 234 | 60.48% |
 
-The [workload characterization](../results/experiments/provided_20261125/characterization/summary.csv)
+The [workload characterization](../evaluation/characterization/summary.csv)
 shows that the top five resources account for 87.97% of Repetitive requests,
 versus 24.60% of Sequential and 30.10% of Mixed requests. This concentration
 is consistent with LFU's strongest 5 MiB result on Repetitive: 94.00% hits

@@ -1,6 +1,10 @@
 # Validation evidence
 
-The [program test report](../reports/test_report_20261125.md) summarizes the checks below. The latest [captured output](run_evidence_20261125/checks.txt) and [execution metadata](run_evidence_20261125/checks.json) record actual commands and exit codes. These reports and [run notes](../reports/provided_experimental_findings.md) are public supporting evidence; the final four-page report and presentation drafts remain private.
+The [program test report](../evaluation/test_report.md) summarizes the checks below. The latest [captured output](run_evidence_20261125/checks.txt) and [execution metadata](run_evidence_20261125/checks.json) record actual commands and exit codes. These reports and [run notes](../evaluation/findings.md) are public supporting evidence; the final four-page report and presentation drafts remain private.
+
+## Current layout verification
+
+Required results and figures are now grouped under [evaluation/](../evaluation/); ten-seed experiments are under [supplementary/synthetic/](../supplementary/synthetic/). The [reorganization audit](../evaluation/validation/reorganization_review.json) checks the relocated 72-cell matrix against current sources. Original CSVs/configs/figures/traces retain their bytes, and all 33 original Python source hashes still match. C's extra comparison helper now points to the new baseline path. Historical commands, hashes and source-set differences below remain records of their stated checkpoints; see the [migration guide](repository_layout.md).
 
 ## November 25 revised-requirements checkpoint
 
@@ -21,7 +25,7 @@ At the initial November 25 integration checkpoint, **46 tests passed**: 35 histo
 
 The three received CSVs were validated against the existing resource metadata, which matches the received resource file byte for byte. Each supplied workload has 3000 requests, six clients, and 21 distinct requested resources. Original trace bytes and SHA256 values are recorded in [the dataset guide](../data/workloads/provided/README.md) and formal configuration.
 
-The [formal snapshot](../results/experiments/provided_20261125/) contains 72 default combinations: three provided traces, six capacities, and four primary policies. Global results include resource evictions, oversized request counts, and mean post-request utilization. Characterization and preliminary hypotheses are written before policy execution. Single-run CLI support for custom input/capacity/policy was already present; no replacement-policy rewrite is part of this update.
+The [formal snapshot](../evaluation/) contains 72 default combinations: three provided traces, six capacities, and four primary policies. Global results include resource evictions, oversized request counts, and mean post-request utilization. Characterization and preliminary hypotheses are written before policy execution. Single-run CLI support for custom input/capacity/policy was already present; no replacement-policy rewrite is part of this update.
 
 The reproducibility verifier checks the selected result snapshot without changing it. The published [review record](provided_run_review.json) records the maintainer's final verification when available.
 
@@ -29,7 +33,7 @@ Final November 25 source freeze: **48 tests pass** (35 historical + six metric +
 
 The historical 1000-run synthetic matrix was rerun after the metric additions. All old `runs.csv` fields and all 40 generated traces match; `summary.csv` and `d_compatible.csv` remain byte-identical. Fresh run CSVs additionally expose the new metric columns. Published historical artifacts were preserved.
 
-[Generated figures](../reports/figures/provided_20261125/) use the new snapshot. Do not infer policy guarantees from these finite traces. In particular, the earlier synthetic mixed-client trade-off is not automatically a finding for the new mixed input. Contributor report analysis, final assembly and video recording/upload remain outstanding.
+[Generated figures](../evaluation/figures/) use the new snapshot. Do not infer policy guarantees from these finite traces. In particular, the earlier synthetic mixed-client trade-off is not automatically a finding for the new mixed input. Contributor report analysis, final assembly and video recording/upload remain outstanding.
 
 ## Historical evidence through November 24
 
@@ -96,4 +100,4 @@ python3 -m experiments.run --output-dir results/my_matrix
 
 `runs.csv` retains unrounded per-seed values. `summary.csv` reports arithmetic means and sample standard deviations. `d_compatible.csv` reproduces D's rounding and column meanings, including the legacy `CUSTOM_noadm` spelling. Exact generated input traces and hashes accompany the outputs.
 
-The checked local output is under `results/experiments/d_reproduction/`. This reviewed baseline and its traces are now included in Git. Ad hoc result directories remain ignored. See the [reorganization review](repository_review.md) for preserved historical provenance. All comparison results apply to the supplied metadata, reference trace, D's synthetic generators and tested boundaries; they do not imply performance guarantees on arbitrary workloads.
+The checked local output is under `supplementary/synthetic/`. This reviewed baseline and its traces are now included in Git. Ad hoc result directories remain ignored. See the [reorganization review](repository_review.md) for preserved historical provenance. All comparison results apply to the supplied metadata, reference trace, D's synthetic generators and tested boundaries; they do not imply performance guarantees on arbitrary workloads.

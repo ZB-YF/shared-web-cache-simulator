@@ -9,14 +9,9 @@ results/*
 !results/.gitkeep
 !results/README.md
 !results/reference/
-!results/experiments/
 results/reference/*
 !results/reference/README.md
 !results/reference/fifo_102400/
 !results/reference/lru_102400/
 !results/reference/lfu_102400/
 !results/reference/custom_102400/
-results/experiments/*
-!results/experiments/README.md
-!results/experiments/d_reproduction/
-!results/experiments/provided_20261125/

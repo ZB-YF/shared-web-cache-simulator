@@ -1,6 +1,6 @@
 # Program test and run verification report
 
-Checked on November 25, 2026. This report records maintainer verification of the simulator and its exported results. It is supporting evidence for the team; it does not replace contributor explanations, E's report analysis, the integrated four-page report, or presentation contributions.
+Checked on November 25, 2026. This report records maintainer verification of the simulator and its exported results. It is supporting evidence for the team; it does not replace contributor explanations, E's data analysis, A's integrated four-page report, or presentation contributions.
 
 ## Recorded checks
 
@@ -15,7 +15,7 @@ Checked on November 25, 2026. This report records maintainer verification of the
 | Input and source provenance | Supplied resource/trace hashes and the exact public Python source snapshot | Match |
 | D prototype comparison | Hit/miss, client/resource, ordered evictions and occupied bytes | 72 runs and 216000 events match |
 
-The [captured command output](../docs/run_evidence_20261125/checks.txt) and [execution metadata](../docs/run_evidence_20261125/checks.json) record the actual test commands, return codes, Python version, UTC check time, source commit and log checksum. The source commit identifies the tested code; this publication adds documentation and evidence without changing Python sources.
+The [captured command output](../docs/run_evidence_20261125/checks.txt) and [execution metadata](../docs/run_evidence_20261125/checks.json) record the actual test commands, return codes, Python version, UTC check time, source commit and log checksum. The source commit identifies the tested code; the original publication added documentation and evidence without changing Python sources.
 
 The [strict matrix review](../docs/provided_run_review.json) includes exact input and result hashes. The separate [D prototype review](../docs/provided_proto_review.json) identifies the received prototype by SHA256. The prototype comparison and historical synthetic regression were performed during the earlier November 25 integration; the captured command log records the fresh public-source checks.
 
@@ -34,7 +34,7 @@ Run from the project root:
 ```bash
 python3 -m unittest discover -s tests -v
 python3 -m experiments.validate_reference
-python3 -m experiments.verify_provided --results-dir results/experiments/provided_20261125 --allow-source-drift
+python3 -m experiments.verify_provided --results-dir evaluation --allow-source-drift
 ```
 
 To create a fresh result snapshot, choose a new output directory:
@@ -48,8 +48,12 @@ The fixed traces are deterministic, so repeated-run seed averaging is unnecessar
 
 After merged PR #4, the published snapshot has exactly one added-source difference: C's documentation-only comparison helper. The [post-merge review](../docs/c_lfu_provided_20261125/maintainer_matrix_review.json) records its hash and verifies that all 33 original sources and all numeric outputs remain unchanged. The flag above audits that historical snapshot with an explicit difference record; it does not assert an identical source set. Fresh current-checkout replays remain eligible for strict checks.
 
-The earlier 1000-run synthetic baseline was also checked during integration: all historical run fields, all 40 traces and both aggregate CSVs match. Original inputs, replacement algorithms and historical published outputs were preserved. See [validation history](../docs/validation.md) for the scope and historical checkpoints, [run notes](provided_experimental_findings.md) for numeric observations, and [HOWTO](../HOWTO.md) for setup.
+The earlier 1000-run synthetic baseline was also checked during integration: all historical run fields, all 40 traces and both aggregate CSVs match. Original inputs, replacement algorithms and historical published outputs were preserved. See [validation history](../docs/validation.md) for the scope and historical checkpoints, [run notes](findings.md) for numeric observations, and [HOWTO](../HOWTO.md) for setup.
 
 ## Publication and team handoff
 
-Program outputs, test evidence, generated figures and supporting run notes are public. The integrated four-page report and video/presentation drafts remain in the maintainer's private project folder until contributor materials are collected. E still owns final result interpretation, figure selection and report analysis/conclusions; B/C supply their own explanations and checks. D's already recorded segment and accepted design are retained without a new recording request.
+Program outputs, test evidence, generated figures and supporting run notes are public. E supplies data analysis; A authors and integrates the final 3–4 page report. The integrated report and video/presentation drafts remain private. B/C's accepted explanations and checks and D's accepted design and existing recording remain credited.
+
+## Verification after directory reorganization
+
+The published matrix and figures now live together in `evaluation/`; the ten-seed synthetic study is explicitly supplementary. Original CSV/config/image/trace bytes were retained. The [new layout audit](validation/reorganization_review.json) verifies the relocated matrix; [migration details](../docs/repository_layout.md) distinguish current paths from paths inside historical logs. All 33 original Python source hashes still match. The extra comparison helper's baseline path now points to this directory.

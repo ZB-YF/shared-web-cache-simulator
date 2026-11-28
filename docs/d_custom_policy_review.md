@@ -48,7 +48,7 @@ The algorithm timing issue is resolved. The report-ready text also corrects thes
 | Read H of victims after deleting them in pseudocode | Save victim priorities before committing removals |
 | References to D_Pseudocode_EN.md | The delivered file is D_Pseudocode.md; the maintained public description is custom_policy.md |
 
-The report draft is credited to D's revised design and edited for consistency with actual code and data. It is a section for team assembly, not the final 3-4 page report or E's final experiment approval.
+The report section is credited to D's revised design and edited for consistency with actual code and data. It is source material for A's final 3–4 page integrated report; E supplies data analysis.
 
 ## Updated handoff status
 

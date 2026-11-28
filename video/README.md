@@ -1,28 +1,15 @@
-# Demonstration video
+# Demonstration video requirements
 
-The current team has five members, so the assignment requires **10 minutes total, approximately two minutes per member**. Every member must participate and explain their individual contribution. Include a project overview, implementation/data-structure decisions, a real simulator demonstration, and experimental findings from the provided workloads.
+For a five-person team, the assignment requires **10 minutes total, approximately two minutes per member**. Every member must participate and explain their actual contribution. Include a project overview, implementation and data structures, a live simulator demonstration, and experimental findings.
 
-Each member prepares their own explanation of their actual contribution. The maintainer collects the materials and coordinates recording after the team has checked the results.
+Use the [main evaluation CSVs](../evaluation/) and [formal figures](../evaluation/figures/) to support findings. Any [supplementary synthetic results](../supplementary/synthetic/) must be identified as generated workloads. Cover the five assignment questions: best policy and metric, workload effects, capacity effects, client-level benefits, and Custom trade-offs.
 
-D has already recorded her segment, according to the maintainer. Retain her existing recording for assembly; no additional design rewrite or rerecording is requested. B/C/E's remaining materials and A's assembly work continue separately. Video scripts and presentation drafts stay in the maintainer's private project folder.
+## Submission
 
-| Segment | Speaker | Focus |
-|---|---|---|
-| 00:00-02:00 | A | Shared simulator overview, architecture, and live CLI run |
-| 02:00-04:00 | B | FIFO/LRU behavior and accepted validation/tests |
-| 04:00-06:00 | C | LFU, metric definitions, and reproducible experiment evidence |
-| 06:00-08:00 | D | LA-GDSF design, admission, and limitations |
-| 08:00-10:00 | E | Official workload/capacity/client findings and conclusions |
+Upload the combined presentation to YouTube; Unlisted visibility is allowed. Verify playback and submit its link through Brightspace. The official deadline is **December 4, 2026 at 17:59 Shanghai time**. The reproducible project ZIP and 3–4 page report are separate deliverables.
 
-Use the [formal CSVs](../results/experiments/provided_20261125/) and [generated figures](../reports/figures/provided_20261125/) as inputs to the team's analysis. The earlier synthetic experiments can be shown only with their provenance stated. Demonstrate real terminal output; do not replace execution with a claim or fabricated screenshot.
+## Recorded status
 
-Cover all five revised questions: best policy and metric, workload effects, capacity effects, client-level benefits, and Custom trade-offs. Explain both gains and costs; Custom is not required to win every workload or metric.
+D's segment has been recorded and is retained for assembly. A coordinates the combined presentation. No completed combined video or verified uploaded link is published in this repository.
 
-## Recording and upload still required
-
-- Collect the remaining contributors' explanations and recordings. Retain D's completed segment without requesting another recording.
-- A assembles the five segments, checks duration, legibility, audio, and the live demonstration.
-- Upload the completed video to YouTube. Unlisted visibility is allowed.
-- Verify playback without the owner's account, then submit its link on Brightspace. Add the verified link to the final submission materials.
-
-No completed video or verified uploaded link is present in the reviewed repository. B/C use PRs for tracked script changes; D/E deliver recording materials through Google Drive. A is the sole main-branch maintainer. The team completion target is November 25, 2026; the official deadline is December 4, 2026 at 17:59 Shanghai time.
+Video scripts and presentation drafts remain private. B/C submit repository contributions through PRs; D/E deliver materials through Google Drive. E supplies data analysis, while A authors the final integrated report. See [contributions](../docs/contributing.md) for the delivery workflow.

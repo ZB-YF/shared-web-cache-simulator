@@ -50,7 +50,7 @@ The required views are all workloads at 5 MiB, six-capacity curves, and mixed-cl
 
 The report must be 3-4 pages and cover all five revised questions. The ZIP must contain source, HOWTO/README, inputs, experiment scripts, CSVs/configs, figures, and report. Verify the extracted package without private paths or missing ignored files. Review contribution claims with all members. The five-person video must include all five participants, a real demonstration, a verified YouTube link, and the same result interpretation.
 
-The November 25 completion target and December 4 official deadline are unchanged. A reviewed script and generated package do not establish completed recording, upload, team sign-off, or Brightspace submission.
+The official deadline is December 4, 2026 at 17:59 Shanghai time. A reviewed script and generated package do not establish completed recording, upload, team sign-off, or Brightspace submission. E provides data analysis; A authors the final integrated report.
 
 ## Preserved contributor checks
 

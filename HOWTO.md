@@ -1,5 +1,7 @@
 # How to run and reproduce the project
 
+The published **[72-run main evaluation](evaluation/)** contains the required result CSVs, workload characterization, figures, and test evidence. The older [ten-seed synthetic study](supplementary/synthetic/) is additional evidence.
+
 ## Requirements and setup
 
 Use **Python 3.10 or newer**. Simulation, correctness tests, workload analysis, and experiment execution use only Python's standard library. No compilation, proxy server, web access, or private planning files are required.
@@ -73,15 +75,15 @@ Verify an existing snapshot without overwriting it:
 python3 -m experiments.verify_provided --results-dir results/my_provided_matrix --output results/my_provided_review.json
 ```
 
-The published [formal snapshot](results/experiments/provided_20261125/) is already included. Reproduction writes a separate directory; do not overwrite the published evidence. Source hashes describe the actual code used. They can differ from historical configs after a code change even if numerical results agree.
+The published [formal snapshot](evaluation/) is already included. Reproduction writes a separate directory; do not overwrite the published evidence. Source hashes describe the actual code used. They can differ from historical configs after a code change even if numerical results agree.
 
-PR #4 adds C's documentation-only `compare_replay.py` after the published snapshot was generated. Its 33 original Python source hashes still match; the only added source is that reviewed helper. To audit the unchanged published matrix from the newer checkout, explicitly record the difference:
+PR #4 added C's documentation-only `compare_replay.py` after the published snapshot was generated. Its baseline path now points to `evaluation/`. The snapshot's 33 original Python source hashes still match; the only added source is that reviewed helper. To audit the unchanged published matrix from the newer checkout, explicitly record the difference:
 
 ```bash
-python3 -m experiments.verify_provided --results-dir results/experiments/provided_20261125 --allow-source-drift --output results/my_published_review.json
+python3 -m experiments.verify_provided --results-dir evaluation --allow-source-drift --output results/my_published_review.json
 ```
 
-Inspect `source_changes`; the accepted [post-merge review](docs/c_lfu_provided_20261125/maintainer_matrix_review.json) contains only the added comparison helper, with no modified original source. Fresh runs created from the current checkout can still be verified strictly. C's LFU-specific commands and preserved original config are documented in the [handoff](docs/c_lfu_provided_20261125.md).
+Inspect `source_changes`; only the added comparison helper should appear, with no modified original source. The [historical post-merge review](docs/c_lfu_provided_20261125/maintainer_matrix_review.json) records the helper's earlier hash; keep that record intact rather than rewriting it after the path change. Fresh runs created from the current checkout can still be verified strictly. C's LFU-specific commands and preserved original config are documented in the [handoff](docs/c_lfu_provided_20261125.md). Historical paths in configs and logs describe their original execution; the [migration map](docs/layout_migration.json) identifies current locations.
 
 ## Reproduce figures
 
@@ -92,7 +94,7 @@ python3 -m pip install -r requirements-plots.txt
 python3 -m experiments.plot_provided --results-dir results/my_provided_matrix --output-dir results/my_provided_figures
 ```
 
-This creates six PNG/SVG figure pairs: `workload_characteristics`, `policy_comparison_5mib`, `capacity_effects`, `capacity_storage`, `mixed_clients_5mib`, and the compact report plot `capacity_latency`. They cover input characteristics, policy metrics, capacity trends, storage behavior, and individual clients. See the [report handoff status](reports/README.md) for remaining interpretation and figure selection.
+This creates six PNG/SVG figure pairs: `workload_characteristics`, `policy_comparison_5mib`, `capacity_effects`, `capacity_storage`, `mixed_clients_5mib`, and the compact report plot `capacity_latency`. They cover input characteristics, policy metrics, capacity trends, storage behavior, and individual clients. Published figures are in [evaluation/figures/](evaluation/figures/); [report source materials](reports/README.md) explain how they relate to the final report.
 
 ## Supplementary synthetic experiments
 
@@ -103,10 +105,10 @@ python3 -m experiments.run --output-dir results/my_synthetic_matrix
 python3 -m experiments.plot --results-dir results/my_synthetic_matrix --output-dir results/my_synthetic_figures
 ```
 
-This pipeline generates four synthetic workloads, five capacities, five policy/ablation variants, and ten seeds: 1000 runs. Its old means, standard deviations, traces, and graphs are preserved. They do not replace the required three fixed instructor workloads and six capacities.
+This pipeline generates four synthetic workloads, five capacities, five policy/ablation variants, and ten seeds: 1000 runs. Its old means, standard deviations, traces, and graphs are preserved under [supplementary/synthetic/](supplementary/synthetic/). They do not replace the required three fixed instructor workloads and six capacities. Use the explicit `--output-dir` shown above to keep newly generated plots in a separate local directory.
 
 ## Troubleshooting and submission
 
 A nonempty output error preserves existing files; choose a new directory. Invalid metadata, unknown requested resources, non-GET requests, and timezone-free timestamps are rejected. A missing Matplotlib import affects plotting only. No resource URL is fetched over the network.
 
-The package must include code, this HOWTO, README, inputs, scripts, result CSVs/configs, figures, and the 3-4 page technical report. The five-person video must be recorded by all members, uploaded to YouTube, and linked on Brightspace separately. The report will be assembled after contributor materials arrive; individual explanations and recording remain team responsibilities. See [delivery status](docs/development.md).
+The package must include code, this HOWTO, README, inputs, scripts, result CSVs/configs, figures, and the 3-4 page technical report. The five-person video must include all members, be uploaded to YouTube, and be linked on Brightspace separately. E supplies data analysis; A writes and integrates the final report. The integrated report and presentation drafts remain private until selected for final publication. See [implementation and contribution status](docs/development.md).
